@@ -290,7 +290,7 @@ int main(void)                                                                 \
                                                                                \
         if (!TMPL_IS_NAN(err) && abs_err > eps)                                \
         {                                                                      \
-            puts("FAIL");                                                      \
+            printf("FAIL: Max Error = %.8LE\n", (long double)abs_err);         \
             fclose(fp);                                                        \
             return -1;                                                         \
         }                                                                      \
