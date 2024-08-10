@@ -1,3 +1,6 @@
+# Data files for unit tests.
+*.csv
+
 # Prerequisites
 *.d
 
