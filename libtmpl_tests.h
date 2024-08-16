@@ -206,6 +206,48 @@ int main(void)                                                                 \
     return 0;                                                                  \
 }
 
+#ifdef _OPENMP
+#define TMPL_TEST_REAL_FUNC_VS_REAL_FUNC_UNIT_TEST(type, begin, finish, f0, f1)\
+int main(void)                                                                 \
+{                                                                              \
+    const size_t zero = TMPL_CAST(0, size_t);                                  \
+    size_t n;                                                                  \
+    const type start = TMPL_CAST(begin, type);                                 \
+    const type end = TMPL_CAST(finish, type);                                  \
+    const size_t number_of_samples = NSAMPS(type);                             \
+    const type dx = (end - start) / TMPL_CAST(number_of_samples, type);        \
+    const type eps = TMPL_CAST(4, type) * TMPL_EPS(dx);                        \
+    volatile int flag = 0;                                                     \
+    volatile type error = TMPL_CAST(0, type);                                  \
+                                                                               \
+    _Pragma("omp parallel for shared(flag, error)")                            \
+    for (n = zero; n < number_of_samples; ++n)                                 \
+    {                                                                          \
+        if (flag)                                                              \
+            continue;                                                          \
+        else                                                                   \
+        {                                                                      \
+            const type x = TMPL_CAST(n, type) * dx + start;                    \
+            const type y = f0(x);                                              \
+            const type z = f1(x);                                              \
+            const type err = (y - z) / z;                                      \
+            const type abs_err = (err > 0 ? err : -err);                       \
+                                                                               \
+            if (!TMPL_IS_NAN(err) && abs_err > eps)                            \
+            {                                                                  \
+                error = err;                                                   \
+                flag = 1;                                                      \
+            }                                                                  \
+        }                                                                      \
+    }                                                                          \
+                                                                               \
+    if (flag)                                                                  \
+        printf("FAIL: Max Error = %.8LE\n", TMPL_CAST(error, long double));    \
+    else                                                                       \
+        puts("PASS");                                                          \
+    return 0;                                                                  \
+}
+#else
 #define TMPL_TEST_REAL_FUNC_VS_REAL_FUNC_UNIT_TEST(type, begin, finish, f0, f1)\
 int main(void)                                                                 \
 {                                                                              \
@@ -216,10 +258,10 @@ int main(void)                                                                 \
     const size_t number_of_samples = NSAMPS(type);                             \
     const type dx = (end - start) / TMPL_CAST(number_of_samples, type);        \
     const type eps = (type)(4) * TMPL_EPS(dx);                                 \
-    type x = start;                                                            \
                                                                                \
     for (n = zero; n < number_of_samples; ++n)                                 \
     {                                                                          \
+        const type x = ((type)n) * dx + start;                                 \
         const type y = f0(x);                                                  \
         const type z = f1(x);                                                  \
         const type err = (y - z) / z;                                          \
@@ -230,13 +272,12 @@ int main(void)                                                                 \
             printf("FAIL: Max Error = %.8LE\n", (long double)abs_err);         \
             return -1;                                                         \
         }                                                                      \
-                                                                               \
-        x += dx;                                                               \
     }                                                                          \
                                                                                \
     puts("PASS");                                                              \
     return 0;                                                                  \
 }
+#endif
 
 #define TMPL_TEST_REAL_BOOL_VS_REAL_BOOL_UNIT_TEST(type, begin, finish, f0, f1)\
 int main(void)                                                                 \
