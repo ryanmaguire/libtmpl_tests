@@ -17,18 +17,21 @@
  *  along with libtmpl.  If not, see <https://www.gnu.org/licenses/>.         *
  ******************************************************************************/
 #include <libtmpl/include/tmpl.h>
+#include <libtmpl/include/tmpl_generic.h>
 
 #ifdef __cplusplus
 #include <cstdlib>
 #include <cstdio>
 #include <ctime>
 #include <cmath>
+#include <cfloat>
 using namespace std;
 #else
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
 #include <math.h>
+#include <float.h>
 #endif
 
 #ifndef TMPL_NSAMPS
@@ -58,58 +61,46 @@ static inline size_t memsize(void)
 #define TMPL_RAND_REAL(type, val)                                              \
 do {                                                                           \
     int my_temp_variable = rand();                                             \
-    val = (type)my_temp_variable / (type)RAND_MAX;                             \
+    val = TMPL_CAST(my_temp_variable, type) / TMPL_CAST(RAND_MAX, type);       \
 } while(0);
-
-/*  C11 generic macro for getting machine epsilon for a given data type.      */
-#define TMPL_EPS(x) _Generic((x),                                              \
-    long double: TMPL_LDBL_EPS,                                                \
-    default:     TMPL_DBL_EPS,                                                 \
-    float:       TMPL_FLT_EPS                                                  \
-)
 
 /*  Given a list of pointers x0, x1, x2, ..., allocates memory for each.      */
 #define TMPL_MALLOC_VARS(type, length, ...)                                    \
 do {                                                                           \
-    type **ptr_arr[] = {__VA_ARGS__};                                          \
-    const size_t ptr_arr_len = TMPL_ARRAY_SIZE(ptr_arr);                       \
-    size_t iterator;                                                           \
-    for (iterator = 0; iterator < ptr_arr_len; ++iterator)                     \
+    type **my_tmp_ptr_arr[] = {__VA_ARGS__};                                   \
+    const size_t my_tmp_ptr_arr_len = TMPL_ARRAY_SIZE(my_tmp_ptr_arr);         \
+    size_t my_tmp_iter;                                                        \
+    for (my_tmp_iter = 0; my_tmp_iter < my_tmp_ptr_arr_len; ++my_tmp_iter)     \
     {                                                                          \
-        *ptr_arr[iterator] = TMPL_MALLOC(ptr_arr[iterator], type, length);     \
+        *my_tmp_ptr_arr[my_tmp_iter] =                                         \
+            TMPL_MALLOC(my_tmp_ptr_arr[my_tmp_iter], type, length);            \
     }                                                                          \
 } while(0)
 
 #define TMPL_NULL_CHECKER(...)                                                 \
 do {                                                                           \
-    int should_free = 0;                                                       \
-    void *ptr_arr[] = {__VA_ARGS__};                                           \
-    const size_t ptr_arr_len = TMPL_ARRAY_SIZE(ptr_arr);                       \
-    size_t iterator;                                                           \
-    for (iterator = 0; iterator < ptr_arr_len; ++iterator)                     \
+    int my_tmp_should_free = 0;                                                \
+    void *my_tmp_ptr_arr[] = {__VA_ARGS__};                                    \
+    const size_t my_tmp_ptr_arr_len = TMPL_ARRAY_SIZE(my_tmp_ptr_arr);         \
+    size_t my_tmp_iter;                                                        \
+    for (my_tmp_iter = 0; my_tmp_iter < my_tmp_ptr_arr_len; ++my_tmp_iter)     \
     {                                                                          \
-        if (ptr_arr[iterator] == NULL)                                         \
+        if (my_tmp_ptr_arr[my_tmp_iter] == NULL)                               \
         {                                                                      \
-            should_free = 1;                                                   \
+            my_tmp_should_free = 1;                                            \
             break;                                                             \
         }                                                                      \
     }                                                                          \
-    if (should_free)                                                           \
+    if (my_tmp_should_free)                                                    \
     {                                                                          \
-        for (iterator = 0; iterator < ptr_arr_len; ++iterator)                 \
+        for (my_tmp_iter = 0; my_tmp_iter < my_tmp_ptr_arr_len; ++my_tmp_iter) \
         {                                                                      \
-            TMPL_FREE(ptr_arr[iterator]);                                      \
+            TMPL_FREE(my_tmp_ptr_arr[my_tmp_iter]);                            \
         }                                                                      \
         puts("One of the pointers is NULL. Aborting.");                        \
         return -1;                                                             \
     }                                                                          \
 } while(0)
-
-#define TMPL_IS_NAN(x) _Generic((x),                                           \
-    long double: tmpl_LDouble_Is_NaN,                                          \
-    default:     tmpl_Double_Is_NaN,                                           \
-    float:       tmpl_Float_Is_NaN                                             \
-)(x)
 
 #define TMPL_OPEN_FILE(fp, name)                                               \
 do {                                                                           \
@@ -123,11 +114,65 @@ do {                                                                           \
                                                                                \
 } while(0);
 
-#define TMPL_STRING_TO_REAL(x, start, end)  _Generic((x),                      \
+#define TMPL_STRING_TO_REAL(x, start, end) _Generic((x),                       \
     long double: strtold,                                                      \
     default:     strtod,                                                       \
     float:       strtof                                                        \
 )(start, end)
+
+/*  Helper macros to shorten up the tests. Undef first to avoid conflict.     */
+#undef T
+#undef F
+#undef TINF
+#undef TNAN
+#undef DNUM
+#undef BNUM
+#undef EPS
+#undef TINFF
+#undef TNANF
+#undef DNUMF
+#undef BNUMF
+#undef EPSF
+#undef TINFL
+#undef TNANL
+#undef DNUML
+#undef BNUML
+#undef EPSL
+
+#define T tmpl_True
+#define F tmpl_False
+
+#define TINF tmpl_Double_Infinity()
+#define TINFF tmpl_Float_Infinity()
+#define TINFL tmpl_LDouble_Infinity()
+
+#define TNAN tmpl_Double_NaN()
+#define TNANF tmpl_Float_NaN()
+#define TNANL tmpl_LDouble_NaN()
+
+#if TMPL_HAS_IEEE754_DOUBLE == 1
+#define DNUM pow(2.0, 1 - (TMPL_DOUBLE_BIAS + TMPL_DOUBLE_MANTISSA_LENGTH))
+#define BNUM pow(2.0, (TMPL_DOUBLE_BIAS))
+#else
+#define DNUM DBL_MIN
+#define BNUM DBL_MAX
+#endif
+
+#if TMPL_HAS_IEEE754_FLOAT == 1
+#define DNUMF powf(2.0F, 1 - (TMPL_FLOAT_BIAS + TMPL_FLOAT_MANTISSA_LENGTH))
+#define BNUMF powf(2.0F, (TMPL_FLOAT_BIAS))
+#else
+#define DNUMF FLT_MIN
+#define BNUMF FLT_MAX
+#endif
+
+#if TMPL_HAS_IEEE754_LDOUBLE == 1
+#define DNUML powl(2.0L, 1 - (TMPL_LDOUBLE_BIAS + TMPL_LDOUBLE_MANTISSA_LENGTH))
+#define BNUML powl(2.0L, (TMPL_LDOUBLE_BIAS))
+#else
+#define DNUML LDBL_MIN
+#define BNUML LDBL_MAX
+#endif
 
 #define TMPL_TEST_REAL_FUNC_VS_REAL_FUNC_TIME_TEST(type, begin, finish, f0, f1)\
 int main(void)                                                                 \
@@ -274,11 +319,15 @@ int main(void)                                                                 \
                                                                                \
         if (!TMPL_IS_NAN(err) && error > eps)                                  \
         {                                                                      \
+            const long double x_bad = TMPL_CAST(x, long double);               \
+            const long double y_bad = TMPL_CAST(y, long double);               \
+            const long double z_bad = TMPL_CAST(z, long double);               \
+            const long double error_bad = TMPL_CAST(error, long double);       \
             puts("FAIL");                                                      \
-            printf("    Input   = %+.40LE\n", TMPL_CAST(x, long double));      \
-            printf("    libtmpl = %+.40LE\n", TMPL_CAST(y, long double));      \
-            printf("    Other   = %+.40LE\n", TMPL_CAST(z, long double));      \
-            printf("    Error   = %+.40LE\n", TMPL_CAST(error, long double));  \
+            printf("    Input   = %+.40LE\n", x_bad);                          \
+            printf("    libtmpl = %+.40LE\n", y_bad);                          \
+            printf("    Other   = %+.40LE\n", z_bad);                          \
+            printf("    Error   = %+.40LE\n", error_bad);                      \
             return -1;                                                         \
         }                                                                      \
     }                                                                          \
@@ -350,5 +399,45 @@ int main(void)                                                                 \
                                                                                \
     puts("PASS");                                                              \
     fclose(fp);                                                                \
+    return 0;                                                                  \
+}
+
+#define TMPL_REAL2_FUNC_VS_REAL2_FUNC_FROM_ARRAY(type, func0, func1, indata)   \
+int main(void)                                                                 \
+{                                                                              \
+    typedef struct {type x, y;} arr2;                                          \
+    const arr2 in[] = indata;                                                  \
+    size_t n;                                                                  \
+    const size_t zero = TMPL_CAST(0, size_t);                                  \
+    const size_t number_of_samples = TMPL_ARRAY_SIZE(in);                      \
+    const long double eps = TMPL_CAST(TMPL_EPS(in[0]), long double);           \
+    long double err = 0.0L;                                                    \
+                                                                               \
+    for (n = zero; n < number_of_samples; ++n)                                 \
+    {                                                                          \
+        const type x = in[n].x;                                                \
+        const type y = in[n].y;                                                \
+        const type z0 = func0(x, y);                                           \
+        const type z1 = func0(x, y);                                           \
+        const type err = (z1 - z0) / z1;                                       \
+        const type error = (err > 0 ? err : -err);                             \
+                                                                               \
+        if (!TMPL_IS_NAN(err) && error > eps)                                  \
+        {                                                                      \
+            const long double x_bad = TMPL_CAST(x, long double);               \
+            const long double y_bad = TMPL_CAST(y, long double);               \
+            const long double z0_bad = TMPL_CAST(z0, long double);             \
+            const long double z1_bad = TMPL_CAST(z1, long double);             \
+            const long double error_bad = TMPL_CAST(error, long double);       \
+            puts("FAIL");                                                      \
+            printf("    Input   = (%+.40LE, %+.40LE)\n", x_bad, y_bad);        \
+            printf("    libtmpl = %+.40LE\n", z0_bad);                         \
+            printf("    Other   = %+.40LE\n", z1_bad);                         \
+            printf("    Error   = %+.40LE\n", error_bad);                      \
+            return -1;                                                         \
+        }                                                                      \
+    }                                                                          \
+                                                                               \
+    puts("PASS");                                                              \
     return 0;                                                                  \
 }
