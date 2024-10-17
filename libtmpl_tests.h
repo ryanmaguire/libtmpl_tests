@@ -1,23 +1,24 @@
 /******************************************************************************
  *                                  LICENSE                                   *
  ******************************************************************************
- *  This file is part of libtmpl.                                             *
+ *  This file is part of libtmpl_tests.                                       *
  *                                                                            *
- *  libtmpl is free software: you can redistribute it and/or modify           *
+ *  libtmpl_tests is free software: you can redistribute it and/or modify     *
  *  it under the terms of the GNU General Public License as published by      *
  *  the Free Software Foundation, either version 3 of the License, or         *
  *  (at your option) any later version.                                       *
  *                                                                            *
- *  libtmpl is distributed in the hope that it will be useful,                *
+ *  libtmpl_tests is distributed in the hope that it will be useful,          *
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of            *
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the             *
  *  GNU General Public License for more details.                              *
  *                                                                            *
  *  You should have received a copy of the GNU General Public License         *
- *  along with libtmpl.  If not, see <https://www.gnu.org/licenses/>.         *
+ *  along with libtmpl_tests.  If not, see <https://www.gnu.org/licenses/>.   *
  ******************************************************************************/
 #include <libtmpl/include/tmpl.h>
 #include <libtmpl/include/tmpl_generic.h>
+#include <libtmpl/include/tmpl_variadic.h>
 
 #ifdef __cplusplus
 #include <cstdlib>
@@ -63,44 +64,6 @@ do {                                                                           \
     int my_temp_variable = rand();                                             \
     val = TMPL_CAST(my_temp_variable, type) / TMPL_CAST(RAND_MAX, type);       \
 } while(0);
-
-/*  Given a list of pointers x0, x1, x2, ..., allocates memory for each.      */
-#define TMPL_MALLOC_VARS(type, length, ...)                                    \
-do {                                                                           \
-    type **my_tmp_ptr_arr[] = {__VA_ARGS__};                                   \
-    const size_t my_tmp_ptr_arr_len = TMPL_ARRAY_SIZE(my_tmp_ptr_arr);         \
-    size_t my_tmp_iter;                                                        \
-    for (my_tmp_iter = 0; my_tmp_iter < my_tmp_ptr_arr_len; ++my_tmp_iter)     \
-    {                                                                          \
-        *my_tmp_ptr_arr[my_tmp_iter] =                                         \
-            TMPL_MALLOC(my_tmp_ptr_arr[my_tmp_iter], type, length);            \
-    }                                                                          \
-} while(0)
-
-#define TMPL_NULL_CHECKER(...)                                                 \
-do {                                                                           \
-    int my_tmp_should_free = 0;                                                \
-    void *my_tmp_ptr_arr[] = {__VA_ARGS__};                                    \
-    const size_t my_tmp_ptr_arr_len = TMPL_ARRAY_SIZE(my_tmp_ptr_arr);         \
-    size_t my_tmp_iter;                                                        \
-    for (my_tmp_iter = 0; my_tmp_iter < my_tmp_ptr_arr_len; ++my_tmp_iter)     \
-    {                                                                          \
-        if (my_tmp_ptr_arr[my_tmp_iter] == NULL)                               \
-        {                                                                      \
-            my_tmp_should_free = 1;                                            \
-            break;                                                             \
-        }                                                                      \
-    }                                                                          \
-    if (my_tmp_should_free)                                                    \
-    {                                                                          \
-        for (my_tmp_iter = 0; my_tmp_iter < my_tmp_ptr_arr_len; ++my_tmp_iter) \
-        {                                                                      \
-            TMPL_FREE(my_tmp_ptr_arr[my_tmp_iter]);                            \
-        }                                                                      \
-        puts("One of the pointers is NULL. Aborting.");                        \
-        return -1;                                                             \
-    }                                                                          \
-} while(0)
 
 #define TMPL_OPEN_FILE(fp, name)                                               \
 do {                                                                           \
@@ -185,14 +148,21 @@ int main(void)                                                                 \
     type *x, *y0, *y1;                                                         \
     size_t n;                                                                  \
     clock_t t1, t2;                                                            \
+    double libother_time, libtmpl_time, ratio;                                 \
                                                                                \
     const type start = TMPL_CAST(begin, type);                                 \
     const type end = TMPL_CAST(finish, type);                                  \
     const size_t N = NSAMPS(type) / 3;                                         \
     const type dx = (end - start) / TMPL_CAST(N, type);                        \
+    int success;                                                               \
                                                                                \
-    TMPL_MALLOC_VARS(type, N, &x, &y0, &y1);                                   \
-    TMPL_NULL_CHECKER(x, y0, y1);                                              \
+    TMPL_MALLOC_VARS(success, type, N, &x, &y0, &y1);                          \
+                                                                               \
+    if (!success)                                                              \
+    {                                                                          \
+        puts("malloc failed and returned NULL. Aborting.");                    \
+        return -1;                                                             \
+    }                                                                          \
                                                                                \
     printf(#f0 " vs. " #f1 "\n");                                              \
     printf("start:   %.16Le\n", TMPL_CAST(start, long double));                \
@@ -208,13 +178,15 @@ int main(void)                                                                 \
     for (n = TMPL_CAST(0, size_t); n < N; ++n)                                 \
         y0[n] = f0(x[n]);                                                      \
     t2 = clock();                                                              \
-    printf("libtmpl: %f seconds\n", TMPL_CAST(t2-t1, double)/CLOCKS_PER_SEC);  \
+    libtmpl_time = TMPL_CAST(t2 - t1, double) / CLOCKS_PER_SEC;                \
+    printf("libtmpl: %f seconds\n", libtmpl_time);                             \
                                                                                \
     t1 = clock();                                                              \
     for (n = TMPL_CAST(0, size_t); n < N; ++n)                                 \
         y1[n] = f1(x[n]);                                                      \
     t2 = clock();                                                              \
-    printf("C:       %f seconds\n", TMPL_CAST(t2-t1, double)/CLOCKS_PER_SEC);  \
+    libother_time = TMPL_CAST(t2 - t1, double) / CLOCKS_PER_SEC;               \
+    printf("C:       %f seconds\n", libother_time);                            \
                                                                                \
     for (n = TMPL_CAST(0, size_t); n < N; ++n)                                 \
     {                                                                          \
@@ -236,10 +208,22 @@ int main(void)                                                                 \
                                                                                \
     rms_rel = sqrtl(rms_rel / TMPL_CAST(N, long double));                      \
     rms_abs = sqrtl(rms_abs / TMPL_CAST(N, long double));                      \
+    ratio = libtmpl_time / libother_time;                                      \
     printf("max abs error: %.16Le\n", max_abs);                                \
     printf("max rel error: %.16Le\n", max_rel);                                \
     printf("rms abs error: %.16Le\n", rms_abs);                                \
     printf("rms rel error: %.16Le\n", rms_rel);                                \
+    if (ratio < 0.5)                                                           \
+        printf("SPEED TEST: INSANELY FASTER");                                 \
+    else if (ratio < 0.9)                                                      \
+        printf("SPEED TEST: FASTER");                                          \
+    else if (0.9 <= ratio && ratio <= 1.1)                                     \
+        printf("SPEED TEST: ABOUT THE SAME");                                  \
+    else if (ratio < 1.5)                                                      \
+        printf("SPEED TEST: SLOWER");                                          \
+    else                                                                       \
+        printf("SPEED TEST: INSANELY SLOWER");                                 \
+    printf(" (ratio = %.4F)\n", ratio);                                        \
     free(x);                                                                   \
     free(y0);                                                                  \
     free(y1);                                                                  \

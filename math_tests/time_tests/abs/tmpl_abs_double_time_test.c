@@ -16,5 +16,10 @@
  *  You should have received a copy of the GNU General Public License         *
  *  along with libtmpl.  If not, see <https://www.gnu.org/licenses/>.         *
  ******************************************************************************/
-#include "tmpl_math_time_tests.h"
-TEST1(double, -1.0E6, 1.0E6, tmpl_Double_Abs, fabs)
+#ifndef TMPL_NSAMPS
+#define TMPL_NSAMPS (3E8)
+#endif
+#include "../../../libtmpl_tests.h"
+TMPL_TEST_REAL_FUNC_VS_REAL_FUNC_TIME_TEST(
+    double, -1.0E6, 1.0E6, tmpl_Double_Abs, fabs
+)
