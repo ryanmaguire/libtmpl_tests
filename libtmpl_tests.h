@@ -21,14 +21,12 @@
 #include <libtmpl/include/tmpl_variadic.h>
 
 #ifdef __cplusplus
-#include <cstdlib>
 #include <cstdio>
 #include <ctime>
 #include <cmath>
 #include <cfloat>
 using namespace std;
 #else
-#include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
 #include <math.h>
@@ -114,27 +112,44 @@ do {                                                                           \
 #define TNANL tmpl_LDouble_NaN()
 
 #if TMPL_HAS_IEEE754_DOUBLE == 1
-#define DNUM pow(2.0, 1 - (TMPL_DOUBLE_BIAS + TMPL_DOUBLE_MANTISSA_LENGTH))
-#define BNUM pow(2.0, (TMPL_DOUBLE_BIAS))
+#define DNUM (+5.00000000000000E-324)
+#define BNUM (+1.79769313486231E+308)
 #else
 #define DNUM DBL_MIN
 #define BNUM DBL_MAX
 #endif
 
 #if TMPL_HAS_IEEE754_FLOAT == 1
-#define DNUMF powf(2.0F, 1 - (TMPL_FLOAT_BIAS + TMPL_FLOAT_MANTISSA_LENGTH))
-#define BNUMF powf(2.0F, (TMPL_FLOAT_BIAS))
+#define DNUMF (+1.401298464324817E-45F)
+#define BNUMF (+3.402823500000000E+38F)
 #else
 #define DNUMF FLT_MIN
 #define BNUMF FLT_MAX
 #endif
 
-#if TMPL_HAS_IEEE754_LDOUBLE == 1
-#define DNUML powl(2.0L, 1 - (TMPL_LDOUBLE_BIAS + TMPL_LDOUBLE_MANTISSA_LENGTH))
-#define BNUML powl(2.0L, (TMPL_LDOUBLE_BIAS))
+#if TMPL_LDOUBLE_TYPE == TMPL_LDOUBLE_64_BIT
+#define DNUML (+5.00000000000000E-324L)
+#define BNUML (+1.79769313486231E+308L)
+#elif TMPL_LDOUBLE_TYPE == TMPL_LDOUBLE_DOUBLEDOUBLE
+#define DNUML (+4.9406564584124654417656879286822137236505980261E-324L)
+#define BNUML (+1.7976931348623100000000000000000000000000000000E+308L)
+#elif TMPL_LDOUBLE_TYPE == TMPL_LDOUBLE_128_BIT
+#define DNUML (+6.475175119438025110924438958227646552499569338E-4966L)
+#define BNUML (+1.189731495357231765085759326628007130763444687E+4932L)
+#elif TMPL_LDOUBLE_TYPE == TMPL_LDOUBLE_80_BIT
+#define DNUML (+3.645199531882474602E-4951L)
+#define BNUML (+1.189731495357231765E+4932L)
 #else
 #define DNUML LDBL_MIN
 #define BNUML LDBL_MAX
+#endif
+
+#ifdef _OPENMP
+#define TMPL_OPENMP_BASE_PRAGMA _Pragma("omp parallel for shared(flag, error)")
+#define TMPL_OPENMP_BOOL_PRAGMA _Pragma("omp parallel for shared(flag)")
+#else
+#define TMPL_OPENMP_BASE_PRAGMA
+#define TMPL_OPENMP_BOOL_PRAGMA
 #endif
 
 #define TMPL_TEST_REAL_FUNC_VS_REAL_FUNC_TIME_TEST(type, begin, finish, f0, f1)\
@@ -224,13 +239,12 @@ int main(void)                                                                 \
     else                                                                       \
         printf("SPEED TEST: INSANELY SLOWER");                                 \
     printf(" (ratio = %.4F)\n", ratio);                                        \
-    free(x);                                                                   \
-    free(y0);                                                                  \
-    free(y1);                                                                  \
+    TMPL_FREE(x);                                                              \
+    TMPL_FREE(y0);                                                             \
+    TMPL_FREE(y1);                                                             \
     return 0;                                                                  \
 }
 
-#ifdef _OPENMP
 #define TMPL_TEST_REAL_FUNC_VS_REAL_FUNC_UNIT_TEST(type, begin, finish, f0, f1)\
 int main(void)                                                                 \
 {                                                                              \
@@ -241,11 +255,13 @@ int main(void)                                                                 \
     const size_t number_of_samples = NSAMPS(type);                             \
     const type dx = (end - start) / TMPL_CAST(number_of_samples, type);        \
     const type eps = TMPL_CAST(4, type) * TMPL_EPS(dx);                        \
+    const type real_zero = TMPL_CAST(0, type);                                 \
     volatile int flag = 0;                                                     \
-    volatile type error = TMPL_CAST(0, type);                                  \
-    volatile type x_bad, y_bad, z_bad;                                         \
-                                                                               \
-    _Pragma("omp parallel for shared(flag, error)")                            \
+    volatile type error = real_zero;                                           \
+    volatile type x_bad = real_zero;                                           \
+    volatile type y_bad = real_zero;                                           \
+    volatile type z_bad = real_zero;                                           \
+    TMPL_OPENMP_BASE_PRAGMA                                                    \
     for (n = zero; n < number_of_samples; ++n)                                 \
     {                                                                          \
         if (flag)                                                              \
@@ -255,10 +271,11 @@ int main(void)                                                                 \
             const type x = TMPL_CAST(n, type) * dx + start;                    \
             const type y = f0(x);                                              \
             const type z = f1(x);                                              \
-            const type err = (y - z) / z;                                      \
-            const type abs_err = (err > 0 ? err : -err);                       \
-                                                                               \
-            if (!TMPL_IS_NAN(err) && abs_err > eps)                            \
+            const tmpl_Bool y_is_nan = TMPL_IS_NAN(y);                         \
+            const tmpl_Bool z_is_nan = TMPL_IS_NAN(z);                         \
+            const type err = (z == real_zero ? (y - z) : (y - z) / z);         \
+            const type abs_err = TMPL_ABS(err);                                \
+            if ((y_is_nan != z_is_nan) || (abs_err > eps))                     \
             {                                                                  \
                 x_bad = x;                                                     \
                 y_bad = y;                                                     \
@@ -268,7 +285,6 @@ int main(void)                                                                 \
             }                                                                  \
         }                                                                      \
     }                                                                          \
-                                                                               \
     if (flag)                                                                  \
     {                                                                          \
             puts("FAIL");                                                      \
@@ -281,45 +297,6 @@ int main(void)                                                                 \
         puts("PASS");                                                          \
     return 0;                                                                  \
 }
-#else
-#define TMPL_TEST_REAL_FUNC_VS_REAL_FUNC_UNIT_TEST(type, begin, finish, f0, f1)\
-int main(void)                                                                 \
-{                                                                              \
-    const size_t zero = TMPL_CAST(0, size_t);                                  \
-    size_t n;                                                                  \
-    const type start = TMPL_CAST(begin, type);                                 \
-    const type end = TMPL_CAST(finish, type);                                  \
-    const size_t number_of_samples = NSAMPS(type);                             \
-    const type dx = (end - start) / TMPL_CAST(number_of_samples, type);        \
-    const type eps = (type)(4) * TMPL_EPS(dx);                                 \
-                                                                               \
-    for (n = zero; n < number_of_samples; ++n)                                 \
-    {                                                                          \
-        const type x = ((type)n) * dx + start;                                 \
-        const type y = f0(x);                                                  \
-        const type z = f1(x);                                                  \
-        const type err = (y - z) / z;                                          \
-        const type error = (err > 0 ? err : -err);                             \
-                                                                               \
-        if (!TMPL_IS_NAN(err) && error > eps)                                  \
-        {                                                                      \
-            const long double x_bad = TMPL_CAST(x, long double);               \
-            const long double y_bad = TMPL_CAST(y, long double);               \
-            const long double z_bad = TMPL_CAST(z, long double);               \
-            const long double error_bad = TMPL_CAST(error, long double);       \
-            puts("FAIL");                                                      \
-            printf("    Input   = %+.40LE\n", x_bad);                          \
-            printf("    libtmpl = %+.40LE\n", y_bad);                          \
-            printf("    Other   = %+.40LE\n", z_bad);                          \
-            printf("    Error   = %+.40LE\n", error_bad);                      \
-            return -1;                                                         \
-        }                                                                      \
-    }                                                                          \
-                                                                               \
-    puts("PASS");                                                              \
-    return 0;                                                                  \
-}
-#endif
 
 #define TMPL_TEST_REAL_BOOL_VS_REAL_BOOL_UNIT_TEST(type, begin, finish, f0, f1)\
 int main(void)                                                                 \
@@ -330,23 +307,39 @@ int main(void)                                                                 \
     const type end = TMPL_CAST(finish, type);                                  \
     const size_t number_of_samples = NSAMPS(type);                             \
     const type dx = (end - start) / TMPL_CAST(number_of_samples, type);        \
-    type x = start;                                                            \
-                                                                               \
+    volatile int flag = 0;                                                     \
+    volatile type x_bad = TMPL_CAST(0, type);                                  \
+    volatile int y_bad = 0;                                                    \
+    volatile int z_bad = 0;                                                    \
+    TMPL_OPENMP_BOOL_PRAGMA                                                    \
     for (n = zero; n < number_of_samples; ++n)                                 \
     {                                                                          \
-        const tmpl_Bool left = f0(x);                                          \
-        const int right = f1(x);                                               \
-                                                                               \
-        if ((int)left != right)                                                \
+        if (flag)                                                              \
+            continue;                                                          \
+        else                                                                   \
         {                                                                      \
-            puts("FAIL");                                                      \
-            return -1;                                                         \
+            const type x = TMPL_CAST(n, type) * dx + start;                    \
+            const tmpl_Bool y_tmp = f0(x);                                     \
+            const int y = TMPL_CAST(y_tmp, int);                               \
+            const int z = f1(x);                                               \
+            if (y != z)                                                        \
+            {                                                                  \
+                x_bad = x;                                                     \
+                y_bad = y;                                                     \
+                z_bad = z;                                                     \
+                flag = 1;                                                      \
+            }                                                                  \
         }                                                                      \
-                                                                               \
-        x += dx;                                                               \
     }                                                                          \
-                                                                               \
-    puts("PASS");                                                              \
+    if (flag)                                                                  \
+    {                                                                          \
+            puts("FAIL");                                                      \
+            printf("    Input   = %+.40LE\n", TMPL_CAST(x_bad, long double));  \
+            printf("    libtmpl = %d\n", y_bad);                               \
+            printf("    Other   = %d\n", z_bad);                               \
+    }                                                                          \
+    else                                                                       \
+        puts("PASS");                                                          \
     return 0;                                                                  \
 }
 
@@ -357,30 +350,29 @@ int main(void)                                                                 \
     char *line, *start, *end;                                                  \
     FILE *fp;                                                                  \
     type x, y, z, err, abs_err;                                                \
-    const type eps = (type)(4) * TMPL_EPS(x);                                  \
-                                                                               \
+    const type eps = TMPL_CAST(4, type) * TMPL_EPS(x);                         \
+    const type real_zero = TMPL_CAST(0, type);                                 \
     TMPL_OPEN_FILE(fp, csv);                                                   \
-                                                                               \
     line = fgets(buffer, sizeof(buffer), fp);                                  \
-                                                                               \
     while (line)                                                               \
     {                                                                          \
         x = TMPL_STRING_TO_REAL(x, line, &start);                              \
         z = TMPL_STRING_TO_REAL(z, start + 1, &end);                           \
         y = f(x);                                                              \
-        err = (y - z) / z;                                                     \
-        abs_err = (err > 0 ? err : -err);                                      \
-                                                                               \
+        err = (z == real_zero ? (y - z) : (y - z) / z);                        \
+        abs_err = TMPL_ABS(err);                                               \
         if (!TMPL_IS_NAN(err) && abs_err > eps)                                \
         {                                                                      \
-            printf("FAIL: Max Error = %.8LE\n", (long double)abs_err);         \
+            puts("FAIL");                                                      \
+            printf("    Input   = %+.40LE\n", TMPL_CAST(x, long double));      \
+            printf("    libtmpl = %+.40LE\n", TMPL_CAST(y, long double));      \
+            printf("    Other   = %+.40LE\n", TMPL_CAST(z, long double));      \
+            printf("    Error   = %+.40LE\n", TMPL_CAST(err, long double));    \
             fclose(fp);                                                        \
             return -1;                                                         \
         }                                                                      \
-                                                                               \
         line = fgets(buffer, sizeof(buffer), fp);                              \
     }                                                                          \
-                                                                               \
     puts("PASS");                                                              \
     fclose(fp);                                                                \
     return 0;                                                                  \
@@ -394,34 +386,33 @@ int main(void)                                                                 \
     size_t n;                                                                  \
     const size_t zero = TMPL_CAST(0, size_t);                                  \
     const size_t number_of_samples = TMPL_ARRAY_SIZE(in);                      \
-    const long double eps = TMPL_CAST(TMPL_EPS(in[0]), long double);           \
-    long double err = 0.0L;                                                    \
-                                                                               \
+    const type real_zero = TMPL_CAST(0, type);                                 \
+    const type eps = TMPL_CAST(4, type) * TMPL_EPS(real_zero);                 \
     for (n = zero; n < number_of_samples; ++n)                                 \
     {                                                                          \
         const type x = in[n].x;                                                \
         const type y = in[n].y;                                                \
         const type z0 = func0(x, y);                                           \
-        const type z1 = func0(x, y);                                           \
-        const type err = (z1 - z0) / z1;                                       \
-        const type error = (err > 0 ? err : -err);                             \
-                                                                               \
-        if (!TMPL_IS_NAN(err) && error > eps)                                  \
+        const type z1 = func1(x, y);                                           \
+        const type err = (z1 == real_zero ? (z0 - z1) : (z0 - z1) / z1);       \
+        const type abs_err = TMPL_ABS(err);                                    \
+        const tmpl_Bool z0_is_nan = TMPL_IS_NAN(z0);                           \
+        const tmpl_Bool z1_is_nan = TMPL_IS_NAN(z1);                           \
+        if ((z0_is_nan != z1_is_nan) || (abs_err > eps))                       \
         {                                                                      \
             const long double x_bad = TMPL_CAST(x, long double);               \
             const long double y_bad = TMPL_CAST(y, long double);               \
             const long double z0_bad = TMPL_CAST(z0, long double);             \
             const long double z1_bad = TMPL_CAST(z1, long double);             \
-            const long double error_bad = TMPL_CAST(error, long double);       \
+            const long double error = TMPL_CAST(abs_err, long double);         \
             puts("FAIL");                                                      \
             printf("    Input   = (%+.40LE, %+.40LE)\n", x_bad, y_bad);        \
             printf("    libtmpl = %+.40LE\n", z0_bad);                         \
             printf("    Other   = %+.40LE\n", z1_bad);                         \
-            printf("    Error   = %+.40LE\n", error_bad);                      \
+            printf("    Error   = %+.40LE\n", error);                          \
             return -1;                                                         \
         }                                                                      \
     }                                                                          \
-                                                                               \
     puts("PASS");                                                              \
     return 0;                                                                  \
 }
