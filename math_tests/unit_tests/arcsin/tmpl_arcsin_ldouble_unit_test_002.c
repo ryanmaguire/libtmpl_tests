@@ -15,11 +15,12 @@
  *                                                                            *
  *  You should have received a copy of the GNU General Public License         *
  *  along with libtmpl_tests.  If not, see <https://www.gnu.org/licenses/>.   *
+ ******************************************************************************
+ *  Author:     Ryan Maguire                                                  *
+ *  Date:       June 9, 2023                                                  *
  ******************************************************************************/
-#ifndef TMPL_NSAMPS
-#define TMPL_NSAMPS (3E8)
-#endif
 #include "../../../libtmpl_tests.h"
-TMPL_TEST_REAL_FUNC_VS_REAL_FUNC_TIME_TEST(
-    double, -1.0E6, 1.0E6, tmpl_Double_Cos, cos
+#define indata {0.0L, -0.0L, DNUML, -DNUML, BNUML, -BNUML, 1.0L, -1.0L}
+TMPL_REAL_FUNC_VS_REAL_FUNC_FROM_ARRAY(
+    long double, tmpl_LDouble_Arcsin, asinl, indata
 )
