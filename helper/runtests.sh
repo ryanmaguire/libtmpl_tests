@@ -81,7 +81,7 @@ runtests() {
     done
 
     for file in $(find . -name "*$TYPE*.cpp" -type f); do
-        $CPP $ExtraArgs -O3 -flto $file -o main -ltmpl
+        $CPP $ExtraArgs -std=c++17 -O3 -flto $file -o main -ltmpl
         printf "$(basename $file): "
         ./main
         rm -f main
