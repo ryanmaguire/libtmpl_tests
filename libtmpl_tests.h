@@ -411,9 +411,9 @@ int main(void)                                                                 \
         if (output != out[n])                                                  \
         {                                                                      \
             puts("FAIL");                                                      \
-            printf("    Input   = %+.40LE\n", TMPL_CAST(in[n], double));       \
-            printf("    libtmpl = %+.40LE\n", TMPL_CAST(output, double));      \
-            printf("    Other   = %+.40LE\n", TMPL_CAST(out[n], double));      \
+            printf("    Input   = %+.40LE\n", TMPL_CAST(in[n], long double));  \
+            printf("    libtmpl = %+.40LE\n", TMPL_CAST(output, long double)); \
+            printf("    Other   = %+.40LE\n", TMPL_CAST(out[n], long double)); \
             return -1;                                                         \
         }                                                                      \
     }                                                                          \
