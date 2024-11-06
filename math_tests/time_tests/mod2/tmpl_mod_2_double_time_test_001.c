@@ -20,7 +20,9 @@
 #define TMPL_NSAMPS (3E8)
 #endif
 #include "../../../libtmpl_tests.h"
-static double mod2(double x){return fmod(x, 2.0);}
+static double mod2(double x){
+    return x - 2.0*trunc(0.5*x);
+}
 TMPL_TEST_REAL_FUNC_VS_REAL_FUNC_TIME_TEST(
     double, -1.0E6, 1.0E6, tmpl_Double_Mod_2, mod2
 )
