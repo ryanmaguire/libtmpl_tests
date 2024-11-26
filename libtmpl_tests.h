@@ -332,7 +332,7 @@ int main(void)                                                                 \
                 x_bad = x;                                                     \
                 y_bad = y;                                                     \
                 z0_bad = z0;                                                   \
-                z1_bad = z0;                                                   \
+                z1_bad = z1;                                                   \
                 error = err;                                                   \
                 flag = 1;                                                      \
             }                                                                  \
@@ -548,5 +548,150 @@ int main(void)                                                                 \
         }                                                                      \
     }                                                                          \
     puts("PASS");                                                              \
+    return 0;                                                                  \
+}
+
+#define TMPL_TEST_MIXED_FUNC_UNIT_TEST(T0, T1, gen, compare, fail, f0, f1)     \
+int main(void)                                                                 \
+{                                                                              \
+    const size_t zero = TMPL_CAST(0, size_t);                                  \
+    size_t n;                                                                  \
+    const size_t number_of_samples = NSAMPS(T0);                               \
+    volatile int flag = 0;                                                     \
+    volatile T0 x_bad, z0_bad;                                                 \
+    volatile T1 z1_bad;                                                        \
+    TMPL_OPENMP_BOOL_PRAGMA                                                    \
+    for (n = zero; n < number_of_samples; ++n)                                 \
+    {                                                                          \
+        if (flag)                                                              \
+            continue;                                                          \
+        else                                                                   \
+        {                                                                      \
+            T0 x, z0;                                                          \
+            T1 y, z1;                                                          \
+            tmpl_Bool pass;                                                    \
+            gen(&x, &y);                                                       \
+            z0 = f0(x);                                                        \
+            z1 = f1(y);                                                        \
+            pass = compare(z0, z1);                                            \
+            if (!pass)                                                         \
+            {                                                                  \
+                x_bad = x;                                                     \
+                z0_bad = z0;                                                   \
+                z1_bad = z1;                                                   \
+                flag = 1;                                                      \
+            }                                                                  \
+        }                                                                      \
+    }                                                                          \
+    if (flag)                                                                  \
+    {                                                                          \
+        fail(x_bad, z0_bad, z1_bad);                                           \
+    }                                                                          \
+    else                                                                       \
+        puts("PASS");                                                          \
+    return 0;                                                                  \
+}
+
+#define TMPL_TEST_MIXED_FUNC2_UNIT_TEST(T0, T1, gen, compare, fail, f0, f1)    \
+int main(void)                                                                 \
+{                                                                              \
+    const size_t zero = TMPL_CAST(0, size_t);                                  \
+    size_t n;                                                                  \
+    const size_t number_of_samples = NSAMPS(T0);                               \
+    volatile int flag = 0;                                                     \
+    volatile T0 x0_bad, y0_bad, z0_bad;                                        \
+    volatile T1 z1_bad;                                                        \
+    TMPL_OPENMP_BOOL_PRAGMA                                                    \
+    for (n = zero; n < number_of_samples; ++n)                                 \
+    {                                                                          \
+        if (flag)                                                              \
+            continue;                                                          \
+        else                                                                   \
+        {                                                                      \
+            T0 x0, y0, z0;                                                     \
+            T1 x1, y1, z1;                                                     \
+            tmpl_Bool pass;                                                    \
+            gen(&x0, &y0, &x1, &y1);                                           \
+            z0 = f0(x0, y0);                                                   \
+            z1 = f1(x1, y1);                                                   \
+            pass = compare(z0, z1);                                            \
+            if (!pass)                                                         \
+            {                                                                  \
+                x0_bad = x0;                                                   \
+                y0_bad = y0;                                                   \
+                z0_bad = z0;                                                   \
+                z1_bad = z1;                                                   \
+                flag = 1;                                                      \
+            }                                                                  \
+        }                                                                      \
+    }                                                                          \
+    if (flag)                                                                  \
+    {                                                                          \
+        fail(x0_bad, y0_bad, z0_bad, z1_bad);                                  \
+    }                                                                          \
+    else                                                                       \
+        puts("PASS");                                                          \
+    return 0;                                                                  \
+}
+
+#define TMPL_TEST_MIXED_FUNC2_TIME_TEST(T0, T1, gen, get_error, f0, f1)        \
+int main(void)                                                                 \
+{                                                                              \
+    T0 *x0, *y0, *z0;                                                          \
+    T1 *x1, *y1, *z1;                                                          \
+    size_t n;                                                                  \
+    clock_t t1, t2;                                                            \
+    double libother_time, libtmpl_time, ratio;                                 \
+    const size_t number_of_samples = NSAMPS(T0) / 3;                           \
+    long double rms_err, max_err;                                              \
+    int success;                                                               \
+    TMPL_MALLOC_VARS(success, T0, number_of_samples, &x0, &y0, &z0);           \
+    if (!success)                                                              \
+    {                                                                          \
+        puts("malloc failed and returned NULL. Aborting.");                    \
+        return -1;                                                             \
+    }                                                                          \
+    TMPL_MALLOC_VARS(success, T1, number_of_samples, &x1, &y1, &z1);           \
+    if (!success)                                                              \
+    {                                                                          \
+        TMPL_FREE_VARS(T0, &x0, &y0, &z0);                                     \
+        puts("malloc failed and returned NULL. Aborting.");                    \
+        return -1;                                                             \
+    }                                                                          \
+    printf(#f0 " vs. " #f1 "\n");                                              \
+    printf("samples: %zu\n", number_of_samples);                               \
+    for (n = 0; n < number_of_samples; ++n)                                    \
+    {                                                                          \
+        gen(x0 + n, y0 + n, x1 + n, y1 + n);                                   \
+    }                                                                          \
+    t1 = clock();                                                              \
+    for (n = 0; n < number_of_samples; ++n)                                    \
+        z0[n] = f0(x0[n], y0[n]);                                              \
+    t2 = clock();                                                              \
+    libtmpl_time = TMPL_CAST(t2 - t1, double) / CLOCKS_PER_SEC;                \
+    printf("libtmpl: %f seconds\n", libtmpl_time);                             \
+    t1 = clock();                                                              \
+    for (n = 0; n < number_of_samples; ++n)                                    \
+        z1[n] = f1(x1[n], y1[n]);                                              \
+    t2 = clock();                                                              \
+    libother_time = TMPL_CAST(t2 - t1, double) / CLOCKS_PER_SEC;               \
+    printf("Other:   %f seconds\n", libother_time);                            \
+    get_error(z0, z1, number_of_samples, &rms_err, &max_err);                  \
+    printf("max rel error: %.16LE\n", max_err);                                \
+    printf("rms rel error: %.16LE\n", rms_err);                                \
+    ratio = libtmpl_time / libother_time;                                      \
+    if (ratio < 0.5)                                                           \
+        printf("SPEED TEST: INSANELY FASTER");                                 \
+    else if (ratio < 0.9)                                                      \
+        printf("SPEED TEST: FASTER");                                          \
+    else if (0.9 <= ratio && ratio <= 1.1)                                     \
+        printf("SPEED TEST: ABOUT THE SAME");                                  \
+    else if (ratio < 1.5)                                                      \
+        printf("SPEED TEST: SLOWER");                                          \
+    else                                                                       \
+        printf("SPEED TEST: INSANELY SLOWER");                                 \
+    printf(" (ratio = %.4F)\n", ratio);                                        \
+    TMPL_FREE_VARS(T0, &x0, &y0, &z0);                                         \
+    TMPL_FREE_VARS(T1, &x1, &y1, &z1);                                         \
     return 0;                                                                  \
 }
