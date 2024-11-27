@@ -17,8 +17,16 @@
  *  along with libtmpl_tests.  If not, see <https://www.gnu.org/licenses/>.   *
  ******************************************************************************/
 #include <libtmpl/include/tmpl_doubledouble.h>
-#include <quadmath.h>
 #include "../libtmpl_tests.h"
+
+#ifndef TMPL_NO_QUADMATH
+#include <quadmath.h>
+#else
+typedef long double __float128;
+#define quadmath_snprintf snprintf
+#define fabsq fabsl
+#endif
+
 
 static void quad_print(__float128 val)
 {
