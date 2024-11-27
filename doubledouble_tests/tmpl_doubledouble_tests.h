@@ -29,7 +29,6 @@ typedef long double __float128;
 #define TMPL_QUAD_FORMAT_STRING "%.40LE"
 #endif
 
-
 static void quad_print(__float128 val)
 {
     char buffer[1024];
@@ -120,7 +119,7 @@ static inline tmpl_Bool compare_flt128(tmpl_DoubleDouble z0, __float128 z1)
     __float128 err = fabsq((val - z1) / z1);
     const double dbl_eps = TMPL_EPS(z0.dat[0]);
     __float128 sqrt_eps = TMPL_CAST(dbl_eps, __float128);
-    __float128 eps = sqrt_eps * sqrt_eps * 4.0Q;
+    __float128 eps = sqrt_eps * sqrt_eps * TMPL_CAST(4, __float128);
 
     if (err > eps)
         return tmpl_False;
