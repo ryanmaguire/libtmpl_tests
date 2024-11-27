@@ -21,17 +21,19 @@
 
 #ifndef TMPL_NO_QUADMATH
 #include <quadmath.h>
+#define TMPL_QUAD_FORMAT_STRING "%.40QE"
 #else
 typedef long double __float128;
 #define quadmath_snprintf snprintf
 #define fabsq fabsl
+#define TMPL_QUAD_FORMAT_STRING "%.40LE"
 #endif
 
 
 static void quad_print(__float128 val)
 {
     char buffer[1024];
-    quadmath_snprintf(buffer, sizeof(buffer), "%.40QE", val);
+    quadmath_snprintf(buffer, sizeof(buffer), TMPL_QUAD_FORMAT_STRING, val);
     printf("%s\n", buffer);
 }
 
