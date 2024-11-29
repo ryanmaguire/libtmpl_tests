@@ -16,6 +16,9 @@
  *  You should have received a copy of the GNU General Public License         *
  *  along with libtmpl_tests.  If not, see <https://www.gnu.org/licenses/>.   *
  ******************************************************************************/
+#ifndef TMPL_NSAMPS
+#define TMPL_NSAMPS (1E7)
+#endif
 #include "../../tmpl_doubledouble_tests.h"
 
 static inline __float128 add128(__float128 x, __float128 y)
