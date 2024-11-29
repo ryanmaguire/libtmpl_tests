@@ -184,7 +184,9 @@ static inline tmpl_Bool compare_flt128l(tmpl_LongDoubleDouble z0, __float128 z1)
     __float128 err = fabsq((val - z1) / z1);
     const long double ldbl_eps = TMPL_LDBL_EPS;
     __float128 sqrt_eps = TMPL_CAST(ldbl_eps, __float128);
-    __float128 eps = sqrt_eps * sqrt_eps * TMPL_CAST(4, __float128);
+    __float128 eps_tmp = sqrt_eps * sqrt_eps;
+    __float128 eps_val = TMPL_MAX(eps_tmp, TMPL_QUAD_EPS);
+    __float128 eps = TMPL_CAST(4, __float128) * eps_val;
 
     if (err > eps)
         return tmpl_False;
