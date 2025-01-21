@@ -24,7 +24,8 @@
 
 int main(void)
 {
-    tmpl_ThreeVectorDouble P = tmpl_3DDouble_Rect(DBL_MAX, DBL_MAX, DBL_MAX);
+    const double val = DBL_MAX / 3.0;
+    tmpl_ThreeVectorDouble P = tmpl_3DDouble_Rect(val, val, val);
     tmpl_ThreeVectorDouble u = tmpl_3DDouble_Normalize(&P);
     const double norm = tmpl_3DDouble_L2_Norm(&u);
 
