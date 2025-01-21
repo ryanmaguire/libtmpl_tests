@@ -16,22 +16,16 @@
  *  You should have received a copy of the GNU General Public License         *
  *  along with libtmpl.  If not, see <https://www.gnu.org/licenses/>.         *
  ******************************************************************************/
-#include <libtmpl/include/tmpl_math.h>
-#include <libtmpl/include/tmpl_differentiation_real.h>
-#include <stdio.h>
-
-static double f(double x)
-{
-    return x*x;
-}
+#include "../../../libtmpl_tests.h"
 
 int main(void)
 {
+    double (*f)(double) = tmpl_Double_Exp;
     const double x0 = 1.0;
-    const double h = 1.0E-6;
+    const double h = 1.0E-8;
     const double tol = 1.0E-6;
-    const double y0 = tmpl_Double_Symmetric_Derivative(f, x0, h);
-    const double ans = 2.0;
+    const double y0 = tmpl_Double_Five_Point_Derivative(f, x0, h);
+    const double ans = tmpl_Double_Euler_E;
     const double err = tmpl_Double_Abs(y0 - ans);
 
     if (err > tol)

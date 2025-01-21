@@ -16,9 +16,7 @@
  *  You should have received a copy of the GNU General Public License         *
  *  along with libtmpl.  If not, see <https://www.gnu.org/licenses/>.         *
  ******************************************************************************/
-#include <libtmpl/include/tmpl_math.h>
-#include <libtmpl/include/tmpl_differentiation_real.h>
-#include <stdio.h>
+#include "../../../libtmpl_tests.h"
 
 static double f(double x)
 {

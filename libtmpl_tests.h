@@ -16,7 +16,12 @@
  *  You should have received a copy of the GNU General Public License         *
  *  along with libtmpl_tests.  If not, see <https://www.gnu.org/licenses/>.   *
  ******************************************************************************/
+#ifdef __cplusplus
+#define restrict
+#endif
+
 #include <libtmpl/include/tmpl.h>
+#include <libtmpl/include/helper/tmpl_abs.h>
 #include <libtmpl/include/tmpl_generic.h>
 #include <libtmpl/include/tmpl_variadic.h>
 

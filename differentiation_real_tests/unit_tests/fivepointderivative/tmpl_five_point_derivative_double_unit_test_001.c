@@ -16,18 +16,17 @@
  *  You should have received a copy of the GNU General Public License         *
  *  along with libtmpl.  If not, see <https://www.gnu.org/licenses/>.         *
  ******************************************************************************/
-#include <libtmpl/include/tmpl_math.h>
-#include <libtmpl/include/tmpl_differentiation_real.h>
-#include <stdio.h>
+#include "../../../libtmpl_tests.h"
+
 
 int main(void)
 {
     double (*f)(double) = tmpl_Double_Sin;
-    const double x0 = tmpl_One_Pi;
-    const double h = 1.0E-4;
-    const double tol = 1.0E-4;
-    const double y0 = tmpl_Double_Five_Point_Second_Derivative(f, x0, h);
-    const double ans = 0.0;
+    const double x0 = tmpl_Double_Pi;
+    const double h = 1.0E-8;
+    const double tol = 1.0E-6;
+    const double y0 = tmpl_Double_Five_Point_Derivative(f, x0, h);
+    const double ans = -1.0;
     const double err = tmpl_Double_Abs(y0 - ans);
 
     if (err > tol)
