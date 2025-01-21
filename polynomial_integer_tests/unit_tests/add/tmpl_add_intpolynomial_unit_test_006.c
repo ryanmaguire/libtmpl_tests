@@ -16,14 +16,9 @@
  *  You should have received a copy of the GNU General Public License         *
  *  along with libtmpl.  If not, see <https://www.gnu.org/licenses/>.         *
  ******************************************************************************/
-#include "tmpl_polynomial_integer_unit_tests.h"
-#define func tmpl_IntPolynomial_AddTo_Product_Naive
-#define pdat {1, 2, 3, 4}
-#define adat {1, 2, 3, 4}
-#define bdat {5, 6, 7}
-#define rdat {6, 18, 37, 56, 45, 28}
-#define type int
+#include "../tmpl_polynomial_integer_unit_tests.h"
+#define func tmpl_IntPolynomial_Add
 #define ptype tmpl_IntPolynomial
-#define pcreate tmpl_IntPolynomial_Create_From_Data
+#define prand tmpl_IntPolynomial_Random
 #define destroy tmpl_IntPolynomial_Destroy
-TEST9(func, pdat, adat, bdat, rdat, type, ptype, pcreate, destroy)
+TEST5(func, ptype, prand, destroy)

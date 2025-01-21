@@ -16,7 +16,7 @@
  *  You should have received a copy of the GNU General Public License         *
  *  along with libtmpl.  If not, see <https://www.gnu.org/licenses/>.         *
  ******************************************************************************/
-#include "tmpl_polynomial_integer_unit_tests.h"
+#include "../tmpl_polynomial_integer_unit_tests.h"
 #define func tmpl_IntPolynomial_AddTo
 #define pdat {1, 2, 3, 4}
 #define rdat {1, 2, 3, 4}
