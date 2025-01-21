@@ -1,6 +1,4 @@
-#include <libtmpl/include/tmpl_orthogonal_polynomial_real.h>
-#include <libtmpl/include/tmpl_compat_cast.h>
-#include <libtmpl/include/tmpl_math.h>
+#include "../../../libtmpl_tests.h"
 #include <stdio.h>
 #include <stdlib.h>
 
