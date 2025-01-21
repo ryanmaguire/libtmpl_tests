@@ -29,21 +29,21 @@
 /*  CHAR_MIN and CHAR_MAX macros are here.                                    */
 #include <limits.h>
 
-/*  tmpl_ASCII_Upper_Case declared here.                                      */
+/*  tmpl_Upper_Case declared here.                                            */
 #include <libtmpl/include/tmpl_string.h>
 
-/*  Function for testing tmpl_ASCII_Upper_Case against toupper.               */
+/*  Function for testing tmpl_Upper_Case against toupper.                     */
 int main(void)
 {
-    /*  Variables for indexing and testing toupper vs tmpl_ASCII_Upper_Case.  */
+    /*  Variables for indexing and testing toupper vs tmpl_Upper_Case.        */
     char n, c;
     int out;
 
     /*  Loop over all possible char values.                                   */
     for (n = CHAR_MIN; n < CHAR_MAX; ++n)
     {
-        /*  Compute toupper and tmpl_ASCII_Upper_Case of n and compare.       */
-        c = tmpl_ASCII_Upper_Case(n);
+        /*  Compute toupper and tmpl_Upper_Case of n and compare.             */
+        c = tmpl_Upper_Case(n);
         out = toupper(n);
 
         /*  The answers should be identical.                                  */
@@ -60,4 +60,3 @@ int main(void)
     return 0;
 }
 /*  End of main.                                                              */
-

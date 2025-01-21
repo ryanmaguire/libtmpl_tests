@@ -23,7 +23,7 @@
 /*  puts function found here.                                                 */
 #include <stdio.h>
 
-/*  tmpl_ASCII_Upper_Case declared here.                                      */
+/*  tmpl_Upper_Case declared here.                                            */
 #include <libtmpl/include/tmpl_string.h>
 
 /*  Array of all upper case characters.                                       */
@@ -38,20 +38,20 @@ static char lower_arr[26] = {
     'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'
 };
 
-/*  Function for testing tmpl_ASCII_Upper_Case.                               */
+/*  Function for testing tmpl_Upper_Case.                                     */
 int main(void)
 {
     /*  Integer for looping over arrays.                                      */
     unsigned int n;
 
-    /*  Character for testing tmpl_ASCII_Upper_Case later.                    */
+    /*  Character for testing tmpl_Upper_Case later.                          */
     char c;
 
-    /*  Loop over all letters and test tmpl_ASCII_Upper_Case.                 */
+    /*  Loop over all letters and test tmpl_Upper_Case.                       */
     for (n = 0; n < 26; ++n)
     {
         /*  Compute the upper case version.                                   */
-        c = tmpl_ASCII_Upper_Case(lower_arr[n]);
+        c = tmpl_Upper_Case(lower_arr[n]);
 
         /*  Check if it worked.                                               */
         if (c != upper_arr[n])
@@ -61,7 +61,7 @@ int main(void)
         }
 
         /*  Compute the upper case version of upper case letters.             */
-        c = tmpl_ASCII_Upper_Case(upper_arr[n]);
+        c = tmpl_Upper_Case(upper_arr[n]);
 
         /*  Nothing should change for upper case. Check this.                 */
         if (c != upper_arr[n])
@@ -77,4 +77,3 @@ int main(void)
     return 0;
 }
 /*  End of main.                                                              */
-

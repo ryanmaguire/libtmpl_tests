@@ -114,7 +114,7 @@ int main(void)
     /*  Run a speed test with tmpl_ASCII_Lower_Case.                          */
     t1 = clock();
     for (n = 0; n < N; ++n)
-        test1[n] = tmpl_ASCII_Lower_Case(str[n]);
+        test1[n] = tmpl_Lower_Case(str[n]);
     t2 = clock();
     printf("tmpl_ASCII_Lower_Case: %f\n", (double)(t2-t1)/CLOCKS_PER_SEC);
 
@@ -157,4 +157,3 @@ int main(void)
     return 0;
 }
 /*  End of main.                                                              */
-
