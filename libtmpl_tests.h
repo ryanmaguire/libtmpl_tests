@@ -407,7 +407,7 @@ int main(void)                                                                 \
 {                                                                              \
     const type in[] = indata;                                                  \
     const tmpl_Bool out[] = outdata;                                           \
-    const size_t number_of_samples = NSAMPS(type);                             \
+    const size_t number_of_samples = TMPL_ARRAY_SIZE(out);                     \
     const size_t zero = TMPL_CAST(0, size_t);                                  \
     size_t n;                                                                  \
     for (n = zero; n < number_of_samples; ++n)                                 \
@@ -417,8 +417,8 @@ int main(void)                                                                 \
         {                                                                      \
             puts("FAIL");                                                      \
             printf("    Input   = %+.40LE\n", TMPL_CAST(in[n], long double));  \
-            printf("    libtmpl = %+.40LE\n", TMPL_CAST(output, long double)); \
-            printf("    Other   = %+.40LE\n", TMPL_CAST(out[n], long double)); \
+            printf("    libtmpl = %u\n", TMPL_CAST(output, unsigned int));     \
+            printf("    Other   = %u\n", TMPL_CAST(out[n], unsigned int));     \
             return -1;                                                         \
         }                                                                      \
     }                                                                          \
