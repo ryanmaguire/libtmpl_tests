@@ -20,7 +20,7 @@
 #define TMPL_NSAMPS (1E7)
 #endif
 #include "../../../libtmpl_tests.h"
-static float mod2(float x){return x - 2.0F*truncl(0.5F*x);}
+static float mod2(float x){return x - 2.0F*truncf(0.5F*x);}
 TMPL_TEST_REAL_FUNC_VS_REAL_FUNC_UNIT_TEST(
     float, 0.0F, 1.0E1F, tmpl_Float_Mod_2, mod2
 )

@@ -21,5 +21,5 @@
 #endif
 #include "../../../libtmpl_tests.h"
 TMPL_TEST_REAL_BOOL_VS_REAL_BOOL_UNIT_TEST(
-    long double, -1.0E3L, 1.0E3L, tmpl_LDouble_Is_NaN, isnanl
+    long double, -1.0E3L, 1.0E3L, tmpl_LDouble_Is_NaN, isnan
 )

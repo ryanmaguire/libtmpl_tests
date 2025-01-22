@@ -21,5 +21,5 @@
 #endif
 #include "../../../libtmpl_tests.h"
 TMPL_TEST_REAL_BOOL_VS_REAL_BOOL_UNIT_TEST(
-    float, -1.0E3F, 1.0E3F, tmpl_Float_Is_Inf, isinff
+    float, -1.0E3F, 1.0E3F, tmpl_Float_Is_Inf, isinf
 )
