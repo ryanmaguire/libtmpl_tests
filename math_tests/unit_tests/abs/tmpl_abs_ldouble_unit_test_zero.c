@@ -22,6 +22,6 @@
 #include "../../../libtmpl_tests.h"
 #define indata {0.0L, -0.0L}
 #define outdata {0.0L, 0.0L}
-TMPL_REAL_FUNC_ARRAY_VS_ANSWER_EXACT(
+TMPL_R_TO_R_ARRAY_EXACT_UNIT_TEST(
     long double, tmpl_LDouble_Abs, indata, outdata
 )

@@ -22,4 +22,4 @@
 #include "../../../libtmpl_tests.h"
 #define indata {BNUMF, -BNUMF}
 #define outdata {BNUMF, BNUMF}
-TMPL_REAL_FUNC_ARRAY_VS_ANSWER_EXACT(float, tmpl_Float_Abs, indata, outdata)
+TMPL_R_TO_R_ARRAY_EXACT_UNIT_TEST(float, tmpl_Float_Abs, indata, outdata)

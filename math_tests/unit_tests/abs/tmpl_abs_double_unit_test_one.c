@@ -20,6 +20,6 @@
  *  Date:       September 5, 2022                                             *
  ******************************************************************************/
 #include "../../../libtmpl_tests.h"
-#define indata {TMPL_INFINITYF, -TMPL_INFINITYF}
-#define outdata {TMPL_INFINITYF, TMPL_INFINITYF}
-TMPL_R_TO_R_ARRAY_EXACT_UNIT_TEST(float, tmpl_Float_Abs, indata, outdata)
+#define indata {1.0, -1.0}
+#define outdata {1.0, 1.0}
+TMPL_R_TO_R_ARRAY_EXACT_UNIT_TEST(double, tmpl_Double_Abs, indata, outdata)

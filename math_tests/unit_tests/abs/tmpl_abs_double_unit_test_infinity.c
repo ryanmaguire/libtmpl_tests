@@ -22,4 +22,4 @@
 #include "../../../libtmpl_tests.h"
 #define indata {TMPL_INFINITY, -TMPL_INFINITY}
 #define outdata {TMPL_INFINITY, TMPL_INFINITY}
-TMPL_REAL_FUNC_ARRAY_VS_ANSWER_EXACT(double, tmpl_Double_Abs, indata, outdata)
+TMPL_R_TO_R_ARRAY_EXACT_UNIT_TEST(double, tmpl_Double_Abs, indata, outdata)
