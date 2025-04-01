@@ -30,7 +30,6 @@
 #include <ctime>
 #include <cmath>
 #include <cfloat>
-using namespace std;
 #else
 #include <stdio.h>
 #include <time.h>
@@ -38,72 +37,33 @@ using namespace std;
 #include <float.h>
 #endif
 
-#ifndef TMPL_NSAMPS
-#ifdef _MSC_VER
-#include <windows.h>
-static inline size_t memsize(void)
-{
-    MEMORYSTATUSEX status;
-    status.dwLength = sizeof(status);
-    GlobalMemoryStatusEx(&status);
-    return TMPL_CAST(status.ullTotalPhys, size_t);
-}
-#else
-#include <unistd.h>
-static inline size_t memsize(void)
-{
-    long pages = sysconf(_SC_PHYS_PAGES);
-    long page_size = sysconf(_SC_PAGE_SIZE);
-    return TMPL_CAST(pages * page_size, size_t);
-}
-#endif
-#define NSAMPS(a) (4*memsize()/(5*sizeof(a)))
-#else
-#define NSAMPS(a) TMPL_CAST(TMPL_NSAMPS, size_t)
-#endif
+#include "testtools/tmpl_tests_memsize.h"
+#include "testtools/tmpl_tests_rand_real.h"
+#include "testtools/tmpl_tests_open_file.h"
+#include "testtools/tmpl_tests_string_to_real.h"
 
-#define TMPL_RAND_REAL(type, val)                                              \
-do {                                                                           \
-    int my_temp_variable = rand();                                             \
-    val = TMPL_CAST(my_temp_variable, type) / TMPL_CAST(RAND_MAX, type);       \
-} while(0);
-
-#define TMPL_OPEN_FILE(fp, name)                                               \
-do {                                                                           \
-    fp = fopen(name, "r");                                                     \
-                                                                               \
-    if (!fp)                                                                   \
-    {                                                                          \
-        puts("fopen failed. Aborting.");                                       \
-        return -1;                                                             \
-    }                                                                          \
-                                                                               \
-} while(0);
-
-#define TMPL_STRING_TO_REAL(x, start, end) _Generic((x),                       \
-    long double: strtold,                                                      \
-    default:     strtod,                                                       \
-    float:       strtof                                                        \
-)(start, end)
+#define TMPL_ERROR_VALUE(tval, cval) \
+    ((cval) == 0 ? TMPL_ABS((cval)-(tval)) : TMPL_ABS(((cval)-(tval))/(cval)))
 
 /*  Helper macros to shorten up the tests. Undef first to avoid conflict.     */
 #undef T
 #undef F
-#undef TINF
+
 #undef TNAN
-#undef DNUM
-#undef BNUM
-#undef EPS
-#undef TINFF
 #undef TNANF
-#undef DNUMF
-#undef BNUMF
-#undef EPSF
-#undef TINFL
 #undef TNANL
+
+#undef DNUM
+#undef DNUMF
 #undef DNUML
+
+#undef BNUM
+#undef BNUMF
 #undef BNUML
-#undef EPSL
+
+#undef TINF
+#undef TINFF
+#undef TINFL
 
 #define T tmpl_True
 #define F tmpl_False
@@ -268,9 +228,8 @@ int main(void)                                                                 \
             const type z = f1(x);                                              \
             const tmpl_Bool y_is_nan = TMPL_IS_NAN(y);                         \
             const tmpl_Bool z_is_nan = TMPL_IS_NAN(z);                         \
-            const type err = (z == real_zero ? (y - z) : (y - z) / z);         \
-            const type abs_err = TMPL_ABS(err);                                \
-            if ((y_is_nan != z_is_nan) || (abs_err > eps))                     \
+            const type err = TMPL_ERROR_VALUE(y, z);                           \
+            if ((y_is_nan != z_is_nan) || (err > eps))                         \
             {                                                                  \
                 x_bad = x;                                                     \
                 y_bad = y;                                                     \
@@ -330,9 +289,8 @@ int main(void)                                                                 \
             const type z1 = f1(x, y);                                          \
             const tmpl_Bool z0_is_nan = TMPL_IS_NAN(z0);                       \
             const tmpl_Bool z1_is_nan = TMPL_IS_NAN(z1);                       \
-            const type err = (z1 == real_zero ? (z0 - z1) : (z0 - z1) / z1);   \
-            const type abs_err = TMPL_ABS(err);                                \
-            if ((z0_is_nan != z1_is_nan) || (abs_err > eps))                   \
+            const type err = TMPL_ERROR_VALUE(z0, z1);                         \
+            if ((z0_is_nan != z1_is_nan) || (err > eps))                       \
             {                                                                  \
                 x_bad = x;                                                     \
                 y_bad = y;                                                     \
@@ -441,11 +399,10 @@ int main(void)                                                                 \
         const type x = TMPL_STRING_TO_REAL(x, line, &start);                   \
         const type z = TMPL_STRING_TO_REAL(z, start + 1, &end);                \
         const type y = f(x);                                                   \
-        const type err = (z == real_zero ? (y - z) : (y - z) / z);             \
-        const type abs_err = TMPL_ABS(err);                                    \
+        const type err = TMPL_ERROR_VALUE(y, z);                               \
         const tmpl_Bool y_is_nan = TMPL_IS_NAN(y);                             \
         const tmpl_Bool z_is_nan = TMPL_IS_NAN(z);                             \
-        if ((y_is_nan != z_is_nan) || (abs_err > eps))                         \
+        if ((y_is_nan != z_is_nan) || (err > eps))                             \
         {                                                                      \
             puts("FAIL");                                                      \
             printf("    Input   = %+.40LE\n", TMPL_CAST(x, long double));      \
@@ -462,99 +419,12 @@ int main(void)                                                                 \
     return 0;                                                                  \
 }
 
-#define TMPL_REAL_FUNC_ARRAY_VS_ANSWER_EXACT(type, func, indata, outdata)      \
-int main(void)                                                                 \
-{                                                                              \
-    const type in[] = indata;                                                  \
-    const type out[] = outdata;                                                \
-    const size_t zero = TMPL_CAST(0, size_t);                                  \
-    const size_t number_of_samples = TMPL_ARRAY_SIZE(in);                      \
-    size_t n;                                                                  \
-    for (n = zero; n < number_of_samples; ++n)                                 \
-    {                                                                          \
-        const type output = func(in[n]);                                       \
-        const tmpl_Bool val_is_nan = TMPL_IS_NAN(output);                      \
-        const tmpl_Bool out_is_nan = TMPL_IS_NAN(out[n]);                      \
-        if (out_is_nan && val_is_nan)                                          \
-            continue;                                                          \
-        else if ((val_is_nan != out_is_nan) || (output != out[n]))             \
-        {                                                                      \
-            puts("FAIL");                                                      \
-            printf("    Input   = %+.40LE\n", TMPL_CAST(in[n], long double));  \
-            printf("    libtmpl = %+.40LE\n", TMPL_CAST(output, long double)); \
-            printf("    Other   = %+.40LE\n", TMPL_CAST(out[n], long double)); \
-            return -1;                                                         \
-        }                                                                      \
-    }                                                                          \
-    puts("PASS");                                                              \
-    return 0;                                                                  \
-}
-
-#define TMPL_REAL_FUNC_VS_REAL_FUNC_FROM_ARRAY(type, func0, func1, indata)     \
-int main(void)                                                                 \
-{                                                                              \
-    const type in[] = indata;                                                  \
-    size_t n;                                                                  \
-    const size_t zero = TMPL_CAST(0, size_t);                                  \
-    const size_t number_of_samples = TMPL_ARRAY_SIZE(in);                      \
-    const type real_zero = TMPL_CAST(0, type);                                 \
-    const type eps = TMPL_DEFAULT_TOLERANCE * TMPL_EPS(real_zero);             \
-    for (n = zero; n < number_of_samples; ++n)                                 \
-    {                                                                          \
-        const type z0 = func0(in[n]);                                          \
-        const type z1 = func1(in[n]);                                          \
-        const type err = (z1 == real_zero ? (z0 - z1) : (z0 - z1) / z1);       \
-        const type abs_err = TMPL_ABS(err);                                    \
-        const tmpl_Bool z0_is_nan = TMPL_IS_NAN(z0);                           \
-        const tmpl_Bool z1_is_nan = TMPL_IS_NAN(z1);                           \
-        if ((z0_is_nan != z1_is_nan) || (abs_err > eps))                       \
-        {                                                                      \
-            puts("FAIL");                                                      \
-            printf("    Input   = %+.40LE\n", TMPL_CAST(in[n], long double));  \
-            printf("    libtmpl = %+.40LE\n", TMPL_CAST(z0, long double));     \
-            printf("    Other   = %+.40LE\n", TMPL_CAST(z1, long double));     \
-            printf("    Error   = %+.40LE\n", TMPL_CAST(err, long double));    \
-            return -1;                                                         \
-        }                                                                      \
-    }                                                                          \
-    puts("PASS");                                                              \
-    return 0;                                                                  \
-}
-
-#define TMPL_REAL2_FUNC_VS_REAL2_FUNC_FROM_ARRAY(type, func0, func1, indata)   \
-int main(void)                                                                 \
-{                                                                              \
-    typedef struct {type x, y;} arr2;                                          \
-    const arr2 in[] = indata;                                                  \
-    size_t n;                                                                  \
-    const size_t zero = TMPL_CAST(0, size_t);                                  \
-    const size_t number_of_samples = TMPL_ARRAY_SIZE(in);                      \
-    const type real_zero = TMPL_CAST(0, type);                                 \
-    const type eps = TMPL_DEFAULT_TOLERANCE * TMPL_EPS(real_zero);             \
-    for (n = zero; n < number_of_samples; ++n)                                 \
-    {                                                                          \
-        const type x = in[n].x;                                                \
-        const type y = in[n].y;                                                \
-        const type z0 = func0(x, y);                                           \
-        const type z1 = func1(x, y);                                           \
-        const type err = (z1 == real_zero ? (z0 - z1) : (z0 - z1) / z1);       \
-        const type abs_err = TMPL_ABS(err);                                    \
-        const tmpl_Bool z0_is_nan = TMPL_IS_NAN(z0);                           \
-        const tmpl_Bool z1_is_nan = TMPL_IS_NAN(z1);                           \
-        if ((z0_is_nan != z1_is_nan) || (abs_err > eps))                       \
-        {                                                                      \
-            puts("FAIL");                                                      \
-            printf("    Input x = %+.40LE\n", TMPL_CAST(x, long double));      \
-            printf("    Input y = %+.40LE\n", TMPL_CAST(y, long double));      \
-            printf("    libtmpl = %+.40LE\n", TMPL_CAST(z0, long double));     \
-            printf("    Other   = %+.40LE\n", TMPL_CAST(z1, long double));     \
-            printf("    Error   = %+.40LE\n", TMPL_CAST(err, long double));    \
-            return -1;                                                         \
-        }                                                                      \
-    }                                                                          \
-    puts("PASS");                                                              \
-    return 0;                                                                  \
-}
+#include "testtools/tmpl_tests_r_to_r_array_unit_test.h"
+#include "testtools/tmpl_tests_r_to_r_array_exact_unit_test.h"
+#include "testtools/tmpl_tests_r_to_r_vs_from_array_unit_test.h"
+#include "testtools/tmpl_tests_r2_to_r_array_exact_unit_test.h"
+#include "testtools/tmpl_tests_r2_to_r_array_unit_test.h"
+#include "testtools/tmpl_tests_r2_to_r_vs_from_array_unit_test.h"
 
 #define TMPL_TEST_MIXED_FUNC_UNIT_TEST(T0, T1, gen, compare, fail, f0, f1)     \
 int main(void)                                                                 \
