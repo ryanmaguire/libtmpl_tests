@@ -17,8 +17,11 @@
  *  along with libtmpl_tests.  If not, see <https://www.gnu.org/licenses/>.   *
  ******************************************************************************
  *  Author:     Ryan Maguire                                                  *
- *  Date:       June 9, 2023                                                  *
+ *  Date:       September 5, 2022                                             *
  ******************************************************************************/
 #include "../../../libtmpl_tests.h"
-#define indata {0.0, -0.0, DNUM, -DNUM, BNUM, -BNUM, 1.0, -1.0}
-TMPL_REAL_FUNC_VS_REAL_FUNC_FROM_ARRAY(double, tmpl_Double_Arccos, acos, indata)
+#define indata {TMPL_NAN, -TMPL_NAN}
+#define outdata {TMPL_NAN, TMPL_NAN}
+TMPL_R_TO_R_ARRAY_EXACT_UNIT_TEST(
+    double, tmpl_Double_Arccos, indata, outdata
+)
