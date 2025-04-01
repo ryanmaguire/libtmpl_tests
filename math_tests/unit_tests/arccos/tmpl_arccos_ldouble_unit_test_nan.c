@@ -15,9 +15,6 @@
  *                                                                            *
  *  You should have received a copy of the GNU General Public License         *
  *  along with libtmpl_tests.  If not, see <https://www.gnu.org/licenses/>.   *
- ******************************************************************************
- *  Author:     Ryan Maguire                                                  *
- *  Date:       September 5, 2022                                             *
  ******************************************************************************/
 #include "../../../libtmpl_tests.h"
 #define indata {TMPL_NANL, -TMPL_NANL}
