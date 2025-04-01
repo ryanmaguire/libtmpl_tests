@@ -16,10 +16,9 @@
  *  You should have received a copy of the GNU General Public License         *
  *  along with libtmpl_tests.  If not, see <https://www.gnu.org/licenses/>.   *
  ******************************************************************************/
-#ifndef TMPL_NSAMPS
-#define TMPL_NSAMPS (1E7)
-#endif
 #include "../../../libtmpl_tests.h"
-TMPL_TEST_REAL2_FUNC_VS_REAL2_FUNC_UNIT_TEST(
-    double, -1.0E6, 1.0E6, tmpl_Double_Arctan2, atan2
+#define indata {{0.0L, 0.0L}, {-0.0L, -0.0L}, {0.0L, -0.0L}, {-0.0L, 0.0L}}
+#define outdata {0.0L, -TMPL_LDOUBLE_PI, TMPL_LDOUBLE_PI, -0.0L}
+TMPL_R2_TO_R_ARRAY_EXACT_UNIT_TEST(
+    long double, tmpl_LDouble_Arctan2, indata, outdata
 )

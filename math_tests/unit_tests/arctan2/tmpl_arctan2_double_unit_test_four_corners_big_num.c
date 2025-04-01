@@ -16,10 +16,22 @@
  *  You should have received a copy of the GNU General Public License         *
  *  along with libtmpl_tests.  If not, see <https://www.gnu.org/licenses/>.   *
  ******************************************************************************/
-#ifndef TMPL_NSAMPS
-#define TMPL_NSAMPS (1E7)
-#endif
 #include "../../../libtmpl_tests.h"
-TMPL_TEST_REAL2_FUNC_VS_REAL2_FUNC_UNIT_TEST(
-    double, -1.0E6, 1.0E6, tmpl_Double_Arctan2, atan2
+
+#define indata {                      \
+    {+BNUM, +BNUM}, /* North-East. */ \
+    {+BNUM, -BNUM}, /* North-West. */ \
+    {-BNUM, -BNUM}, /* South-West. */ \
+    {-BNUM, +BNUM}  /* South-East. */ \
+}
+
+#define outdata {                   \
+    +TMPL_DOUBLE_PI_BY_FOUR,        \
+    +TMPL_DOUBLE_THREE_PI_BY_FOUR,  \
+    -TMPL_DOUBLE_THREE_PI_BY_FOUR,  \
+    -TMPL_DOUBLE_PI_BY_FOUR         \
+}
+
+TMPL_R2_TO_R_ARRAY_UNIT_TEST(
+    double, tmpl_Double_Arctan2, indata, outdata
 )
