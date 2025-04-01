@@ -20,8 +20,6 @@
  *  Date:       September 5, 2022                                             *
  ******************************************************************************/
 #include "../../../libtmpl_tests.h"
-#define indata {0.0L, -0.0L, DNUML, -DNUML, BNUML, -BNUML}
-#define outdata {0.0L, 0.0L, DNUML, DNUML, BNUML, BNUML}
-TMPL_REAL_FUNC_ARRAY_VS_ANSWER_EXACT(
-    long double, tmpl_LDouble_Abs, indata, outdata
-)
+#define indata {BNUMF, -BNUMF}
+#define outdata {BNUMF, BNUMF}
+TMPL_REAL_FUNC_ARRAY_VS_ANSWER_EXACT(float, tmpl_Float_Abs, indata, outdata)
