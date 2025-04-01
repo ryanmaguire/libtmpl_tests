@@ -19,6 +19,6 @@
 #include "../../../libtmpl_tests.h"
 #define indata {1.0, -1.0}
 #define outdata {0.0, TMPL_DOUBLE_PI}
-TMPL_R_TO_R_ARRAY_UNIT_TEST(
+TMPL_R_TO_R_ARRAY_EXACT_UNIT_TEST(
     double, tmpl_Double_Arccos, indata, outdata
 )
