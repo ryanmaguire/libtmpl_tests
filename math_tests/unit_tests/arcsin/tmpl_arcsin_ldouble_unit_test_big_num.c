@@ -15,10 +15,10 @@
  *                                                                            *
  *  You should have received a copy of the GNU General Public License         *
  *  along with libtmpl_tests.  If not, see <https://www.gnu.org/licenses/>.   *
- ******************************************************************************
- *  Author:     Ryan Maguire                                                  *
- *  Date:       June 9, 2023                                                  *
  ******************************************************************************/
 #include "../../../libtmpl_tests.h"
-#define indata {0.0F, -0.0F, DNUMF, -DNUMF, BNUMF, -BNUMF, 1.0F, -1.0F}
-TMPL_REAL_FUNC_VS_REAL_FUNC_FROM_ARRAY(float, tmpl_Float_Arcsin, asinf, indata)
+#define indata {BNUML, -BNUML}
+#define outdata {TMPL_NANL, TMPL_NANL}
+TMPL_R_TO_R_ARRAY_EXACT_UNIT_TEST(
+    long double, tmpl_LDouble_Arcsin, indata, outdata
+)
