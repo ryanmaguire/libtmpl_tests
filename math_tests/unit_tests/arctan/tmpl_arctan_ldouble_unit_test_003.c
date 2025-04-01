@@ -21,5 +21,5 @@
 #endif
 #include "../../../libtmpl_tests.h"
 TMPL_TEST_REAL_FUNC_VS_REAL_FUNC_UNIT_TEST(
-    long double, -1.0E0L, 1.0E0L, tmpl_LDouble_Arctan, atanl
+    long double, -1.0E6L, 1.0E6L, tmpl_LDouble_Arctan, atanl
 )
