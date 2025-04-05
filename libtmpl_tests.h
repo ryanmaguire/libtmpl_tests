@@ -49,10 +49,6 @@
 #undef T
 #undef F
 
-#undef TNAN
-#undef TNANF
-#undef TNANL
-
 #undef DNUM
 #undef DNUMF
 #undef DNUML
@@ -61,20 +57,8 @@
 #undef BNUMF
 #undef BNUML
 
-#undef TINF
-#undef TINFF
-#undef TINFL
-
 #define T tmpl_True
 #define F tmpl_False
-
-#define TINF tmpl_Double_Infinity()
-#define TINFF tmpl_Float_Infinity()
-#define TINFL tmpl_LDouble_Infinity()
-
-#define TNAN tmpl_Double_NaN()
-#define TNANF tmpl_Float_NaN()
-#define TNANL tmpl_LDouble_NaN()
 
 #if TMPL_HAS_IEEE754_DOUBLE == 1
 #define DNUM (+5.00000000000000E-324)
