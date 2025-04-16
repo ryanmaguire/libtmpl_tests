@@ -24,6 +24,7 @@ int main(void)                                                                 \
             printf("    Input   = %+.40LE\n", TMPL_CAST(in[n], long double));  \
             printf("    libtmpl = %+.40LE\n", TMPL_CAST(output, long double)); \
             printf("    Other   = %+.40LE\n", TMPL_CAST(out[n], long double)); \
+            printf("    Error   = %+.40LE\n", TMPL_CAST(err, long double));    \
             return -1;                                                         \
         }                                                                      \
     }                                                                          \

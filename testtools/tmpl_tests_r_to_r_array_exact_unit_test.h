@@ -18,10 +18,12 @@ int main(void)                                                                 \
             continue;                                                          \
         else if ((val_is_nan != out_is_nan) || (output != out[n]))             \
         {                                                                      \
+            const type err = TMPL_ERROR_VALUE(output, out[n]);                 \
             puts("FAIL");                                                      \
             printf("    Input   = %+.40LE\n", TMPL_CAST(in[n], long double));  \
             printf("    libtmpl = %+.40LE\n", TMPL_CAST(output, long double)); \
             printf("    Other   = %+.40LE\n", TMPL_CAST(out[n], long double)); \
+            printf("    Error   = %+.40LE\n", TMPL_CAST(err, long double));    \
             return -1;                                                         \
         }                                                                      \
     }                                                                          \

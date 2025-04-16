@@ -17,9 +17,9 @@ int main(void)                                                                 \
     else                                                                       \
     {                                                                          \
         puts("FAIL");                                                          \
-        printf("Result: %.16LE\n", TMPL_CAST(result, long double));            \
-        printf("Answer: %.16LE\n", TMPL_CAST(output, long double));            \
-        printf("Error:  %.16LE\n", TMPL_CAST(err, long double));               \
+        printf("    Result: %.16LE\n", TMPL_CAST(result, long double));        \
+        printf("    Answer: %.16LE\n", TMPL_CAST(output, long double));        \
+        printf("    Error:  %.16LE\n", TMPL_CAST(err, long double));           \
     }                                                                          \
     return 0;                                                                  \
 }
