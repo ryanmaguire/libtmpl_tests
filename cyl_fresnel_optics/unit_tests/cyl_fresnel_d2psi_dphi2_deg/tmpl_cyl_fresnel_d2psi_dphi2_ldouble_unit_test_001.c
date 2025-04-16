@@ -49,7 +49,7 @@ int main(void)
         const long double d2psi_approx =
             tmpl_LDouble_Five_Point_Second_Derivative(func, phi, h);
 
-        const double d2psi =
+        const long double d2psi =
             tmpl_LDouble_Cyl_Fresnel_d2Psi_dPhi2(k, r, r0, phi, phi0, B, D);
 
         const long double err =
