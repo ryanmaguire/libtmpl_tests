@@ -23,17 +23,17 @@ static const float k = 1.7453292519943294E+05F;
 static const float r = 8.76E+04F;
 static const float r0 = 8.75E+04F;
 static const float phi0 = 2.62F;
-static const float B = 0.61F;
+static const float B = 6.1E-01F;
 static const float D = 2.0E+05F;
-static const float eps = 1.0E-4F;
+static const float eps = 1.0E-04F;
 
 int main(void)
 {
     /*  There is a root for the second derivative near 0.24 radians. The      *
      *  relative error will likely be poorer here. Start after this point.    */
-    const float start = 0.3F;
+    const float start = 3.0E-01F;
     const float end = tmpl_Float_Pi;
-    const float dphi = 1.0E-5F;
+    const float dphi = 1.0E-05F;
     float phi = start;
 
     while (phi < end)
