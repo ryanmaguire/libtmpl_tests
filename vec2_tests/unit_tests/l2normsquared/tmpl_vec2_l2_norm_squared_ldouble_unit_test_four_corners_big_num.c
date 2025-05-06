@@ -17,13 +17,16 @@
  *  along with libtmpl_tests.  If not, see <https://www.gnu.org/licenses/>.   *
  ******************************************************************************/
 #include "../../../libtmpl_tests.h"
-#define inarr {         \
-    {{+0.0F, +1.0F}},   \
-    {{-0.0F, +1.0F}},   \
-    {{+0.0F, -1.0F}},   \
-    {{-0.0F, -1.0F}}    \
+#define IN_VAL 0.5L * tmpl_LDouble_Sqrt(BNUML)
+#define OUT_VAL 0.5L * BNUML
+#define inarr {             \
+    {{+IN_VAL, +IN_VAL}},   \
+    {{+IN_VAL, -IN_VAL}},   \
+    {{-IN_VAL, +IN_VAL}},   \
+    {{-IN_VAL, -IN_VAL}}    \
 }
-#define outarr {+1.0F, +1.0F, +1.0F, +1.0F}
-TMPL_TWOVEC_TO_R_ARRAY_EXACT_UNIT_TEST(
-    tmpl_TwoVectorFloat, float, tmpl_2DFloat_L2_Norm_Squared, inarr, outarr
+#define outarr {OUT_VAL, OUT_VAL, OUT_VAL, OUT_VAL}
+TMPL_TWOVEC_TO_R_ARRAY_UNIT_TEST(
+    tmpl_TwoVectorLongDouble, long double,
+    tmpl_2DLDouble_L2_Norm_Squared, inarr, outarr
 )

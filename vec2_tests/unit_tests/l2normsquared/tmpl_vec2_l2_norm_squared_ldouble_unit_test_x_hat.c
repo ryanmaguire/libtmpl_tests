@@ -18,12 +18,13 @@
  ******************************************************************************/
 #include "../../../libtmpl_tests.h"
 #define inarr {         \
-    {{+0.0F, +1.0F}},   \
-    {{-0.0F, +1.0F}},   \
-    {{+0.0F, -1.0F}},   \
-    {{-0.0F, -1.0F}}    \
+    {{+1.0L, +0.0L}},   \
+    {{+1.0L, -0.0L}},   \
+    {{-1.0L, +0.0L}},   \
+    {{-1.0L, -0.0L}}    \
 }
-#define outarr {+1.0F, +1.0F, +1.0F, +1.0F}
+#define outarr {+1.0L, +1.0L, +1.0L, +1.0L}
 TMPL_TWOVEC_TO_R_ARRAY_EXACT_UNIT_TEST(
-    tmpl_TwoVectorFloat, float, tmpl_2DFloat_L2_Norm_Squared, inarr, outarr
+    tmpl_TwoVectorLongDouble, long double,
+    tmpl_2DLDouble_L2_Norm_Squared, inarr, outarr
 )
