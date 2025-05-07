@@ -413,6 +413,7 @@ int main(void)                                                                 \
 #include "testtools/tmpl_tests_twovec_to_r_array_unit_test.h"
 #include "testtools/tmpl_tests_twovec_to_r_array_exact_unit_test.h"
 #include "testtools/tmpl_tests_twovec_to_twovec_array_exact_unit_test.h"
+#include "testtools/tmpl_tests_twovec2_to_twovec_array_exact_unit_test.h"
 
 #define TMPL_TEST_MIXED_FUNC_UNIT_TEST(T0, T1, gen, compare, fail, f0, f1)     \
 int main(void)                                                                 \
