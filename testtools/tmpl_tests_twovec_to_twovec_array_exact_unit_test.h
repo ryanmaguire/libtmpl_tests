@@ -19,7 +19,7 @@
 #ifndef TMPL_TESTS_TWOVEC_TO_TWOVEC_ARRAY_EXACT_UNIT_TEST_H
 #define TMPL_TESTS_TWOVEC_TO_TWOVEC_ARRAY_EXACT_UNIT_TEST_H
 
-#define TMPL_TWOVEC_TO_TWOVEC_ARRAY_EXACT_UNIT_TEST(type, f, inarr, outarr)    \
+#define TMPL_TWOVEC_TO_TWOVEC_ARRAY_EXACT_UNIT_TEST(type, func, inarr, outarr) \
 int main(void)                                                                 \
 {                                                                              \
     const type in[] = inarr;                                                   \
@@ -29,7 +29,7 @@ int main(void)                                                                 \
     size_t n;                                                                  \
     for (n = zero; n < number_of_samples; ++n)                                 \
     {                                                                          \
-        const type output = f(&in[n]);                                         \
+        const type output = func(&in[n]);                                      \
         const tmpl_Bool xval_is_nan = TMPL_IS_NAN(output.dat[0]);              \
         const tmpl_Bool yval_is_nan = TMPL_IS_NAN(output.dat[1]);              \
         const tmpl_Bool xout_is_nan = TMPL_IS_NAN(out[n].dat[0]);              \
