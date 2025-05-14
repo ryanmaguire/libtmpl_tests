@@ -16,8 +16,8 @@
  *  You should have received a copy of the GNU General Public License         *
  *  along with libtmpl_tests.  If not, see <https://www.gnu.org/licenses/>.   *
  ******************************************************************************/
-#ifndef TMPL_TESTS_TWOVEC2_TO_TWOVEC_ARRAY_EXACT_UNIT_TEST_H
-#define TMPL_TESTS_TWOVEC2_TO_TWOVEC_ARRAY_EXACT_UNIT_TEST_H
+#ifndef TMPL_TESTS_TWOVEC_TO_TWOVEC_ARRAY_UNIT_TEST_H
+#define TMPL_TESTS_TWOVEC_TO_TWOVEC_ARRAY_UNIT_TEST_H
 
 #define TMPL_TWOVEC_TO_TWOVEC_ARRAY_UNIT_TEST(type, ftype, func, iarr, oarr)   \
 int main(void)                                                                 \
