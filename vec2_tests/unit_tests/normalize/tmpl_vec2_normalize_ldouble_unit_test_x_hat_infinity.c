@@ -32,5 +32,6 @@
 }
 
 TMPL_TWOVEC_TO_TWOVEC_ARRAY_UNIT_TEST(
-    tmpl_TwoVectorLongDouble, long double, tmpl_2DLDouble_Normalize, inarr, outarr
+    tmpl_TwoVectorLongDouble, long double,
+    tmpl_2DLDouble_Normalize, inarr, outarr
 )
