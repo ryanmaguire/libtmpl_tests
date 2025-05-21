@@ -30,7 +30,7 @@ static const long double eps = 1.0E-04L;
 /*  psi as a function of phi alone. Used for numerical differentiation.       */
 static long double func(long double phi)
 {
-    return tmpl_LDouble_Cyl_Fresnel_Psi(k, r, r0, phi, phi0, B, D);
+    return tmpl_LDouble_Ideal_Cyl_Fresnel_Psi(k, r, r0, phi, phi0, B, D);
 }
 
 int main(void)
@@ -50,7 +50,7 @@ int main(void)
             tmpl_LDouble_Five_Point_Second_Derivative(func, phi, h);
 
         const long double d2psi =
-            tmpl_LDouble_Cyl_Fresnel_d2Psi_dPhi2(k, r, r0, phi, phi0, B, D);
+            tmpl_LDouble_Ideal_Cyl_Fresnel_d2Psi_dPhi2(k, r, r0, phi, phi0, B, D);
 
         const long double err =
             tmpl_LDouble_Abs((d2psi - d2psi_approx) / d2psi);
