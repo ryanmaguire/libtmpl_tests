@@ -28,5 +28,5 @@ static const long double answer = 5.44732137271094924474214127762279103942E+09L;
 #define ARG k COMMA r COMMA r0 COMMA phi COMMA phi0 COMMA B COMMA D
 
 TMPL_RN_TO_R_SINGLE_UNIT_TEST(
-    long double, tmpl_LDouble_Cyl_Fresnel_d2Psi_dPhi2_Deg, ARG, answer
+    long double, tmpl_LDouble_Ideal_Cyl_Fresnel_d2Psi_dPhi2_Deg, ARG, answer
 )

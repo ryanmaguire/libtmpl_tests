@@ -19,49 +19,49 @@
 #include "../../../libtmpl_tests.h"
 
 /*  Geometric values for Saturn, Rev007.                                      */
-static const double k = 1.7453292519943294E+05;
-static const double r = 8.76E+04;
-static const double r0 = 8.75E+04;
-static const double phi0 = 1.5E+02;
-static const double B = 3.5E+01;
-static const double D = 2.0E+05;
-static const double eps = 1.0E-04;
-static const double scale = 3.282806350011743794781694607995175500501224E+03;
-
-/*  psi as a function of phi alone. Used for numerical differentiation.       */
-static double func(double phi)
-{
-    return tmpl_Double_Cyl_Fresnel_Psi_Deg(k, r, r0, phi, phi0, B, D);
-}
+static const float k = 1.7453292519943294E+05F;
+static const float r = 8.76E+04F;
+static const float r0 = 8.75E+04F;
+static const float phi0 = 2.62F;
+static const float B = 6.1E-01F;
+static const float D = 2.0E+05F;
+static const float eps = 1.0E-04F;
 
 int main(void)
 {
-    /*  There is a root for the second derivative near 13.75 degrees. The     *
-     *  numerical second derivative will have poor relative error here, start *
-     *  away from this value.                                                 */
-    const double start = 1.6E+01;
-    const double end = 1.8E+02;
-    const double dphi = 1.0E-03;
-    const double h = 1.0E-02;
-    double phi = start;
+    /*  There is a root for the second derivative near 0.24 radians. The      *
+     *  relative error will likely be poorer here. Start after this point.    */
+    const float start = 3.0E-01F;
+    const float end = tmpl_Float_Pi;
+    const float dphi = 1.0E-05F;
+    float phi = start;
 
     while (phi < end)
     {
-        const double d2psi_approx =
-            scale * tmpl_Double_Five_Point_Second_Derivative(func, phi, h);
+        const double d2psi_double = tmpl_Double_Ideal_Cyl_Fresnel_d2Psi_dPhi2_Deg(
+            TMPL_CAST(k, double),
+            TMPL_CAST(r, double),
+            TMPL_CAST(r0, double),
+            TMPL_CAST(phi, double),
+            TMPL_CAST(phi0, double),
+            TMPL_CAST(B, double),
+            TMPL_CAST(D, double)
+        );
 
-        const double d2psi =
-            tmpl_Double_Cyl_Fresnel_d2Psi_dPhi2_Deg(k, r, r0, phi, phi0, B, D);
+        const float d2psi = TMPL_CAST(d2psi_double, float);
+        const float d2psi_approx = tmpl_Float_Ideal_Cyl_Fresnel_d2Psi_dPhi2_Deg(
+            k, r, r0, phi, phi0, B, D
+        );
 
-        const double err = tmpl_Double_Abs((d2psi - d2psi_approx) / d2psi);
+        const float err = tmpl_Float_Abs((d2psi - d2psi_approx) / d2psi);
 
         if (err > eps)
         {
             puts("FAIL");
-            printf("phi       = %+.16E\n", phi);
-            printf("Exact     = %+.16E\n", d2psi);
-            printf("Numerical = %+.16E\n", d2psi_approx);
-            printf("Error     = %+.16E\n", err);
+            printf("phi       = %+.16E\n", TMPL_CAST(phi, double));
+            printf("Exact     = %+.16E\n", TMPL_CAST(d2psi, double));
+            printf("Numerical = %+.16E\n", TMPL_CAST(d2psi_approx, double));
+            printf("Error     = %+.16E\n", TMPL_CAST(err, double));
             return -1;
         }
 

@@ -17,16 +17,16 @@
  *  along with libtmpl_tests.  If not, see <https://www.gnu.org/licenses/>.   *
  ******************************************************************************/
 #include "../../../libtmpl_tests.h"
-static const float k = 175000.0F;
-static const float r = 8.76E+04F;
-static const float r0 = 8.75E+04F;
-static const float phi = 1.5E+02F;
-static const float phi0 = 1.75E+02F;
-static const float B = 3.0E+01F;
-static const float D = 2.0E+05F;
-static const float answer = 5.44732137271094924474214127762279103942208562E+09F;
+static const double k = 175000.0;
+static const double r = 8.76E+04;
+static const double r0 = 8.75E+04;
+static const double phi = 1.5E+02;
+static const double phi0 = 1.75E+02;
+static const double B = 3.0E+01;
+static const double D = 2.0E+05;
+static const double answer = 5.44732137271094924474214127762279103942208562E+09;
 #define ARG k COMMA r COMMA r0 COMMA phi COMMA phi0 COMMA B COMMA D
 
 TMPL_RN_TO_R_SINGLE_UNIT_TEST(
-    float, tmpl_Float_Cyl_Fresnel_d2Psi_dPhi2_Deg, ARG, answer
+    double, tmpl_Double_Ideal_Cyl_Fresnel_d2Psi_dPhi2_Deg, ARG, answer
 )
