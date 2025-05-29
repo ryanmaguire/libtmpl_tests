@@ -16,21 +16,22 @@
  *  You should have received a copy of the GNU General Public License         *
  *  along with libtmpl_tests.  If not, see <https://www.gnu.org/licenses/>.   *
  ******************************************************************************/
-#ifndef TMPL_TESTS_C2_TO_C_ARRAY_EXACT_UNIT_TEST_H
-#define TMPL_TESTS_C2_TO_C_ARRAY_EXACT_UNIT_TEST_H
+#ifndef TMPL_TESTS_C2PTR_ARRAY_EXACT_UNIT_TEST_H
+#define TMPL_TESTS_C2PTR_ARRAY_EXACT_UNIT_TEST_H
 
-#define TMPL_C2_TO_C_ARRAY_EXACT_UNIT_TEST(type, func, inarr0, inarr1, outarr) \
+#define TMPL_C2PTR_ARRAY_EXACT_UNIT_TEST(type, func, iarr0, iarr1, outarr)     \
 int main(void)                                                                 \
 {                                                                              \
-    const type in0[] = inarr0;                                                 \
-    const type in1[] = inarr1;                                                 \
+    const type in0[] = iarr0;                                                  \
+    const type in1[] = iarr1;                                                  \
     const type out[] = outarr;                                                 \
     const size_t zero = TMPL_CAST(0, size_t);                                  \
     const size_t number_of_samples = TMPL_ARRAY_SIZE(in0);                     \
     size_t n;                                                                  \
     for (n = zero; n < number_of_samples; ++n)                                 \
     {                                                                          \
-        const type output = func(in0[n], in1[n]);                              \
+        type output = in0[n];                                                  \
+        func(&output, &in1[n]);                                                \
         const tmpl_Bool xval_is_nan = TMPL_IS_NAN(output.dat[0]);              \
         const tmpl_Bool yval_is_nan = TMPL_IS_NAN(output.dat[1]);              \
         const tmpl_Bool xout_is_nan = TMPL_IS_NAN(out[n].dat[0]);              \

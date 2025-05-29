@@ -16,21 +16,21 @@
  *  You should have received a copy of the GNU General Public License         *
  *  along with libtmpl_tests.  If not, see <https://www.gnu.org/licenses/>.   *
  ******************************************************************************/
-#ifndef TMPL_TESTS_C2_TO_C_ARRAY_EXACT_UNIT_TEST_H
-#define TMPL_TESTS_C2_TO_C_ARRAY_EXACT_UNIT_TEST_H
+#ifndef TMPL_TESTS_C2PTR_DUP_ARRAY_EXACT_UNIT_TEST_H
+#define TMPL_TESTS_C2PTR_DUP_ARRAY_EXACT_UNIT_TEST_H
 
-#define TMPL_C2_TO_C_ARRAY_EXACT_UNIT_TEST(type, func, inarr0, inarr1, outarr) \
+#define TMPL_C2PTR_DUP_ARRAY_EXACT_UNIT_TEST(type, func, inarr, outarr)        \
 int main(void)                                                                 \
 {                                                                              \
-    const type in0[] = inarr0;                                                 \
-    const type in1[] = inarr1;                                                 \
+    const type in[] = inarr;                                                   \
     const type out[] = outarr;                                                 \
     const size_t zero = TMPL_CAST(0, size_t);                                  \
-    const size_t number_of_samples = TMPL_ARRAY_SIZE(in0);                     \
+    const size_t number_of_samples = TMPL_ARRAY_SIZE(in);                      \
     size_t n;                                                                  \
     for (n = zero; n < number_of_samples; ++n)                                 \
     {                                                                          \
-        const type output = func(in0[n], in1[n]);                              \
+        type output = in[n];                                                   \
+        func(&output, &output);                                                \
         const tmpl_Bool xval_is_nan = TMPL_IS_NAN(output.dat[0]);              \
         const tmpl_Bool yval_is_nan = TMPL_IS_NAN(output.dat[1]);              \
         const tmpl_Bool xout_is_nan = TMPL_IS_NAN(out[n].dat[0]);              \
@@ -45,10 +45,8 @@ int main(void)                                                                 \
         const tmpl_Bool y_pass = (ynan_pass || (y_equal && ynan_equal));       \
         if ((!x_pass) || (!y_pass))                                            \
         {                                                                      \
-            const long double x0 = TMPL_CAST(in0[n].dat[0], long double);      \
-            const long double y0 = TMPL_CAST(in0[n].dat[1], long double);      \
-            const long double x1 = TMPL_CAST(in1[n].dat[0], long double);      \
-            const long double y1 = TMPL_CAST(in1[n].dat[1], long double);      \
+            const long double x0 = TMPL_CAST(in[n].dat[0], long double);       \
+            const long double y0 = TMPL_CAST(in[n].dat[1], long double);       \
             const long double xl = TMPL_CAST(output.dat[0], long double);      \
             const long double yl = TMPL_CAST(output.dat[1], long double);      \
             const long double xc = TMPL_CAST(out[n].dat[0], long double);      \
@@ -56,10 +54,8 @@ int main(void)                                                                 \
             const long double xerr = TMPL_ERROR_VALUE(xl, xc);                 \
             const long double yerr = TMPL_ERROR_VALUE(yl, yc);                 \
             puts("FAIL");                                                      \
-            printf("    Input x0  = %+.40LE\n", x0);                           \
-            printf("    Input y0  = %+.40LE\n", y0);                           \
-            printf("    Input x1  = %+.40LE\n", x1);                           \
-            printf("    Input y1  = %+.40LE\n", y1);                           \
+            printf("    Input x  = %+.40LE\n", x0);                            \
+            printf("    Input y  = %+.40LE\n", y0);                            \
             printf("    libtmpl x = %+.40LE\n", xl);                           \
             printf("    libtmpl y = %+.40LE\n", yl);                           \
             printf("    Other x   = %+.40LE\n", xc);                           \
