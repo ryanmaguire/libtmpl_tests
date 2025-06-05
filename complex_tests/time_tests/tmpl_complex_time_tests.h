@@ -425,7 +425,7 @@ int main(void)                                                                 \
         mag = CMAG(C[n]);                                                      \
         dx = Z[n].dat[0] - REPART(C[n]);                                       \
         dy = Z[n].dat[1] - IMPART(C[n]);                                       \
-        tmp = sqrtl((long double)(dx*dx) + (long double)(dy*dy)) / mag;        \
+        tmp = sqrtl((long double)(dx*dx + dy*dy)) / (long double)mag;          \
         rel_err += tmp*tmp;                                                    \
                                                                                \
         if (max_err < tmp)                                                     \
