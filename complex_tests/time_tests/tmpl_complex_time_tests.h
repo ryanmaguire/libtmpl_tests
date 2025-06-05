@@ -68,6 +68,15 @@ static size_t memsize()
     complex float: crealf         \
 )(x)
 
+#ifdef CMAG
+#undef CMAG
+#endif
+#define CMAG(x) _Generic((x),   \
+    complex long double: cabsl, \
+    default: cabs,              \
+    complex float: cabsf        \
+)(x)
+
 static inline long double rand_real(void)
 {
     int n = rand();
@@ -316,7 +325,7 @@ int main(void)                                                                 \
     long double max_err = 0.0L;                                                \
     long double rel_err = 0.0L;                                                \
     long double tmp = 0.0L;                                                    \
-    ftype dx, dy;                                                              \
+    ftype dx, dy, mag;                                                         \
                                                                                \
     X = malloc(sizeof(*X) * N);                                                \
                                                                                \
@@ -413,9 +422,10 @@ int main(void)                                                                 \
                                                                                \
     for (n = 0U; n < N; ++n)                                                   \
     {                                                                          \
+        mag = CMAG(C[n]);                                                      \
         dx = Z[n].dat[0] - REPART(C[n]);                                       \
         dy = Z[n].dat[1] - IMPART(C[n]);                                       \
-        tmp = sqrtl((long double)(dx*dx) + (long double)(dy*dy));              \
+        tmp = sqrtl((long double)(dx*dx) + (long double)(dy*dy)) / mag;        \
         rel_err += tmp*tmp;                                                    \
                                                                                \
         if (max_err < tmp)                                                     \
