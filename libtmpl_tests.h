@@ -184,58 +184,6 @@ int main(void)                                                                 \
     return 0;                                                                  \
 }
 
-#define TMPL_TEST_REAL_FUNC_VS_REAL_FUNC_UNIT_TEST(type, begin, finish, f0, f1)\
-int main(void)                                                                 \
-{                                                                              \
-    const size_t zero = TMPL_CAST(0, size_t);                                  \
-    size_t n;                                                                  \
-    const type start = TMPL_CAST(begin, type);                                 \
-    const type end = TMPL_CAST(finish, type);                                  \
-    const size_t number_of_samples = NSAMPS(type);                             \
-    const type dx = (end - start) / TMPL_CAST(number_of_samples, type);        \
-    const type eps = TMPL_DEFAULT_TOLERANCE * TMPL_EPS(dx);                    \
-    const type real_zero = TMPL_CAST(0, type);                                 \
-    volatile int flag = 0;                                                     \
-    volatile type error = real_zero;                                           \
-    volatile type x_bad = real_zero;                                           \
-    volatile type y_bad = real_zero;                                           \
-    volatile type z_bad = real_zero;                                           \
-    TMPL_OPENMP_BASE_PRAGMA                                                    \
-    for (n = zero; n < number_of_samples; ++n)                                 \
-    {                                                                          \
-        if (flag)                                                              \
-            continue;                                                          \
-        else                                                                   \
-        {                                                                      \
-            const type x = TMPL_CAST(n, type) * dx + start;                    \
-            const type y = f0(x);                                              \
-            const type z = f1(x);                                              \
-            const tmpl_Bool y_is_nan = TMPL_IS_NAN(y);                         \
-            const tmpl_Bool z_is_nan = TMPL_IS_NAN(z);                         \
-            const type err = TMPL_ERROR_VALUE(y, z);                           \
-            if ((y_is_nan != z_is_nan) || (err > eps))                         \
-            {                                                                  \
-                x_bad = x;                                                     \
-                y_bad = y;                                                     \
-                z_bad = z;                                                     \
-                error = err;                                                   \
-                flag = 1;                                                      \
-            }                                                                  \
-        }                                                                      \
-    }                                                                          \
-    if (flag)                                                                  \
-    {                                                                          \
-        puts("FAIL");                                                          \
-        printf("    Input   = %+.40LE\n", TMPL_CAST(x_bad, long double));      \
-        printf("    libtmpl = %+.40LE\n", TMPL_CAST(y_bad, long double));      \
-        printf("    Other   = %+.40LE\n", TMPL_CAST(z_bad, long double));      \
-        printf("    Error   = %+.40LE\n", TMPL_CAST(error, long double));      \
-    }                                                                          \
-    else                                                                       \
-        puts("PASS");                                                          \
-    return 0;                                                                  \
-}
-
 #define TMPL_TEST_REAL2_FUNC_VS_REAL2_FUNC_UNIT_TEST(type, start, end, f0, f1) \
 static type get_rand_real(type minimum, type maximum)                          \
 {                                                                              \
@@ -408,11 +356,13 @@ int main(void)                                                                 \
 #include "testtools/tmpl_tests_c_to_c_array_unit_test.h"
 #include "testtools/tmpl_tests_c_to_c_array_exact_unit_test.h"
 #include "testtools/tmpl_tests_c2_to_c_array_exact_unit_test.h"
+#include "testtools/tmpl_tests_c2_to_c_array_unit_test.h"
 #include "testtools/tmpl_tests_c2ptr_array_exact_unit_test.h"
 #include "testtools/tmpl_tests_c2ptr_dup_array_exact_unit_test.h"
 #include "testtools/tmpl_tests_r_to_r_array_unit_test.h"
 #include "testtools/tmpl_tests_r_to_r_array_exact_unit_test.h"
 #include "testtools/tmpl_tests_r_to_r_vs_from_array_unit_test.h"
+#include "testtools/tmpl_tests_r_to_r_vs_from_interval_unit_test.h"
 #include "testtools/tmpl_tests_r2_to_r_array_exact_unit_test.h"
 #include "testtools/tmpl_tests_r2_to_r_array_unit_test.h"
 #include "testtools/tmpl_tests_r2_to_r_vs_from_array_unit_test.h"
