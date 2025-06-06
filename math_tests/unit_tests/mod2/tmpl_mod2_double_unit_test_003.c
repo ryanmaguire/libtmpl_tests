@@ -21,6 +21,6 @@
 #endif
 #include "../../../libtmpl_tests.h"
 static double mod2(double x){return x - 2.0*trunc(0.5*x);}
-TMPL_TEST_REAL_FUNC_VS_REAL_FUNC_UNIT_TEST(
+TMPL_TEST_R_TO_R_VS_FROM_INTERVAL_UNIT_TEST(
     double, 0.0, 1.0E0, tmpl_Double_Mod_2, mod2
 )

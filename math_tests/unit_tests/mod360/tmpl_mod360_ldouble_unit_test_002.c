@@ -21,6 +21,6 @@
 #endif
 #include "../../../libtmpl_tests.h"
 static long double mod360(long double x){return fmodl(x, 360.0L);}
-TMPL_TEST_REAL_FUNC_VS_REAL_FUNC_UNIT_TEST(
+TMPL_TEST_R_TO_R_VS_FROM_INTERVAL_UNIT_TEST(
     long double, 0.0L, 1.0E1L, tmpl_LDouble_Mod_360, mod360
 )

@@ -27,6 +27,6 @@ static float im_w_of_xf(float x)
     double im_w_of_x_double = im_w_of_x(x_double);
     return TMPL_CAST(im_w_of_x_double, float);
 }
-TMPL_TEST_REAL_FUNC_VS_REAL_FUNC_UNIT_TEST(
+TMPL_TEST_R_TO_R_VS_FROM_INTERVAL_UNIT_TEST(
     float, -1.0E1F, 1.0E1F, tmpl_Float_Faddeeva_Im, im_w_of_xf
 )

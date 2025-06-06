@@ -22,6 +22,6 @@
 #include "../../../libtmpl_tests.h"
 #include <algorithm>
 static double unit_clamp(double x){return std::clamp(x, 0.0, 1.0);}
-TMPL_TEST_REAL_FUNC_VS_REAL_FUNC_UNIT_TEST(
+TMPL_TEST_R_TO_R_VS_FROM_INTERVAL_UNIT_TEST(
     double, -1.0E6, 1.0E6, tmpl_Double_Unit_Clamp, unit_clamp
 )
