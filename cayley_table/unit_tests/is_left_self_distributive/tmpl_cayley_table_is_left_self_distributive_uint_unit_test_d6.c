@@ -1,0 +1,44 @@
+/******************************************************************************
+ *                                  LICENSE                                   *
+ ******************************************************************************
+ *  This file is part of libtmpl_tests.                                       *
+ *                                                                            *
+ *  libtmpl_tests is free software: you can redistribute it and/or modify     *
+ *  it under the terms of the GNU General Public License as published by      *
+ *  the Free Software Foundation, either version 3 of the License, or         *
+ *  (at your option) any later version.                                       *
+ *                                                                            *
+ *  libtmpl_tests is distributed in the hope that it will be useful,          *
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of            *
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the             *
+ *  GNU General Public License for more details.                              *
+ *                                                                            *
+ *  You should have received a copy of the GNU General Public License         *
+ *  along with libtmpl_tests.  If not, see <https://www.gnu.org/licenses/>.   *
+ ******************************************************************************/
+#include <libtmpl/include/tmpl_cayley_table.h>
+#include <stdio.h>
+
+static unsigned int data[36] = {
+    0, 1, 2, 3, 4, 5,
+    1, 0, 3, 2, 5, 4,
+    2, 4, 0, 5, 1, 3,
+    3, 5, 1, 4, 0, 2,
+    4, 2, 5, 0, 3, 1,
+    5, 3, 4, 1, 2, 0
+};
+
+int main(void)
+{
+    tmpl_UIntCayleyTable table;
+
+    table.data = data;
+    table.size = 6;
+
+    if (tmpl_UIntCayleyTable_Is_Left_Self_Distributive(&table))
+        puts("FAIL");
+    else
+        puts("PASS");
+
+    return 0;
+}
