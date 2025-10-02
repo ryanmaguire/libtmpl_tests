@@ -34,7 +34,7 @@ int main(void)                                                                 \
         const tmpl_Bool out_is_nan = TMPL_IS_NAN(out[n]);                      \
         if (out_is_nan && val_is_nan)                                          \
             continue;                                                          \
-        else if ((val_is_nan != out_is_nan) || (output != out[n]))             \
+        if ((val_is_nan != out_is_nan) || (output != out[n]))                  \
         {                                                                      \
             const ftype err = TMPL_ERROR_VALUE(output, out[n]);                \
             const long double x_val = TMPL_CAST(in[n].dat[0], long double);    \
