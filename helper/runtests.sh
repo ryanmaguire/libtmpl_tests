@@ -46,6 +46,7 @@ runtests() {
     CC=gcc
     CPP=g++
     ExtraArgs=""
+    LinkerFlags="-lm -ltmpl"
     TYPE="unit"
 
     # Parse the inputs.
@@ -67,6 +68,10 @@ runtests() {
         elif [[ "$arg" == *"-type"* ]]; then
             TYPE=${arg#*=}
 
+        # Check if additional linker flags are being passed.
+        elif [[ "$arg" == *"-l"* ]]; then
+            LinkerFlags="$LinkerFlags ${arg#*}"
+
         # The user can add compiler options if they want.
         else
             ExtraArgs="$ExtraArgs ${arg#*}"
@@ -74,14 +79,14 @@ runtests() {
     done
 
     for file in $(find . -name "*$TYPE*.c" -type f); do
-        $CC $ExtraArgs -O3 -flto $file -o main -lm -ltmpl
+        $CC $ExtraArgs -O3 -flto $file -o main $LinkerFlags
         printf "$(basename $file): "
         ./main
         rm -f main
     done
 
     for file in $(find . -name "*$TYPE*.cpp" -type f); do
-        $CPP $ExtraArgs -std=c++17 -O3 -flto $file -o main -ltmpl
+        $CPP $ExtraArgs -std=c++17 -O3 -flto $file -o main $LinkerFlags
         printf "$(basename $file): "
         ./main
         rm -f main
