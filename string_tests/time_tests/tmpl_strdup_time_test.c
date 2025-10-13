@@ -120,7 +120,7 @@ int main(void)
     /*  The results should all be the same. Check that this is true.          */
     for (n = 0U; n <= N; ++n)
     {
-        if (test1[n] != str[n])
+        if (test1[n] != test2[n])
         {
             puts("FAILED");
 
