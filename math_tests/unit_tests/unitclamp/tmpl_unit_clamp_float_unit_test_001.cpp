@@ -22,6 +22,6 @@
 #include "../../../libtmpl_tests.h"
 #include <algorithm>
 static float unit_clamp(float x){return std::clamp(x, 0.0F, 1.0F);}
-TMPL_TEST_R_TO_R_VS_FROM_INTERVAL_UNIT_TEST(
+TMPL_R_TO_R_VS_FROM_INTERVAL_UNIT_TEST(
     float, -1.0E6F, 1.0E6F, tmpl_Float_Unit_Clamp, unit_clamp
 )
