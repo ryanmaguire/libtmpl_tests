@@ -35,8 +35,8 @@
  ******************************************************************************/
 
 /*  Include guard to prevent including this file twice.                       */
-#ifndef LIBTMPL_TESTS_STRING_TO_REAL_H
-#define LIBTMPL_TESTS_STRING_TO_REAL_H
+#ifndef TMPL_TESTS_STRING_TO_REAL_H
+#define TMPL_TESTS_STRING_TO_REAL_H
 
 /*  strtold, strtod, and strtof all found here.                               */
 #include <stdlib.h>

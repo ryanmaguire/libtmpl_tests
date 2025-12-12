@@ -37,8 +37,8 @@
  ******************************************************************************/
 
 /*  Include guard to prevent including this file twice.                       */
-#ifndef LIBTMPL_TESTS_RAND_REAL_H
-#define LIBTMPL_TESTS_RAND_REAL_H
+#ifndef TMPL_TESTS_RAND_REAL_H
+#define TMPL_TESTS_RAND_REAL_H
 
 /*  TMPL_CAST, providing C vs. C++ compatibility, found here.                 */
 #include <libtmpl/include/compat/tmpl_cast.h>

@@ -35,8 +35,8 @@
  ******************************************************************************/
 
 /*  Include guard to prevent including this file twice.                       */
-#ifndef LIBTMPL_TESTS_OPEN_FILE_H
-#define LIBTMPL_TESTS_OPEN_FILE_H
+#ifndef TMPL_TESTS_OPEN_FILE_H
+#define TMPL_TESTS_OPEN_FILE_H
 
 /*  If running with C++, use std::func instead of just func, like in C.       */
 #ifdef __cplusplus
