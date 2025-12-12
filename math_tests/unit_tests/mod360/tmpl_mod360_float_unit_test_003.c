@@ -21,6 +21,6 @@
 #endif
 #include "../../../libtmpl_tests.h"
 static float mod360(float x){return fmodf(x, 360.0F);}
-TMPL_TEST_R_TO_R_VS_FROM_INTERVAL_UNIT_TEST(
+TMPL_R_TO_R_VS_FROM_INTERVAL_UNIT_TEST(
     float, 0.0F, 1.0E0F, tmpl_Float_Mod_360, mod360
 )

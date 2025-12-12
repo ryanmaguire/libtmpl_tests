@@ -21,6 +21,6 @@
 #endif
 #include "../../../libtmpl_tests.h"
 static float mod2(float x){return x - 2.0F*truncf(0.5F*x);}
-TMPL_TEST_R_TO_R_VS_FROM_INTERVAL_UNIT_TEST(
+TMPL_R_TO_R_VS_FROM_INTERVAL_UNIT_TEST(
     float, 0.0F, 1.0E6F, tmpl_Float_Mod_2, mod2
 )

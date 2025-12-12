@@ -21,6 +21,6 @@
 #endif
 #include "../../../libtmpl_tests.h"
 static float fractional_part(float x){return x - truncf(x);}
-TMPL_TEST_R_TO_R_VS_FROM_INTERVAL_UNIT_TEST(
+TMPL_R_TO_R_VS_FROM_INTERVAL_UNIT_TEST(
     float, 0.0F, 1.0E0F, tmpl_Float_Fractional_Part, fractional_part
 )

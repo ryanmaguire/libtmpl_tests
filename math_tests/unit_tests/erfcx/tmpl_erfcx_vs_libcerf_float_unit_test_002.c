@@ -27,6 +27,6 @@ static float erfcxf(float x)
     double erfcx_double = erfcx(x_double);
     return TMPL_CAST(erfcx_double, float);
 }
-TMPL_TEST_R_TO_R_VS_FROM_INTERVAL_UNIT_TEST(
+TMPL_R_TO_R_VS_FROM_INTERVAL_UNIT_TEST(
     float, -1.0E1F, 1.0E1F, tmpl_Float_Erfcx, erfcxf
 )

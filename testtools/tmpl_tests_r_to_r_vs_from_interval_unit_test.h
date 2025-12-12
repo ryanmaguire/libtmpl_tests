@@ -1,7 +1,7 @@
 #ifndef TMPL_TESTS_R_TO_R_VS_FROM_INTERVAL_UNIT_TEST_H
 #define TMPL_TESTS_R_TO_R_VS_FROM_INTERVAL_UNIT_TEST_H
 
-#define TMPL_TEST_R_TO_R_VS_FROM_INTERVAL_UNIT_TEST(type, left, right, f0, f1) \
+#define TMPL_R_TO_R_VS_FROM_INTERVAL_UNIT_TEST(type, left, right, f0, f1)      \
 int main(void)                                                                 \
 {                                                                              \
     const size_t zero = TMPL_CAST(0, size_t);                                  \

@@ -21,6 +21,6 @@
 #endif
 #include "../../../libtmpl_tests.h"
 #include <cerf.h>
-TMPL_TEST_R_TO_R_VS_FROM_INTERVAL_UNIT_TEST(
+TMPL_R_TO_R_VS_FROM_INTERVAL_UNIT_TEST(
     double, -1.0E0, 1.0E0, tmpl_Double_Erfcx, erfcx
 )
