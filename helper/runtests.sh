@@ -81,7 +81,14 @@ runtests() {
     for file in $(find . -name "*$TYPE*.c" -type f); do
         $CC $ExtraArgs -O3 -flto $file -o main $LinkerFlags
         printf "$(basename $file): "
-        ./main
+
+        if [[ "$CC" == "emcc" ]]; then
+            node main
+            rm -f main.wasm
+        else
+            ./main
+        fi
+
         rm -f main
     done
 
