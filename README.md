@@ -33,20 +33,20 @@ functions with. They also use modern `C` features (like `_Generic`), and
 `C++` standard library functions are used as well.
 To run every test, you will need:
 
-- 1. `libtmpl`.
-- 2. A `C` compiler with the standard library and `C11` support.
-- 3. A `C++` compiler with the standard library and `C++17` support.
-- 4. GMP (The GNU Multi-Precision Arithmetic Library).
-- 5. GSL (The GNU Scientific Library).
-- 6. FFTW (The Fastest Fourier Transform in the West).
-- 7. `libquadmath` (GNU Quadruple Precision Math Library).
-- 7. `libcerf` (Error Function Library)
-- 8. `linasm` (Assembly Math Library for `x86-64`).
-- 9. Boost Libraries
-    - 10a. `boost/math/special_functions`
-    - 10b. `boost/math/tools/polynomial`
-    - 10c. `boost/integer`
-    - 10d. `boost/rational`
+- `libtmpl`.
+- A `C` compiler with the standard library and `C11` support.
+- A `C++` compiler with the standard library and `C++17` support.
+- GMP (The GNU Multi-Precision Arithmetic Library).
+- GSL (The GNU Scientific Library).
+- FFTW (The Fastest Fourier Transform in the West).
+- `libquadmath` (GNU Quadruple Precision Math Library).
+- `libcerf` (Error Function Library)
+- `linasm` (Assembly Math Library for `x86-64`).
+- Boost Libraries
+    - `boost/math/special_functions`
+    - `boost/math/tools/polynomial`
+    - `boost/integer`
+    - `boost/rational`
 
 # License
     libtmpl_tests is free software: you can redistribute it and/or modify it
