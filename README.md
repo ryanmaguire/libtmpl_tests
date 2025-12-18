@@ -26,7 +26,7 @@ Unit and performance tests for libtmpl.
 # Dependencies
 `libtmpl` has very few dependencies. Namely, a `C` compiler supporting any of
 the major standards (`C89`, `C99`, `C11`, `C17`, or `C23`) and a small portion
-of the `C standard library.
+of the `C` standard library.
 
 These tests, on the other hand, use lots of external libraries to compare
 functions with. They also use modern `C` features (like `_Generic`), and
