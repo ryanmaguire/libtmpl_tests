@@ -57,5 +57,5 @@
 }
 
 TMPL_C2_TO_C_ARRAY_EXACT_UNIT_TEST(
-    tmpl_ComplexDouble, tmpl_CDouble_Multipy, inarr0, inarr1, outarr
+    tmpl_ComplexDouble, tmpl_CDouble_Multiply, inarr0, inarr1, outarr
 )
