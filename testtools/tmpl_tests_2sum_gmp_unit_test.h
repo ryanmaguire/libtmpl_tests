@@ -18,11 +18,11 @@
  ******************************************************************************/
 #ifndef TMPL_TESTS_2SUM_GMP_UNIT_TEST_H
 #define TMPL_TESTS_2SUM_GMP_UNIT_TEST_H
-#include <gmp.h>
 
-/*  TODO:
- *      Rewrite using long double instead of double.
- */
+#include <gmp.h>
+#include <string.h>
+#include "tmpl_tests_mpf_get_ld.h"
+#include "tmpl_tests_mpf_set_ld.h"
 
 #define TMPL_2SUM_GMP_UNIT_TEST(type, func, inx, iny)                          \
 int main(void)                                                                 \
@@ -31,8 +31,8 @@ int main(void)                                                                 \
     const type y[] = iny;                                                      \
     const size_t zero = TMPL_CAST(0, size_t);                                  \
     const size_t number_of_samples = TMPL_ARRAY_SIZE(x);                       \
-    const type eps = 2 * TMPL_EPS(x[0]);                                       \
-    const double eps_squared = TMPL_CAST(eps * eps, double);                   \
+    const long double eps = TMPL_CAST(2 * TMPL_EPS(x[0]), long double);        \
+    const long double eps_squared = eps * eps;                                 \
     size_t n;                                                                  \
     mpf_t x_mp, y_mp, exact_mp, s_mp, e_mp, err_mp;                            \
     mpf_init2(x_mp, 1024);                                                     \
@@ -44,7 +44,7 @@ int main(void)                                                                 \
     for (n = zero; n < number_of_samples; ++n)                                 \
     {                                                                          \
         type s, e;                                                             \
-        double err;                                                            \
+        long double err, eval;                                                 \
         tmpl_Bool x_is_nan, y_is_nan, s_is_nan, e_is_nan;                      \
         tmpl_Bool s_nan_pass, e_nan_pass, nan_pass, pass;                      \
         func(x[n], y[n], &s, &e);                                              \
@@ -62,32 +62,33 @@ int main(void)                                                                 \
             else                                                               \
             {                                                                  \
                 puts("FAIL");                                                  \
-                printf("    Input x   = %+.40E\n", TMPL_CAST(x[n], double));   \
-                printf("    Input y   = %+.40E\n", TMPL_CAST(y[n], double));   \
-                printf("    libtmpl s = %+.40E\n", TMPL_CAST(s, double));      \
-                printf("    libtmpl e = %+.40E\n", TMPL_CAST(e, double));      \
+                printf("    x  = %+.40LE\n", TMPL_CAST(x[n], long double));    \
+                printf("    y  = %+.40LE\n", TMPL_CAST(y[n], long double));    \
+                printf("    s = %+.40LE\n", TMPL_CAST(s, long double));        \
+                printf("    e = %+.40LE\n", TMPL_CAST(e, long double));        \
                 return -1;                                                     \
             }                                                                  \
         }                                                                      \
-        mpf_set_d(x_mp, TMPL_CAST(x[n], double));                              \
-        mpf_set_d(y_mp, TMPL_CAST(y[n], double));                              \
-        mpf_set_d(s_mp, TMPL_CAST(s, double));                                 \
-        mpf_set_d(e_mp, TMPL_CAST(e, double));                                 \
+        tmpl_tests_mpf_set_ld(x_mp, TMPL_CAST(x[n], long double));             \
+        tmpl_tests_mpf_set_ld(y_mp, TMPL_CAST(y[n], long double));             \
+        tmpl_tests_mpf_set_ld(s_mp, TMPL_CAST(s, long double));                \
+        tmpl_tests_mpf_set_ld(e_mp, TMPL_CAST(e, long double));                \
         mpf_add(exact_mp, x_mp, y_mp);                                         \
         mpf_add(err_mp, s_mp, e_mp);                                           \
         mpf_sub(err_mp, err_mp, exact_mp);                                     \
         mpf_div(err_mp, err_mp, exact_mp);                                     \
-        err = mpf_get_d(err_mp);                                               \
+        eval = tmpl_tests_mpf_get_ld(exact_mp);                                \
+        err = tmpl_tests_mpf_get_ld(err_mp);                                   \
         pass = (TMPL_ABS(err) < eps_squared);                                  \
         if (!pass)                                                             \
         {                                                                      \
             puts("FAIL");                                                      \
-            printf("    Input x   = %+.40E\n", TMPL_CAST(x[n], double));       \
-            printf("    Input y   = %+.40E\n", TMPL_CAST(y[n], double));       \
-            printf("    libtmpl s = %+.40E\n", TMPL_CAST(s, double));          \
-            printf("    libtmpl e = %+.40E\n", TMPL_CAST(e, double));          \
-            printf("    Exact Sum = %+.40E\n", mpf_get_d(exact_mp));           \
-            printf("    Error     = %+.40E\n", err);                           \
+            printf("    Input x   = %+.40LE\n", TMPL_CAST(x[n], long double)); \
+            printf("    Input y   = %+.40LE\n", TMPL_CAST(y[n], long double)); \
+            printf("    libtmpl s = %+.40LE\n", TMPL_CAST(s, long double));    \
+            printf("    libtmpl e = %+.40LE\n", TMPL_CAST(e, long double));    \
+            printf("    Exact Sum = %+.40LE\n", eval);                         \
+            printf("    Error     = %+.40LE\n", err);                          \
             return -1;                                                         \
         }                                                                      \
     }                                                                          \
