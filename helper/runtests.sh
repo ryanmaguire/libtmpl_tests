@@ -45,8 +45,8 @@
 runtests() {
     CC=gcc
     CPP=g++
-    ExtraArgs=""
-    LinkerFlags="-lm -ltmpl"
+    ExtraArgs="-O2 -flto -I/usr/local/include"
+    LinkerFlags="-L/usr/local/lib -lgsl -lcerf -lgmp -lm -ltmpl"
     TYPE="unit"
 
     # Parse the inputs.
@@ -79,7 +79,7 @@ runtests() {
     done
 
     for file in $(find . -name "*$TYPE*.c" -type f); do
-        $CC $ExtraArgs -O3 -flto $file -o main $LinkerFlags
+        $CC $ExtraArgs $file -o main $LinkerFlags
         printf "$(basename $file): "
 
         if [[ "$CC" == "emcc" ]]; then
@@ -93,7 +93,7 @@ runtests() {
     done
 
     for file in $(find . -name "*$TYPE*.cpp" -type f); do
-        $CPP $ExtraArgs -std=c++17 -O3 -flto $file -o main $LinkerFlags
+        $CPP $ExtraArgs -std=c++17 $file -o main $LinkerFlags
         printf "$(basename $file): "
         ./main
         rm -f main
