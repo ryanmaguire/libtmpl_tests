@@ -19,4 +19,6 @@
 #include "../../../libtmpl_tests.h"
 #define xarr {TMPL_NANL, 1.0L, TMPL_NANL}
 #define yarr {1.0L, TMPL_NANL, TMPL_NANL}
-TMPL_2SUM_GMP_UNIT_TEST(long double, tmpl_LDouble_Fast_Two_Sum, xarr, yarr)
+TMPL_2OP_GMP_UNIT_TEST(
+    long double, tmpl_LDouble_Fast_Two_Sum, mpf_add, xarr, yarr
+)

@@ -19,4 +19,4 @@
 #include "../../../libtmpl_tests.h"
 #define xarr {1.0F, 2.0F, 3.0F}
 #define yarr {1.0E-16F, 1.0E-15F, 1.0E-30F}
-TMPL_2SUM_GMP_UNIT_TEST(float, tmpl_Float_Fast_Two_Sum, xarr, yarr)
+TMPL_2OP_GMP_UNIT_TEST(float, tmpl_Float_Fast_Two_Sum, mpf_add, xarr, yarr)

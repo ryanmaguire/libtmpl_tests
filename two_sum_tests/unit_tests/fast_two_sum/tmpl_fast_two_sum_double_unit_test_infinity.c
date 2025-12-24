@@ -17,6 +17,6 @@
  *  along with libtmpl_tests.  If not, see <https://www.gnu.org/licenses/>.   *
  ******************************************************************************/
 #include "../../../libtmpl_tests.h"
-#define xarr {1.0, 2.0, 3.0}
-#define yarr {1.0E-16, 1.0E-15, 1.0E-30}
+#define xarr {TMPL_INFINITY, 1.0, TMPL_INFINITY}
+#define yarr {1.0, TMPL_INFINITY, TMPL_INFINITY}
 TMPL_2OP_GMP_UNIT_TEST(double, tmpl_Double_Fast_Two_Sum, mpf_add, xarr, yarr)
