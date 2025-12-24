@@ -16,15 +16,15 @@
  *  You should have received a copy of the GNU General Public License         *
  *  along with libtmpl_tests.  If not, see <https://www.gnu.org/licenses/>.   *
  ******************************************************************************/
-#ifndef TMPL_TESTS_2SUM_GMP_UNIT_TEST_H
-#define TMPL_TESTS_2SUM_GMP_UNIT_TEST_H
+#ifndef TMPL_TESTS_2OP_GMP_UNIT_TEST_H
+#define TMPL_TESTS_2OP_GMP_UNIT_TEST_H
 
 #include <gmp.h>
 #include <string.h>
 #include "tmpl_tests_mpf_get_ld.h"
 #include "tmpl_tests_mpf_set_ld.h"
 
-#define TMPL_2SUM_GMP_UNIT_TEST(type, func, inx, iny)                          \
+#define TMPL_2OP_GMP_UNIT_TEST(type, func, mpf_op, inx, iny)                   \
 int main(void)                                                                 \
 {                                                                              \
     const type x[] = inx;                                                      \
@@ -34,6 +34,9 @@ int main(void)                                                                 \
     const long double eps = TMPL_CAST(2 * TMPL_EPS(x[0]), long double);        \
     const long double eps_squared = eps * eps;                                 \
     size_t n;                                                                  \
+    type s, e;                                                                 \
+    long double err, eval;                                                     \
+    tmpl_Bool x_is_nan, y_is_nan, x_is_inf, y_is_inf;                          \
     mpf_t x_mp, y_mp, exact_mp, s_mp, e_mp, err_mp;                            \
     mpf_init2(x_mp, 1024);                                                     \
     mpf_init2(y_mp, 1024);                                                     \
@@ -43,44 +46,45 @@ int main(void)                                                                 \
     mpf_init2(err_mp, 1024);                                                   \
     for (n = zero; n < number_of_samples; ++n)                                 \
     {                                                                          \
-        type s, e;                                                             \
-        long double err, eval;                                                 \
-        tmpl_Bool x_is_nan, y_is_nan, s_is_nan, e_is_nan;                      \
-        tmpl_Bool s_nan_pass, e_nan_pass, nan_pass, pass;                      \
         func(x[n], y[n], &s, &e);                                              \
         x_is_nan = TMPL_IS_NAN(x[n]);                                          \
         y_is_nan = TMPL_IS_NAN(y[n]);                                          \
-        s_is_nan = TMPL_IS_NAN(s);                                             \
-        e_is_nan = TMPL_IS_NAN(e);                                             \
-        s_nan_pass = (!s_is_nan || (s_is_nan && (x_is_nan || y_is_nan)));      \
-        e_nan_pass = (!e_is_nan || (e_is_nan && (x_is_nan || y_is_nan)));      \
-        nan_pass = (s_nan_pass && e_nan_pass && (s_is_nan == e_is_nan));       \
         if (x_is_nan || y_is_nan)                                              \
         {                                                                      \
-            if (nan_pass)                                                      \
+            if (TMPL_IS_NAN(s) && TMPL_IS_NAN(e))                              \
                 continue;                                                      \
             else                                                               \
+                goto FAIL;                                                     \
+        }                                                                      \
+        x_is_inf = TMPL_IS_INF(x[n]);                                          \
+        y_is_inf = TMPL_IS_INF(y[n]);                                          \
+        if (x_is_inf || y_is_inf)                                              \
+        {                                                                      \
+            if (!TMPL_IS_NAN(e))                                               \
+                goto FAIL;                                                     \
+            if (TMPL_IS_NAN(s))                                                \
             {                                                                  \
-                puts("FAIL");                                                  \
-                printf("    x  = %+.40LE\n", TMPL_CAST(x[n], long double));    \
-                printf("    y  = %+.40LE\n", TMPL_CAST(y[n], long double));    \
-                printf("    s = %+.40LE\n", TMPL_CAST(s, long double));        \
-                printf("    e = %+.40LE\n", TMPL_CAST(e, long double));        \
-                return -1;                                                     \
+                if (x_is_inf && y_is_inf && (x[n] != y[n]))                    \
+                    continue;                                                  \
+                else                                                           \
+                    goto FAIL;                                                 \
             }                                                                  \
+            if (TMPL_IS_INF(s))                                                \
+                continue;                                                      \
+            else                                                               \
+                goto FAIL;                                                     \
         }                                                                      \
         tmpl_tests_mpf_set_ld(x_mp, TMPL_CAST(x[n], long double));             \
         tmpl_tests_mpf_set_ld(y_mp, TMPL_CAST(y[n], long double));             \
         tmpl_tests_mpf_set_ld(s_mp, TMPL_CAST(s, long double));                \
         tmpl_tests_mpf_set_ld(e_mp, TMPL_CAST(e, long double));                \
-        mpf_add(exact_mp, x_mp, y_mp);                                         \
-        mpf_add(err_mp, s_mp, e_mp);                                           \
+        mpf_op(exact_mp, x_mp, y_mp);                                          \
+        mpf_op(err_mp, s_mp, e_mp);                                            \
         mpf_sub(err_mp, err_mp, exact_mp);                                     \
         mpf_div(err_mp, err_mp, exact_mp);                                     \
         eval = tmpl_tests_mpf_get_ld(exact_mp);                                \
         err = tmpl_tests_mpf_get_ld(err_mp);                                   \
-        pass = (TMPL_ABS(err) < eps_squared);                                  \
-        if (!pass)                                                             \
+        if (TMPL_ABS(err) > eps_squared)                                       \
         {                                                                      \
             puts("FAIL");                                                      \
             printf("    Input x   = %+.40LE\n", TMPL_CAST(x[n], long double)); \
@@ -94,6 +98,13 @@ int main(void)                                                                 \
     }                                                                          \
     puts("PASS");                                                              \
     return 0;                                                                  \
+FAIL:                                                                          \
+    puts("FAIL");                                                              \
+    printf("    x = %+.40LE\n", TMPL_CAST(x[n], long double));                 \
+    printf("    y = %+.40LE\n", TMPL_CAST(y[n], long double));                 \
+    printf("    s = %+.40LE\n", TMPL_CAST(s, long double));                    \
+    printf("    e = %+.40LE\n", TMPL_CAST(e, long double));                    \
+    return -1;                                                                 \
 }
 
 #endif
