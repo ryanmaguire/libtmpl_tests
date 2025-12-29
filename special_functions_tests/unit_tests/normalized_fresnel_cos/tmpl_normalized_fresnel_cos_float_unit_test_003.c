@@ -19,6 +19,6 @@
 #include "../../../libtmpl_tests.h"
 TMPL_TEST_REAL_FROM_CSV_UNIT_TEST(
     float,
-    "fresnel_cos_near_two_to_the_34.csv",
+    "csv_data/fresnel_cos_near_two_to_the_34.csv",
     tmpl_Float_Normalized_Fresnel_Cos
 )
