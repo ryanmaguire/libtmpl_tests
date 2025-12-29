@@ -22,7 +22,7 @@
 int main(void)
 {
     double (*f)(double) = tmpl_Double_Sin;
-    const double x0 = tmpl_Double_Pi;
+    const double x0 = tmpl_double_pi;
     const double h = 1.0E-8;
     const double tol = 1.0E-6;
     const double y0 = tmpl_Double_Five_Point_Derivative(f, x0, h);

@@ -25,7 +25,7 @@ static double sincpi(double x)
     if (x == 0.0)
         return 1.0;
 
-    return tmpl_Double_SinPi(x) / (tmpl_Double_Pi * x);
+    return tmpl_Double_SinPi(x) / (tmpl_double_pi * x);
 }
 TMPL_TEST_REAL_FUNC_VS_REAL_FUNC_TIME_TEST(
     double, -5.0E-01, 5.0E-01, tmpl_Double_SincPi, sincpi

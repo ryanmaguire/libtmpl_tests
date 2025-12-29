@@ -22,7 +22,7 @@ static long double func(long double x, long double W)
 {
     const long double c = 2.0L*x/W;
     const long double arg = 1.0L - c*c;
-    const long double alpha = 2.0L*tmpl_LDouble_Pi;
+    const long double alpha = 2.0L*tmpl_ldouble_pi;
 
     if (arg < 0.0L)
         return 0.0L;

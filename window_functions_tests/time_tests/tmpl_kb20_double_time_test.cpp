@@ -22,7 +22,7 @@ static double func(double x, double W)
 {
     const double c = 2.0*x/W;
     const double arg = 1.0 - c*c;
-    const double alpha = 2.0*tmpl_Double_Pi;
+    const double alpha = 2.0*tmpl_double_pi;
 
     if (arg < 0.0)
         return 0.0;

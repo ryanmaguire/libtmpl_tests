@@ -20,7 +20,7 @@
 
 int main(void)
 {
-    const double x0 = tmpl_Double_Pi;
+    const double x0 = tmpl_double_pi;
     const double tol = 1.0E-6;
     const double y0 = tmpl_Double_Derivative(tmpl_Double_Sin, x0);
     const double ans = -1.0;
