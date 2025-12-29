@@ -18,4 +18,4 @@
  ******************************************************************************/
 #include "../tmpl_array_integer_unit_tests.h"
 #define inarr {0, 1, 2, 3, 4, 5}
-TEST_INT_ARRAY_IN_INT_TYPE_OUT(int, tmpl_Int_Array_Total, inarr, 15)
+TEST_INT_ARRAY_IN_INT_TYPE_OUT(int, tmpl_Int_Array_Sum, inarr, 15)

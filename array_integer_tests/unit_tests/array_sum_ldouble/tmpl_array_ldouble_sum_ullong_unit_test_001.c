@@ -20,5 +20,5 @@
 #define inarr {0, 1, 2, 3, 4, 5}
 TEST_INT_ARRAY_IN_FLOAT_TYPE_OUT(
     unsigned long long int, long double,
-    tmpl_ULLong_Array_LDouble_Total, inarr, 15.0L
+    tmpl_ULLong_Array_LDouble_Sum, inarr, 15.0L
 )

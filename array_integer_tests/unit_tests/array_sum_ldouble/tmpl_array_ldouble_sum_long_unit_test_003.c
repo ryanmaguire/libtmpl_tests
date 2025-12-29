@@ -19,5 +19,5 @@
 #include "../tmpl_array_integer_unit_tests.h"
 #define inarr {}
 TEST_INT_ARRAY_IN_FLOAT_TYPE_OUT(
-    long int, long double, tmpl_Long_Array_LDouble_Total, inarr, 0.0L
+    long int, long double, tmpl_Long_Array_LDouble_Sum, inarr, 0.0L
 )
