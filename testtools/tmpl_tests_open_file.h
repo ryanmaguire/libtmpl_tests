@@ -48,13 +48,25 @@
  *  computation if fopen fails.                                               */
 #define TMPL_OPEN_FILE(file_pointer, file_name)                                \
 do {                                                                           \
-    file_pointer = std::fopen(file_name, "r");                                 \
+    const char * const tmp_pfxs[] = {                                          \
+        "../", "../../", "../../../", "../../../../"                           \
+    };                                                                         \
+    const size_t tmp_pfx_length = sizeof(tmp_pfxs) / sizeof(tmp_pfxs[0]);      \
+    size_t tmp_ind;                                                            \
+    char tmp_path[1024];                                                       \
+    for (tmp_ind = 0; tmp_ind < tmp_pfx_length; ++tmp_ind)                     \
+    {                                                                          \
+        std::sprintf(tmp_path, "%s%s", tmp_pfxs[tmp_ind], file_name);          \
+        file_pointer = std::fopen(tmp_path, "r");                              \
+        if (file_pointer)                                                      \
+            break;                                                             \
+    }                                                                          \
     if (!file_pointer)                                                         \
     {                                                                          \
         std::puts("fopen failed. Aborting.");                                  \
         return -1;                                                             \
     }                                                                          \
-} while(0);
+} while (0)
 
 #else
 
@@ -64,13 +76,25 @@ do {                                                                           \
 /*  C version of the macro provided above.                                    */
 #define TMPL_OPEN_FILE(file_pointer, file_name)                                \
 do {                                                                           \
-    file_pointer = fopen(file_name, "r");                                      \
+    const char * const tmp_pfxs[] = {                                          \
+        "../", "../../", "../../../", "../../../../"                           \
+    };                                                                         \
+    const size_t tmp_pfx_length = sizeof(tmp_pfxs) / sizeof(tmp_pfxs[0]);      \
+    size_t tmp_ind;                                                            \
+    char tmp_path[1024];                                                       \
+    for (tmp_ind = 0; tmp_ind < tmp_pfx_length; ++tmp_ind)                     \
+    {                                                                          \
+        sprintf(tmp_path, "%s%s", tmp_pfxs[tmp_ind], file_name);               \
+        file_pointer = fopen(tmp_path, "r");                                   \
+        if (file_pointer)                                                      \
+            break;                                                             \
+    }                                                                          \
     if (!file_pointer)                                                         \
     {                                                                          \
         puts("fopen failed. Aborting.");                                       \
         return -1;                                                             \
     }                                                                          \
-} while(0);
+} while (0)
 
 #endif
 /*  End of C vs. C++.                                                         */
