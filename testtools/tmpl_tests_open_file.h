@@ -49,7 +49,7 @@
 #define TMPL_OPEN_FILE(file_pointer, file_name)                                \
 do {                                                                           \
     const char * const tmp_pfxs[] = {                                          \
-        "../", "../../", "../../../", "../../../../"                           \
+        "./", "../", "../../", "../../../", "../../../../"                     \
     };                                                                         \
     const size_t tmp_pfx_length = sizeof(tmp_pfxs) / sizeof(tmp_pfxs[0]);      \
     size_t tmp_ind;                                                            \
@@ -77,7 +77,7 @@ do {                                                                           \
 #define TMPL_OPEN_FILE(file_pointer, file_name)                                \
 do {                                                                           \
     const char * const tmp_pfxs[] = {                                          \
-        "../", "../../", "../../../", "../../../../"                           \
+        "./", "../", "../../", "../../../", "../../../../"                     \
     };                                                                         \
     const size_t tmp_pfx_length = sizeof(tmp_pfxs) / sizeof(tmp_pfxs[0]);      \
     size_t tmp_ind;                                                            \
