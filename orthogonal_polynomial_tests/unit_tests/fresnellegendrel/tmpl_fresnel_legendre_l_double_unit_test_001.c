@@ -26,7 +26,7 @@ int main(void)
     {
         tmpl_Double_Legendre_P(legendre, x[n], max_degree + 2);
         tmpl_Double_Chebyshev_U(chebyshev, x[n], max_degree + 2);
-	tmpl_Double_Fresnel_Legendre_L(fresnel, x[n], beta, max_degree);
+	    tmpl_Double_Fresnel_Legendre_L(fresnel, x[n], beta, max_degree);
 
         for (m = 0; m < max_degree; ++m)
         {
