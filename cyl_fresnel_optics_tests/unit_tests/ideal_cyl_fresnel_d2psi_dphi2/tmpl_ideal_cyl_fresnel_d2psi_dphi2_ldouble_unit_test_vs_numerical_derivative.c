@@ -39,7 +39,7 @@ int main(void)
      *  numerical second derivative will have poor relative error here, start *
      *  away from this value.                                                 */
     const long double start = 3.0E-01L;
-    const long double end = tmpl_LDouble_Pi;
+    const long double end = tmpl_ldouble_pi;
     const long double dphi = 1.0E-05L;
     const long double h = 1.0E-02L;
     long double phi = start;

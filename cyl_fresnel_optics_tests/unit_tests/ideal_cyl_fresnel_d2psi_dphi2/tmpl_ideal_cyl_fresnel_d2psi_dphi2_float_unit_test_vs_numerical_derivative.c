@@ -32,7 +32,7 @@ int main(void)
     /*  There is a root for the second derivative near 0.24 radians. The      *
      *  relative error will likely be poorer here. Start after this point.    */
     const float start = 3.0E-01F;
-    const float end = tmpl_Float_Pi;
+    const float end = tmpl_float_pi;
     const float dphi = 1.0E-05F;
     float phi = start;
 
