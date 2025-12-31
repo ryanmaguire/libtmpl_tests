@@ -21,9 +21,10 @@
 #include <cmath>
 #include <ctime>
 #include <numeric>
+#include <libtmpl/include/compat/tmpl_cast.h>
+#include <libtmpl/include/tmpl_integer.h>
 
 extern "C" {
-#include <libtmpl/include/tmpl_integer.h>
 #ifdef _MSC_VER
 #include <windows.h>
 #else
@@ -52,7 +53,7 @@ static size_t memsize(void)
 #endif
 #define NSAMPS(a) (4*memsize()/(5*sizeof(a)))
 #else
-#define NSAMPS(a) (size_t)TMPL_NSAMPS
+#define NSAMPS(a) TMPL_CAST(TMPL_NSAMPS, size_t)
 #endif
 
 static double time_as_double(clock_t a, clock_t b)
@@ -77,13 +78,9 @@ static type random_int(void)                                                   \
                                                                                \
 int main(void)                                                                 \
 {                                                                              \
-    type *A, *B, *C, *X, *Y, *Z;                                               \
-    unsigned long int n;                                                       \
+    type *A, *B, *C, *Z;                                                       \
+    size_t n;                                                                  \
     clock_t t1, t2;                                                            \
-    type tmp;                                                                  \
-    type max = 0;                                                              \
-    double rms = 0.0;                                                          \
-    double tmpd;                                                               \
     const size_t N = NSAMPS(type) / 6;                                         \
     A = static_cast<type *>(std::malloc(sizeof(*A)*N));                        \
     if (!A)                                                                    \
@@ -106,25 +103,6 @@ int main(void)                                                                 \
     	std::free(B);                                                          \
     	return -1;                                                             \
     }                                                                          \
-    X = static_cast<type *>(std::malloc(sizeof(*X)*N));                        \
-    if (!X)                                                                    \
-    {                                                                          \
-    	std::puts("Malloc failed for X. Aborting.");                           \
-    	std::free(A);                                                          \
-    	std::free(B);                                                          \
-    	std::free(C);                                                          \
-    	return -1;                                                             \
-    }                                                                          \
-    Y = static_cast<type *>(std::malloc(sizeof(*Y)*N));                        \
-    if (!Y)                                                                    \
-    {                                                                          \
-    	std::puts("Malloc failed for Y. Aborting.");                           \
-    	std::free(A);                                                          \
-    	std::free(B);                                                          \
-    	std::free(C);                                                          \
-    	std::free(X);                                                          \
-    	return -1;                                                             \
-    }                                                                          \
     Z = static_cast<type *>(std::malloc(sizeof(*Z)*N));                        \
     if (!Z)                                                                    \
     {                                                                          \
@@ -132,8 +110,6 @@ int main(void)                                                                 \
     	std::free(A);                                                          \
     	std::free(B);                                                          \
     	std::free(C);                                                          \
-    	std::free(X);                                                          \
-    	std::free(Y);                                                          \
     	return -1;                                                             \
     }                                                                          \
                                                                                \
@@ -142,8 +118,8 @@ int main(void)                                                                 \
                                                                                \
     for (n = 0UL; n < N; ++n)                                                  \
     {                                                                          \
-        A[n] = X[n] = random_int();                                            \
-        B[n] = Y[n] = random_int();                                            \
+        A[n] = random_int();                                                   \
+        B[n] = random_int();                                                   \
     }                                                                          \
                                                                                \
     t1 = std::clock();                                                         \
@@ -154,28 +130,25 @@ int main(void)                                                                 \
                                                                                \
     t1 = std::clock();                                                         \
     for (n = 0; n < N; ++n)                                                    \
-        Z[n] = f1(X[n], Y[n]);                                                 \
+        Z[n] = f1(A[n], B[n]);                                                 \
     t2 = std::clock();                                                         \
     printf("cpp:     %f\n", time_as_double(t1, t2));                           \
                                                                                \
     for (n = 0UL; n < N; ++n)                                                  \
     {                                                                          \
-        tmp = (Z[n] < C[n] ? C[n] - Z[n] : Z[n] - C[n]);                       \
-        tmpd = static_cast<double>(tmp);                                       \
-        rms += tmpd*tmpd;                                                      \
-        if (max < tmp)                                                         \
-            max = tmp;                                                         \
+        if (C[n] != Z[n])                                                      \
+        {                                                                      \
+            puts("FAIL");                                                      \
+            printf("x       = %ld\n", TMPL_CAST(A[n], signed long int));       \
+            printf("y       = %ld\n", TMPL_CAST(B[n], signed long int));       \
+            printf("libtmpl = %ld\n", TMPL_CAST(C[n], signed long int));       \
+            printf("other   = %ld\n", TMPL_CAST(Z[n], signed long int));       \
+            break;                                                             \
+        }                                                                      \
     }                                                                          \
-                                                                               \
-    rms = std::sqrt(rms / static_cast<double>(N));                             \
-    printf("rms error: %e\n", rms);                                            \
-    printf("max error: %e\n", static_cast<double>(max));                       \
-                                                                               \
     std::free(A);                                                              \
     std::free(B);                                                              \
     std::free(C);                                                              \
-    std::free(X);                                                              \
-    std::free(Y);                                                              \
     std::free(Z);                                                              \
     return 0;                                                                  \
 }
