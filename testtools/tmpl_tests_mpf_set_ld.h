@@ -22,7 +22,7 @@
 #include <string.h>
 #include <gmp.h>
 
-static void tmpl_tests_mpf_set_ld(mpf_t op, long double val)
+static inline void tmpl_tests_mpf_set_ld(mpf_t op, long double val)
 {
     char buffer[128];
     sprintf(buffer, "%.100LE", val);

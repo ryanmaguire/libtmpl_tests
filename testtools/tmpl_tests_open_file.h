@@ -69,6 +69,7 @@ do {                                                                           \
 } while (0)
 
 #else
+/*  Else for #ifdef __cplusplus. C version is below.                          */
 
 /*  C equivalent of cstdio, just include stdio.h.                             */
 #include <stdio.h>

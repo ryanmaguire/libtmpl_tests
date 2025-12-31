@@ -22,7 +22,7 @@
 #include <string.h>
 #include <gmp.h>
 
-static long double tmpl_tests_mpf_get_ld(mpf_t op)
+static inline long double tmpl_tests_mpf_get_ld(mpf_t op)
 {
     char buffer[128];
     gmp_sprintf(buffer, "%.100FE", op);
