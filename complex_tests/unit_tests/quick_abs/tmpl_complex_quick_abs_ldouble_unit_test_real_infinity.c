@@ -19,10 +19,10 @@
 #include "../../../libtmpl_tests.h"
 #define val TMPL_INFINITYL
 #define inarr {                 \
-    {{+TMPL_INFINITYL, +0.0L}},   \
-    {{+TMPL_INFINITYL, -0.0L}},   \
-    {{-TMPL_INFINITYL, +0.0L}},   \
-    {{-TMPL_INFINITYL, -0.0L}}    \
+    {{+TMPL_INFINITYL, +0.0L}}, \
+    {{+TMPL_INFINITYL, -0.0L}}, \
+    {{-TMPL_INFINITYL, +0.0L}}, \
+    {{-TMPL_INFINITYL, -0.0L}}  \
 }
 #define outarr {val, val, val, val}
 TMPL_C_TO_R_ARRAY_EXACT_UNIT_TEST(

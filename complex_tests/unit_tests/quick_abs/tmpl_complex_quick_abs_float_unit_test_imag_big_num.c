@@ -20,10 +20,10 @@
 #define IN_VAL tmpl_Float_Sqrt(BNUMF)
 #define OUT_VAL tmpl_Float_Sqrt(BNUMF)
 #define inarr {         \
-    {{+IN_VAL, +0.0F}},  \
-    {{+IN_VAL, -0.0F}},  \
-    {{-IN_VAL, +0.0F}},  \
-    {{-IN_VAL, -0.0F}}   \
+    {{+IN_VAL, +0.0F}}, \
+    {{+IN_VAL, -0.0F}}, \
+    {{-IN_VAL, +0.0F}}, \
+    {{-IN_VAL, -0.0F}}  \
 }
 #define outarr {OUT_VAL, OUT_VAL, OUT_VAL, OUT_VAL}
 TMPL_C_TO_R_ARRAY_UNIT_TEST(

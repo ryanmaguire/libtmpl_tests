@@ -19,10 +19,10 @@
 #include "../../../libtmpl_tests.h"
 #define val TMPL_NANL
 #define inarr {                 \
-    {{+TMPL_NANL, +TMPL_NANL}},   \
-    {{+TMPL_NANL, -TMPL_NANL}},   \
-    {{-TMPL_NANL, +TMPL_NANL}},   \
-    {{-TMPL_NANL, -TMPL_NANL}}    \
+    {{+TMPL_NANL, +TMPL_NANL}}, \
+    {{+TMPL_NANL, -TMPL_NANL}}, \
+    {{-TMPL_NANL, +TMPL_NANL}}, \
+    {{-TMPL_NANL, -TMPL_NANL}}  \
 }
 #define outarr {val, val, val, val}
 TMPL_C_TO_R_ARRAY_EXACT_UNIT_TEST(

@@ -19,10 +19,10 @@
 #include "../../../libtmpl_tests.h"
 #define val tmpl_LDouble_Sqrt(2.0L)
 #define inarr {         \
-    {{+1.0L, +1.0L}},     \
-    {{+1.0L, -1.0L}},     \
-    {{-1.0L, +1.0L}},     \
-    {{-1.0L, -1.0L}}      \
+    {{+1.0L, +1.0L}},   \
+    {{+1.0L, -1.0L}},   \
+    {{-1.0L, +1.0L}},   \
+    {{-1.0L, -1.0L}}    \
 }
 #define outarr {val, val, val, val}
 TMPL_C_TO_R_ARRAY_EXACT_UNIT_TEST(
