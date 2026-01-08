@@ -28,5 +28,5 @@
 }
 #define outdata {16384, 16385, 16386, 16387, 16388, 16389, 16390}
 TMPL_R2_TO_R_ARRAY_EXACT_UNIT_TEST(
-    unsigned int, tmpl_UInt_GCD, indata, outdata
+    unsigned int, tmpl_UInt_GCD_Binary, indata, outdata
 )
