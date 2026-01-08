@@ -78,7 +78,7 @@ runtests() {
         fi
     done
 
-    for file in $(find . -name "*$TYPE*.c" -type f); do
+    for file in $(find . -name "*$TYPE*.c" -type f | sort); do
         $CC $ExtraArgs $file -o main $LinkerFlags
         printf "$(basename $file): "
 
@@ -92,7 +92,7 @@ runtests() {
         rm -f main
     done
 
-    for file in $(find . -name "*$TYPE*.cpp" -type f); do
+    for file in $(find . -name "*$TYPE*.cpp" -type f | sort); do
         $CPP $ExtraArgs -std=c++17 $file -o main $LinkerFlags
         printf "$(basename $file): "
         ./main
