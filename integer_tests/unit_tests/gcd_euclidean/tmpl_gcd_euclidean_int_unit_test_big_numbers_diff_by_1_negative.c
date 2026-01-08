@@ -28,5 +28,5 @@
 }
 #define outdata {1, 1, 1, 1, 1, 1, 1}
 TMPL_R2_TO_R_ARRAY_EXACT_UNIT_TEST(
-    unsigned int, tmpl_Int_GCD_Euclidean, indata, outdata
+    signed int, tmpl_Int_GCD_Euclidean, indata, outdata
 )
