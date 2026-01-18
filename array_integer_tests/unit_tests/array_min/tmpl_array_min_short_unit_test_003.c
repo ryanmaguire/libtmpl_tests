@@ -16,6 +16,6 @@
  *  You should have received a copy of the GNU General Public License         *
  *  along with libtmpl_tests.  If not, see <https://www.gnu.org/licenses/>.   *
  ******************************************************************************/
-#include "../tmpl_array_integer_unit_tests.h"
+#include "../../../libtmpl_tests.h"
 #define inarr {5, 4, 3, 2, 1, 0}
-TEST_INT_ARRAY_IN_INT_TYPE_OUT(short int, tmpl_Short_Array_Min, inarr, 0)
+TMPL_INT_ARRAY_IN_INT_OUT_UNIT_TEST(short int, tmpl_Short_Array_Min, inarr, 0)

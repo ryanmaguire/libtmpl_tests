@@ -16,8 +16,8 @@
  *  You should have received a copy of the GNU General Public License         *
  *  along with libtmpl_tests.  If not, see <https://www.gnu.org/licenses/>.   *
  ******************************************************************************/
-#include "../tmpl_array_integer_unit_tests.h"
+#include "../../../libtmpl_tests.h"
 #define inarr {}
-TEST_INT_ARRAY_IN_SIZE_T_OUT(
+TMPL_INT_ARRAY_IN_SIZE_T_OUT_UNIT_TEST(
     unsigned short int, tmpl_UShort_Array_Max_Index, inarr, 0
 )

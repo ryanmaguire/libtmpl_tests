@@ -16,9 +16,9 @@
  *  You should have received a copy of the GNU General Public License         *
  *  along with libtmpl_tests.  If not, see <https://www.gnu.org/licenses/>.   *
  ******************************************************************************/
-#include "../tmpl_array_integer_unit_tests.h"
+#include "../../../libtmpl_tests.h"
 #define inarr {1, 2, 3, 4, 5}
 #define answer (3.316624790355399849114932736670686683927E+00)
-TEST_INT_ARRAY_IN_FLOAT_TYPE_OUT_WITH_ERR(
+TMPL_INT_ARRAY_IN_FLOAT_OUT_UNIT_TEST(
     signed int, double, tmpl_Int_Array_Double_RMS, inarr, answer
 )

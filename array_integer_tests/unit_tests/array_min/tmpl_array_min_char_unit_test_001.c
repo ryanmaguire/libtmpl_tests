@@ -16,6 +16,8 @@
  *  You should have received a copy of the GNU General Public License         *
  *  along with libtmpl_tests.  If not, see <https://www.gnu.org/licenses/>.   *
  ******************************************************************************/
-#include "../tmpl_array_integer_unit_tests.h"
+#include "../../../libtmpl_tests.h"
 #define inarr {0x00, 0x01, 0x02, 0x03, 0x04, 0x05}
-TEST_INT_ARRAY_IN_INT_TYPE_OUT(signed char, tmpl_Char_Array_Min, inarr, 0x00)
+TMPL_INT_ARRAY_IN_INT_OUT_UNIT_TEST(
+    signed char, tmpl_Char_Array_Min, inarr, 0x00
+)

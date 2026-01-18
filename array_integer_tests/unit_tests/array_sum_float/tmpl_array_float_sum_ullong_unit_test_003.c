@@ -16,8 +16,8 @@
  *  You should have received a copy of the GNU General Public License         *
  *  along with libtmpl_tests.  If not, see <https://www.gnu.org/licenses/>.   *
  ******************************************************************************/
-#include "../tmpl_array_integer_unit_tests.h"
+#include "../../../libtmpl_tests.h"
 #define inarr {}
-TEST_INT_ARRAY_IN_FLOAT_TYPE_OUT(
+TMPL_INT_ARRAY_IN_FLOAT_OUT_EXACT_UNIT_TEST(
     unsigned long long int, float, tmpl_ULLong_Array_Float_Sum, inarr, 0.0F
 )

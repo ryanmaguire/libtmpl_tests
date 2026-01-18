@@ -30,11 +30,13 @@
 #include <ctime>
 #include <cmath>
 #include <cfloat>
+#include <climits>
 #else
 #include <stdio.h>
 #include <time.h>
 #include <math.h>
 #include <float.h>
+#include <limits.h>
 #endif
 
 #include "testtools/tmpl_tests_memsize.h"
@@ -360,6 +362,12 @@ int main(void)                                                                 \
 #include "testtools/tmpl_tests_c2_to_c_array_unit_test.h"
 #include "testtools/tmpl_tests_c2ptr_array_exact_unit_test.h"
 #include "testtools/tmpl_tests_c2ptr_dup_array_exact_unit_test.h"
+#include "testtools/tmpl_tests_int_array_in_float_out_exact_unit_test.h"
+#include "testtools/tmpl_tests_int_array_in_float_out_unit_test.h"
+#include "testtools/tmpl_tests_int_array_in_int_out_unit_test.h"
+#include "testtools/tmpl_tests_int_array_in_two_int_out_unit_test.h"
+#include "testtools/tmpl_tests_int_array_in_two_size_t_out_unit_test.h"
+#include "testtools/tmpl_tests_int_array_int_size_t_out_unit_test.h"
 #include "testtools/tmpl_tests_r_to_r_array_unit_test.h"
 #include "testtools/tmpl_tests_r_to_r_array_exact_unit_test.h"
 #include "testtools/tmpl_tests_r_to_r_vs_from_array_unit_test.h"

@@ -46,7 +46,7 @@ runtests() {
     CC=gcc
     CPP=g++
     ExtraArgs="-O2 -flto -I/usr/local/include"
-    LinkerFlags="-L/usr/local/lib -lgsl -lcerf -lgmp -lm -ltmpl"
+    LinkerFlags="-L/usr/local/lib -lgsl -lcerf -lgmp -lm -ltmpl -lquadmath"
     TYPE="unit"
 
     # Parse the inputs.
