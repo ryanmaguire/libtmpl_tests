@@ -17,8 +17,8 @@
  *  along with libtmpl_tests.  If not, see <https://www.gnu.org/licenses/>.   *
  ******************************************************************************/
 #include "../../../libtmpl_tests.h"
-#define a (9223372036854775807LL)
-#define b (9223372036854775807.0)
+#define a (LONG_MAX)
+#define b ((double)LONG_MAX)
 #define inarr {a, a, a, a}
 #define answer (b)
 TMPL_INT_ARRAY_IN_FLOAT_OUT_UNIT_TEST(
