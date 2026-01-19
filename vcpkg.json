@@ -1,0 +1,15 @@
+{
+    "dependencies": [
+        "boost-algorithm",
+        "boost-integer",
+        "boost-math",
+        "boost-rational",
+        {
+            "name": "fftw3",
+            "default-features": false
+        },
+        "gmp",
+        "gsl",
+        "libcerf"
+    ]
+  }
