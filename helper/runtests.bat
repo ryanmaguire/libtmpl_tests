@@ -28,16 +28,19 @@ SET "CPP=cl"
 SET "ExtraArgs="
 SET "TYPE=unit"
 
+:: Location of the header files installed by vcpkg.
+SET "VCPATH=C:\libtmpl_tests\vcpkg_installed\x64-windows-static\include"
+
 :: C Compiler arguments. Unit tests use _Generic and variadic macros to
 :: simplify things (libtmpl itself does not, it is C89 compliant). Need to
 :: enable std:c11 for things to compile correctly.
-SET "CARGS=/std:c11 /O2 /IC:\"
+SET "CARGS=/std:c11 /O2 /IC:\ /I%VCPATH%"
 
 :: C++ unit tests makes use of C++17 standard library functions. Enable these.
-SET "CPPARGS=/std:c++17 /O2 /IC:\"
+SET "CPPARGS=/std:c++17 /O2 /IC:\ /I%VCPATH%"
 
 :: Linker arguments (the last bit silences the compiler / linker).
-SET "LARGS=/link /out:main.exe >nul 2>&1"
+SET "LARGS=C:\libtmpl\libtmpl.lib /link /out:main.exe"
 
 :: Parse command-line arguments.
 :PARSE_ARGS
@@ -73,8 +76,11 @@ GOTO PARSE_ARGS
 
 :: Compile and run C files.
 FOR /f "delims=" %%f IN ('dir /b /s "*%TYPE%*.c"') DO (
-    CALL "%CC%" !ExtraArgs! %CARGS% "%%f" C:\libtmpl\libtmpl.lib %LARGS%
-    IF EXIST main.exe (
+    CALL "%CC%" !ExtraArgs! %CARGS% "%%f" %LARGS% >nul 2>&1
+    IF ERRORLEVEL 1 (
+        ECHO [FAIL] %%f
+        CALL "%CC%" !ExtraArgs! %CARGS% "%%f" %LARGS%
+    ) ELSE (
         < NUL SET /p ="%%f: "
         CALL main.exe
         DEL /f /q main.exe *.obj
@@ -83,8 +89,11 @@ FOR /f "delims=" %%f IN ('dir /b /s "*%TYPE%*.c"') DO (
 
 :: Compile and run C++ files.
 FOR /f "delims=" %%f IN ('dir /b /s "*%TYPE%*.cpp"') DO (
-    CALL "%CC%" !ExtraArgs! %CPPARGS% "%%f" C:\libtmpl\libtmpl.lib %LARGS%
-    IF EXIST main.exe (
+    CALL "%CPP%" !ExtraArgs! %CPPARGS% "%%f" %LARGS% >nul 2>&1
+    IF ERRORLEVEL 1 (
+        ECHO [FAIL] %%f
+        CALL "%CPP%" !ExtraArgs! %CPPARGS% "%%f" %LARGS%
+    ) ELSE (
         < NUL SET /p ="%%f: "
         CALL main.exe
         DEL /f /q main.exe *.obj
