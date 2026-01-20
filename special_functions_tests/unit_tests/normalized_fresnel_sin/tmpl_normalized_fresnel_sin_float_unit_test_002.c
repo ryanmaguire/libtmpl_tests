@@ -20,12 +20,12 @@
 #define TMPL_NSAMPS (1E7)
 #endif
 #include "../../../libtmpl_tests.h"
-static float fcos(const float x)
+static float fsin(const float x)
 {
     const double x_double = TMPL_CAST(x, double);
-    const double f_cos_x = tmpl_Double_Normalized_Fresnel_Cos(x_double);
-    return TMPL_CAST(f_cos_x, float);
+    const double f_sin_x = tmpl_Double_Normalized_Fresnel_Sin(x_double);
+    return TMPL_CAST(f_sin_x, float);
 }
 TMPL_R_TO_R_VS_FROM_INTERVAL_UNIT_TEST(
-    float, 1.0E+3F, 1.0E+05F, tmpl_Float_Normalized_Fresnel_Cos, fcos
+    float, 1.0E+03F, 1.0E+05F, tmpl_Float_Normalized_Fresnel_Sin, fsin
 )

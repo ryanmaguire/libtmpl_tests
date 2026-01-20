@@ -27,5 +27,5 @@ static float fcos(const float x)
     return TMPL_CAST(f_cos_x, float);
 }
 TMPL_R_TO_R_VS_FROM_INTERVAL_UNIT_TEST(
-    float, 1.0E+3F, 1.0E+05F, tmpl_Float_Normalized_Fresnel_Cos, fcos
+    float, 0.0F, 1.0E+02F, tmpl_Float_Normalized_Fresnel_Cos, fcos
 )
