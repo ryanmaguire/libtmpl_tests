@@ -20,10 +20,21 @@
 #define TMPL_NSAMPS (65535)
 #endif
 #include "../../../libtmpl_tests.h"
+#if defined(_WIN32) || defined(_WIN64) || defined(_MSC_VER)
+static int trailing_zeros(unsigned short int n)
+{
+    unsigned long index;
+    if (n == 0)
+        return 0;
+    _BitScanForward(&index, n);
+    return (int)index;
+}
+#else
 static int trailing_zeros(unsigned short int n)
 {
     return (n == 0 ? 0 : __builtin_ctz(n));
 }
+#endif
 TMPL_R_TO_R_VS_FROM_INTERVAL_EXACT_UNIT_TEST(
     unsigned short int, 0, 65535, tmpl_UShort_Trailing_Zeros, trailing_zeros
 )
