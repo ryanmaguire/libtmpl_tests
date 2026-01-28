@@ -17,7 +17,7 @@
  *  along with libtmpl_tests.  If not, see <https://www.gnu.org/licenses/>.   *
  ******************************************************************************/
 #include "../../../libtmpl_tests.h"
-#define IN_VAL tmpl_Double_Sqrt(DNUM)
+#define IN_VAL sqrt(DNUM)
 #define OUT_VAL 2.0 * DNUM
 #define inarr {             \
     {{+IN_VAL, +IN_VAL}},   \
