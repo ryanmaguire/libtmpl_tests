@@ -30,17 +30,22 @@ SET "TYPE=unit"
 
 :: Location of the header files installed by vcpkg.
 SET "VCPATH=C:\libtmpl_tests\vcpkg_installed\x64-windows-static\include"
+SET "VCLIBS=C:\libtmpl_tests\vcpkg_installed\x64-windows-static\lib"
 
 :: C Compiler arguments. Unit tests use _Generic and variadic macros to
 :: simplify things (libtmpl itself does not, it is C89 compliant). Need to
 :: enable std:c11 for things to compile correctly.
 SET "CARGS=/std:c11 /O2 /IC:\ /I%VCPATH%"
+SET "CLIBRARIES=%VCLIBS%\gmp.lib %VCLIBS%\gsl.lib %VCLIBS%\gslcblas.lib"
 
 :: C++ unit tests makes use of C++17 standard library functions. Enable these.
 SET "CPPARGS=/std:c++17 /O2 /IC:\ /I%VCPATH%"
+set "CPPLIBRARIES=%VCLIBS%\cerfcpp.lib %VCLIBS%\gmpxx.lib"
 
 :: Linker arguments (the last bit silences the compiler / linker).
 SET "LARGS=C:\libtmpl\libtmpl.lib /link /out:main.exe"
+SET "CLARGS=%CLIBRARIES% %LARGS%"
+SET "CPPLARGS=%CPPLIBRARIES% %LARGS%"
 
 :: Parse command-line arguments.
 :PARSE_ARGS
@@ -76,7 +81,7 @@ GOTO PARSE_ARGS
 
 :: Compile and run C files.
 FOR /f "delims=" %%f IN ('dir /b /s "*%TYPE%*.c"') DO (
-    CALL "%CC%" !ExtraArgs! %CARGS% "%%f" %LARGS% >nul 2>&1
+    CALL "%CC%" !ExtraArgs! %CARGS% "%%f" %CLARGS% >nul 2>&1
     IF ERRORLEVEL 1 (
         ECHO [FAILED TO COMPILE] %%f
     ) ELSE (
@@ -88,7 +93,7 @@ FOR /f "delims=" %%f IN ('dir /b /s "*%TYPE%*.c"') DO (
 
 :: Compile and run C++ files.
 FOR /f "delims=" %%f IN ('dir /b /s "*%TYPE%*.cpp"') DO (
-    CALL "%CPP%" !ExtraArgs! %CPPARGS% "%%f" %LARGS% >nul 2>&1
+    CALL "%CPP%" !ExtraArgs! %CPPARGS% "%%f" %CPPLARGS% >nul 2>&1
     IF ERRORLEVEL 1 (
         ECHO [FAILED TO COMPILE] %%f
     ) ELSE (
