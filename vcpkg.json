@@ -4,12 +4,12 @@
         "boost-integer",
         "boost-math",
         "boost-rational",
+        "gmp",
+        "gsl",
+        "libcerf",
         {
             "name": "fftw3",
             "default-features": false
-        },
-        "gmp",
-        "gsl",
-        "libcerf"
+        }
     ]
   }
