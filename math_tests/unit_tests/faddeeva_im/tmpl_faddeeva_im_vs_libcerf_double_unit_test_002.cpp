@@ -16,6 +16,7 @@
  *  You should have received a copy of the GNU General Public License         *
  *  along with libtmpl_tests.  If not, see <https://www.gnu.org/licenses/>.   *
  ******************************************************************************/
+#define CERF_AS_CPP 1
 #ifndef TMPL_NSAMPS
 #define TMPL_NSAMPS (1E7)
 #endif
