@@ -17,7 +17,7 @@
  *  along with libtmpl_tests.  If not, see <https://www.gnu.org/licenses/>.   *
  ******************************************************************************/
 #include "../../../libtmpl_tests.h"
-#define val tmpl_Float_Sqrt(2.0F)
+#define val sqrtf(2.0F)
 #define inarr {         \
     {{+1.0F, +1.0F}},   \
     {{+1.0F, -1.0F}},   \
