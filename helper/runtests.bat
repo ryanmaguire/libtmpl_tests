@@ -78,8 +78,7 @@ GOTO PARSE_ARGS
 FOR /f "delims=" %%f IN ('dir /b /s "*%TYPE%*.c"') DO (
     CALL "%CC%" !ExtraArgs! %CARGS% "%%f" %LARGS% >nul 2>&1
     IF ERRORLEVEL 1 (
-        ECHO [FAIL] %%f
-        CALL "%CC%" !ExtraArgs! %CARGS% "%%f" %LARGS%
+        ECHO [FAILED TO COMPILE] %%f
     ) ELSE (
         < NUL SET /p ="%%f: "
         CALL main.exe
@@ -91,8 +90,7 @@ FOR /f "delims=" %%f IN ('dir /b /s "*%TYPE%*.c"') DO (
 FOR /f "delims=" %%f IN ('dir /b /s "*%TYPE%*.cpp"') DO (
     CALL "%CPP%" !ExtraArgs! %CPPARGS% "%%f" %LARGS% >nul 2>&1
     IF ERRORLEVEL 1 (
-        ECHO [FAIL] %%f
-        CALL "%CPP%" !ExtraArgs! %CPPARGS% "%%f" %LARGS%
+        ECHO [FAILED TO COMPILE] %%f
     ) ELSE (
         < NUL SET /p ="%%f: "
         CALL main.exe
