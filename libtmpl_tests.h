@@ -22,7 +22,10 @@
 
 #include <libtmpl/include/tmpl.h>
 #include <libtmpl/include/helper/tmpl_abs.h>
-#include <libtmpl/include/tmpl_generic.h>
+#include <libtmpl/include/helper/tmpl_error_value.h>
+#include <libtmpl/include/generic/tmpl_eps.h>
+#include <libtmpl/include/generic/tmpl_is_inf.h>
+#include <libtmpl/include/generic/tmpl_is_nan.h>
 #include <libtmpl/include/tmpl_variadic.h>
 
 #ifdef __cplusplus
@@ -43,9 +46,6 @@
 #include "testtools/tmpl_tests_rand_real.h"
 #include "testtools/tmpl_tests_open_file.h"
 #include "testtools/tmpl_tests_string_to_real.h"
-
-#define TMPL_ERROR_VALUE(tval, cval) \
-    ((cval) == 0 ? TMPL_ABS((cval)-(tval)) : TMPL_ABS(((cval)-(tval))/(cval)))
 
 /*  Helper macros to shorten up the tests. Undef first to avoid conflict.     */
 #undef T
