@@ -71,7 +71,9 @@ int main(void)                                                                 \
             const tmpl_Bool y_is_nan = TMPL_IS_NAN(y);                         \
             const tmpl_Bool z_is_nan = TMPL_IS_NAN(z);                         \
             const type err = TMPL_ERROR_VALUE(y, z);                           \
-            if ((y_is_nan != z_is_nan) || (err > eps))                         \
+            if (y_is_nan && z_is_nan)                                          \
+                continue;                                                      \
+            else if ((y_is_nan != z_is_nan) || (err > eps))                    \
             {                                                                  \
                 x_bad = x;                                                     \
                 y_bad = y;                                                     \
