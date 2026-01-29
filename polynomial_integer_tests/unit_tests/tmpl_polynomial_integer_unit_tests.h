@@ -32,7 +32,7 @@ int main(void)                                                                 \
     ptype Q = pcreate(Q_data, Q_len);                                          \
     ptype out = pcreate(NULL, (size_t)0);                                      \
     size_t n;                                                                  \
-    func(&P, &Q, &out);                                                        \
+    func(&out, &P, &Q);                                                        \
                                                                                \
     if (!out.coeffs)                                                           \
     {                                                                          \
@@ -75,7 +75,7 @@ int main(void)                                                                 \
     ptype Q = pcreate(NULL, (size_t)0);                                        \
     ptype out = pcreate(NULL, (size_t)0);                                      \
     size_t n;                                                                  \
-    func(&P, &Q, &out);                                                        \
+    func(&out, &P, &Q);                                                        \
                                                                                \
     if (!out.coeffs)                                                           \
     {                                                                          \
@@ -162,7 +162,7 @@ int main(void)                                                                 \
     ptype *P_ptr = NULL;                                                       \
     ptype *Q_ptr = NULL;                                                       \
     ptype out = prand(deg);                                                    \
-    func(P_ptr, Q_ptr, &out);                                                  \
+    func(&out, P_ptr, Q_ptr);                                                  \
                                                                                \
     if (out.error_occurred)                                                    \
     {                                                                          \
