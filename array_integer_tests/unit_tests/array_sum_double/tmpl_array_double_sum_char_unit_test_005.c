@@ -17,7 +17,7 @@
  *  along with libtmpl_tests.  If not, see <https://www.gnu.org/licenses/>.   *
  ******************************************************************************/
 #include "../../../libtmpl_tests.h"
-#define inarr {1, CHAR_MAX - 1, 1, 1 - CHAR_MAX}
+#define inarr {1, SCHAR_MAX - 1, 1, 1 - SCHAR_MAX}
 TMPL_INT_ARRAY_IN_FLOAT_OUT_EXACT_UNIT_TEST(
     signed char, double, tmpl_Char_Array_Double_Sum, inarr, 2.0
 )
