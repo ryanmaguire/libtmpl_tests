@@ -16,38 +16,48 @@
  *  You should have received a copy of the GNU General Public License         *
  *  along with libtmpl_tests.  If not, see <https://www.gnu.org/licenses/>.   *
  ******************************************************************************/
-#include <libtmpl/include/tmpl_doubledouble.h>
 #include "../libtmpl_tests.h"
+#include <libtmpl/include/tmpl_doubledouble.h>
 
 #ifndef TMPL_NO_QUADMATH
 #include <quadmath.h>
+typedef __float128 float128;
 #define TMPL_QUAD_FORMAT_STRING "%.40QE"
+#define TMPL_QUAD_VAL(x) (x)
 #else
-typedef long double __float128;
+#include <boost/multiprecision/float128.hpp>
+typedef boost::multiprecision::float128 float128;
 #define quadmath_snprintf snprintf
-#define fabsq fabsl
-#define TMPL_QUAD_FORMAT_STRING "%.40LE"
+#define fabsq(x) ((x) < 0 ? (x) : -(x))
+#define TMPL_QUAD_FORMAT_STRING "%s"
+#define TMPL_QUAD_VAL(x) (boost::lexical_cast<std::string>(x).c_str())
 #endif
 #define TMPL_QUAD_EPS (1.9259299443872358530559779425849273185381E-34L)
 
-static void quad_print(__float128 val)
+static void quad_print(float128 val)
 {
     char buffer[1024];
-    quadmath_snprintf(buffer, sizeof(buffer), TMPL_QUAD_FORMAT_STRING, val);
+    quadmath_snprintf(
+        buffer,
+        sizeof(buffer),
+        TMPL_QUAD_FORMAT_STRING,
+        TMPL_QUAD_VAL(val)
+    );
+
     printf("%s\n", buffer);
 }
 
-static inline __float128 dd_to_flt128(tmpl_DoubleDouble z)
+static inline float128 dd_to_flt128(tmpl_DoubleDouble z)
 {
-    const __float128 hi = TMPL_CAST(z.dat[0], __float128);
-    const __float128 lo = TMPL_CAST(z.dat[1], __float128);
+    const float128 hi = TMPL_CAST(z.dat[0], float128);
+    const float128 lo = TMPL_CAST(z.dat[1], float128);
     return hi + lo;
 }
 
-static inline __float128 ldd_to_flt128(tmpl_LongDoubleDouble z)
+static inline float128 ldd_to_flt128(tmpl_LongDoubleDouble z)
 {
-    const __float128 hi = TMPL_CAST(z.dat[0], __float128);
-    const __float128 lo = TMPL_CAST(z.dat[1], __float128);
+    const float128 hi = TMPL_CAST(z.dat[0], float128);
+    const float128 lo = TMPL_CAST(z.dat[1], float128);
     return hi + lo;
 }
 
@@ -83,8 +93,8 @@ static inline tmpl_LongDoubleDouble ld_to_ldd(long double z)
 static inline void
 generate_flt128(tmpl_DoubleDouble * restrict const x0,
                 tmpl_DoubleDouble * restrict const y0,
-                __float128 * restrict const x1,
-                __float128 * restrict const y1)
+                float128 * restrict const x1,
+                float128 * restrict const y1)
 {
     double r0, r1, r2, r3;
     const double scale = TMPL_CAST(TMPL_QUAD_EPS, double) / TMPL_DBL_EPS;
@@ -108,8 +118,8 @@ generate_flt128(tmpl_DoubleDouble * restrict const x0,
 static inline void
 generate_flt128l(tmpl_LongDoubleDouble * restrict const x0,
                  tmpl_LongDoubleDouble * restrict const y0,
-                 __float128 * restrict const x1,
-                 __float128 * restrict const y1)
+                 float128 * restrict const x1,
+                 float128 * restrict const y1)
 {
     long double r0, r1, r2, r3;
     const long double scale = TMPL_QUAD_EPS / TMPL_LDBL_EPS;
@@ -133,8 +143,8 @@ generate_flt128l(tmpl_LongDoubleDouble * restrict const x0,
 static inline void
 generate_pos_flt128(tmpl_DoubleDouble * restrict const x0,
                     tmpl_DoubleDouble * restrict const y0,
-                    __float128 * restrict const x1,
-                    __float128 * restrict const y1)
+                    float128 * restrict const x1,
+                    float128 * restrict const y1)
 {
     double r0, r1, r2, r3;
     const double scale = TMPL_CAST(TMPL_QUAD_EPS, double) / TMPL_DBL_EPS;
@@ -158,8 +168,8 @@ generate_pos_flt128(tmpl_DoubleDouble * restrict const x0,
 static inline void
 generate_pos_flt128l(tmpl_LongDoubleDouble * restrict const x0,
                      tmpl_LongDoubleDouble * restrict const y0,
-                     __float128 * restrict const x1,
-                     __float128 * restrict const y1)
+                     float128 * restrict const x1,
+                     float128 * restrict const y1)
 {
     long double r0, r1, r2, r3;
     const long double scale = TMPL_QUAD_EPS / TMPL_LDBL_EPS;
@@ -214,13 +224,13 @@ generate_ldl(tmpl_LongDoubleDouble * restrict const x0,
     *y0 = ld_to_ldd(*y1);
 }
 
-static inline tmpl_Bool compare_flt128(tmpl_DoubleDouble z0, __float128 z1)
+static inline tmpl_Bool compare_flt128(tmpl_DoubleDouble z0, float128 z1)
 {
-    __float128 val = dd_to_flt128(z0);
-    __float128 err = fabsq((val - z1) / z1);
+    float128 val = dd_to_flt128(z0);
+    float128 err = fabsq((val - z1) / z1);
     const double dbl_eps = TMPL_DBL_EPS;
-    __float128 sqrt_eps = TMPL_CAST(dbl_eps, __float128);
-    __float128 eps = sqrt_eps * sqrt_eps * TMPL_CAST(4, __float128);
+    float128 sqrt_eps = TMPL_CAST(dbl_eps, float128);
+    float128 eps = sqrt_eps * sqrt_eps * TMPL_CAST(4, float128);
 
     if (err > eps)
         return tmpl_False;
@@ -228,15 +238,15 @@ static inline tmpl_Bool compare_flt128(tmpl_DoubleDouble z0, __float128 z1)
     return tmpl_True;
 }
 
-static inline tmpl_Bool compare_flt128l(tmpl_LongDoubleDouble z0, __float128 z1)
+static inline tmpl_Bool compare_flt128l(tmpl_LongDoubleDouble z0, float128 z1)
 {
-    __float128 val = ldd_to_flt128(z0);
-    __float128 err = fabsq((val - z1) / z1);
+    float128 val = ldd_to_flt128(z0);
+    float128 err = fabsq((val - z1) / z1);
     const long double ldbl_eps = TMPL_LDBL_EPS;
-    __float128 sqrt_eps = TMPL_CAST(ldbl_eps, __float128);
-    __float128 eps_tmp = sqrt_eps * sqrt_eps;
-    __float128 eps_val = TMPL_MAX(eps_tmp, TMPL_QUAD_EPS);
-    __float128 eps = TMPL_CAST(4, __float128) * eps_val;
+    float128 sqrt_eps = TMPL_CAST(ldbl_eps, float128);
+    float128 eps_tmp = sqrt_eps * sqrt_eps;
+    float128 eps_val = TMPL_MAX(eps_tmp, TMPL_QUAD_EPS);
+    float128 eps = TMPL_CAST(4, float128) * eps_val;
 
     if (err > eps)
         return tmpl_False;
@@ -272,12 +282,12 @@ static inline void
 fail_flt128(tmpl_DoubleDouble x0,
             tmpl_DoubleDouble y0,
             tmpl_DoubleDouble z0,
-            __float128 z1)
+            float128 z1)
 {
-    __float128 x128 = dd_to_flt128(x0);
-    __float128 y128 = dd_to_flt128(y0);
-    __float128 z128 = dd_to_flt128(z0);
-    __float128 err = fabsq((z128 - z1) / z1);
+    float128 x128 = dd_to_flt128(x0);
+    float128 y128 = dd_to_flt128(y0);
+    float128 z128 = dd_to_flt128(z0);
+    float128 err = fabsq((z128 - z1) / z1);
 
     puts("FAIL");
     quad_print(x128);
@@ -291,12 +301,12 @@ static inline void
 fail_flt128l(tmpl_LongDoubleDouble x0,
              tmpl_LongDoubleDouble y0,
              tmpl_LongDoubleDouble z0,
-             __float128 z1)
+             float128 z1)
 {
-    __float128 x128 = ldd_to_flt128(x0);
-    __float128 y128 = ldd_to_flt128(y0);
-    __float128 z128 = ldd_to_flt128(z0);
-    __float128 err = fabsq((z128 - z1) / z1);
+    float128 x128 = ldd_to_flt128(x0);
+    float128 y128 = ldd_to_flt128(y0);
+    float128 z128 = ldd_to_flt128(z0);
+    float128 err = fabsq((z128 - z1) / z1);
 
     puts("FAIL");
     quad_print(x128);
@@ -346,7 +356,7 @@ fail_ldl(tmpl_LongDoubleDouble x0,
 
 static inline void
 get_flt128_error(const tmpl_DoubleDouble * restrict const z0,
-                 const __float128 * restrict const z1,
+                 const float128 * restrict const z1,
                  size_t number_of_samples,
                  long double * restrict const rms_err,
                  long double * restrict const max_err)
@@ -357,8 +367,8 @@ get_flt128_error(const tmpl_DoubleDouble * restrict const z0,
 
     for (n = 0; n < number_of_samples; ++n)
     {
-        __float128 val = dd_to_flt128(z0[n]);
-        __float128 errQ = fabsq((val - z1[n]) / z1[n]);
+        float128 val = dd_to_flt128(z0[n]);
+        float128 errQ = fabsq((val - z1[n]) / z1[n]);
         long double err = TMPL_CAST(errQ, long double);
         *rms_err += err*err;
 
@@ -371,7 +381,7 @@ get_flt128_error(const tmpl_DoubleDouble * restrict const z0,
 
 static inline void
 get_flt128l_error(const tmpl_LongDoubleDouble * restrict const z0,
-                  const __float128 * restrict const z1,
+                  const float128 * restrict const z1,
                   size_t number_of_samples,
                   long double * restrict const rms_err,
                   long double * restrict const max_err)
@@ -382,8 +392,8 @@ get_flt128l_error(const tmpl_LongDoubleDouble * restrict const z0,
 
     for (n = 0; n < number_of_samples; ++n)
     {
-        __float128 val = ldd_to_flt128(z0[n]);
-        __float128 errQ = fabsq((val - z1[n]) / z1[n]);
+        float128 val = ldd_to_flt128(z0[n]);
+        float128 errQ = fabsq((val - z1[n]) / z1[n]);
         long double err = TMPL_CAST(errQ, long double);
         *rms_err += err*err;
 

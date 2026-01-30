@@ -16,17 +16,17 @@
  *  You should have received a copy of the GNU General Public License         *
  *  along with libtmpl_tests.  If not, see <https://www.gnu.org/licenses/>.   *
  ******************************************************************************/
-#include "../../tmpl_doubledouble_tests.h"
+#include "../../tmpl_doubledouble_tests.hpp"
 
-static inline __float128 mul128(__float128 x, __float128 y)
+static inline __float128 add128(__float128 x, __float128 y)
 {
-    return x * y;
+    return x + y;
 }
 
 static inline
-tmpl_LongDoubleDouble mulLDD(tmpl_LongDoubleDouble x, tmpl_LongDoubleDouble y)
+tmpl_LongDoubleDouble addLDD(tmpl_LongDoubleDouble x, tmpl_LongDoubleDouble y)
 {
-    return tmpl_LDoubleDouble_Multiply(&x, &y);
+    return tmpl_LDoubleDouble_Add(&x, &y);
 }
 
 TMPL_TEST_MIXED_FUNC2_TIME_TEST(
@@ -34,6 +34,6 @@ TMPL_TEST_MIXED_FUNC2_TIME_TEST(
     __float128,
     generate_flt128l,
     get_flt128l_error,
-    mulLDD,
-    mul128
+    addLDD,
+    add128
 )

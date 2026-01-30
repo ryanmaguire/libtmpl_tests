@@ -19,24 +19,25 @@
 #ifndef TMPL_NSAMPS
 #define TMPL_NSAMPS (1E7)
 #endif
-#include "../../tmpl_doubledouble_tests.h"
+#include "../../tmpl_doubledouble_tests.hpp"
 
-static inline __float128 add128(__float128 x, __float128 y)
+static inline float128 add128(float128 x, float128 y)
 {
     return x + y;
 }
 
-static inline tmpl_DoubleDouble addDD(tmpl_DoubleDouble x, tmpl_DoubleDouble y)
+static inline
+tmpl_LongDoubleDouble addLDD(tmpl_LongDoubleDouble x, tmpl_LongDoubleDouble y)
 {
-    return tmpl_DoubleDouble_Add(&x, &y);
+    return tmpl_LDoubleDouble_Add(&x, &y);
 }
 
 TMPL_TEST_MIXED_FUNC2_UNIT_TEST(
-    tmpl_DoubleDouble,
-    __float128,
-    generate_flt128,
-    compare_flt128,
-    fail_flt128,
-    addDD,
+    tmpl_LongDoubleDouble,
+    float128,
+    generate_flt128l,
+    compare_flt128l,
+    fail_flt128l,
+    addLDD,
     add128
 )
