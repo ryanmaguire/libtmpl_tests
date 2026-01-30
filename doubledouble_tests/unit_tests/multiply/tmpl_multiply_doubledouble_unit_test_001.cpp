@@ -21,7 +21,7 @@
 #endif
 #include "../../tmpl_doubledouble_tests.hpp"
 
-static inline __float128 mul128(__float128 x, __float128 y)
+static inline float128 mul128(float128 x, float128 y)
 {
     return x * y;
 }
@@ -33,7 +33,7 @@ static inline tmpl_DoubleDouble mulDD(tmpl_DoubleDouble x, tmpl_DoubleDouble y)
 
 TMPL_TEST_MIXED_FUNC2_UNIT_TEST(
     tmpl_DoubleDouble,
-    __float128,
+    float128,
     generate_flt128,
     compare_flt128,
     fail_flt128,
