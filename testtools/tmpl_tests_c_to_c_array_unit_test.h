@@ -18,7 +18,29 @@
  ******************************************************************************/
 #ifndef TMPL_TESTS_C_TO_C_ARRAY_UNIT_TEST_H
 #define TMPL_TESTS_C_TO_C_ARRAY_UNIT_TEST_H
+#include <libtmpl/include/compat/tmpl_cast.h>
+#include <libtmpl/include/helper/tmpl_array_size.h>
+#include <libtmpl/include/helper/tmpl_error_value.h>
+#include <libtmpl/include/generic/tmpl_eps.h>
+#include <libtmpl/include/generic/tmpl_is_nan.h>
+#include <stddef.h>
+#include <stdio.h>
 
+/******************************************************************************
+ *  Macro:                                                                    *
+ *      TMPL_C_TO_C_ARRAY_UNIT_TEST                                           *
+ *  Purpose:                                                                  *
+ *      Test functions of the form f: R -> R over a given array.              *
+ *  Arguments:                                                                *
+ *      type:                                                                 *
+ *          The data type (tmpl_ComplexDouble, etc.).                         *
+ *      func:                                                                 *
+ *          The libtmpl function being tested.                                *
+ *      indata:                                                               *
+ *          The input array.                                                  *
+ *      outdata:                                                              *
+ *          The output array. To pass we need |func(indata) - outdata| small. *
+ ******************************************************************************/
 #define TMPL_C_TO_C_ARRAY_UNIT_TEST(type, ftype, func, inarr, outarr)          \
 int main(void)                                                                 \
 {                                                                              \
