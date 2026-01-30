@@ -16,8 +16,8 @@
  *  You should have received a copy of the GNU General Public License         *
  *  along with libtmpl_tests.  If not, see <https://www.gnu.org/licenses/>.   *
  ******************************************************************************/
-#ifndef TMPL_TESTS_C_TO_C_ARRAY_UNIT_TEST_H
-#define TMPL_TESTS_C_TO_C_ARRAY_UNIT_TEST_H
+#ifndef TMPL_TESTS_C_TO_C_VS_FROM_ARRAY_UNIT_TEST_H
+#define TMPL_TESTS_C_TO_C_VS_FROM_ARRAY_UNIT_TEST_H
 #include <libtmpl/include/compat/tmpl_cast.h>
 #include <libtmpl/include/helper/tmpl_array_size.h>
 #include <libtmpl/include/helper/tmpl_error_value.h>
