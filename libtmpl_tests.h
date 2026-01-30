@@ -435,8 +435,6 @@ int main(void)                                                                 \
     size_t n;                                                                  \
     const size_t number_of_samples = NSAMPS(T0);                               \
     volatile int flag = 0;                                                     \
-    volatile T0 x0_bad, y0_bad, z0_bad;                                        \
-    volatile T1 z1_bad;                                                        \
     TMPL_OPENMP_BOOL_PRAGMA                                                    \
     for (n = zero; n < number_of_samples; ++n)                                 \
     {                                                                          \
@@ -453,19 +451,12 @@ int main(void)                                                                 \
             pass = compare(z0, z1);                                            \
             if (!pass)                                                         \
             {                                                                  \
-                x0_bad = x0;                                                   \
-                y0_bad = y0;                                                   \
-                z0_bad = z0;                                                   \
-                z1_bad = z1;                                                   \
                 flag = 1;                                                      \
+                fail(x0, y0, z0, z1);                                          \
             }                                                                  \
         }                                                                      \
     }                                                                          \
-    if (flag)                                                                  \
-    {                                                                          \
-        fail(x0_bad, y0_bad, z0_bad, z1_bad);                                  \
-    }                                                                          \
-    else                                                                       \
+    if (!flag)                                                                 \
         puts("PASS");                                                          \
     return 0;                                                                  \
 }
