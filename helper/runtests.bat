@@ -35,7 +35,7 @@ SET "VCLIBS=C:\libtmpl_tests\vcpkg_installed\x64-windows-static\lib"
 :: C Compiler arguments. Unit tests use _Generic and variadic macros to
 :: simplify things (libtmpl itself does not, it is C89 compliant). Need to
 :: enable std:c11 for things to compile correctly.
-SET "CARGS=/std:c11 /O2 /IC:\ /I%VCPATH%"
+SET "CARGS=/std:c11 /O2 /MD /IC:\ /I%VCPATH%"
 SET "CLIBRARIES=%VCLIBS%\gmp.lib %VCLIBS%\gsl.lib %VCLIBS%\gslcblas.lib"
 
 :: C++ unit tests makes use of C++17 standard library functions. Enable these.
