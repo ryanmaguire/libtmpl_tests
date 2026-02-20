@@ -22,8 +22,6 @@
 #include <math.h>
 #include <libtmpl/include/tmpl_math.h>
 
-
-
 /*  Macro for plotting libtmpl functions using GNU Plot Utils.                */
 #define PLOT_LOGDIFF(f0, f1, type, begin, finish, samples, filename)           \
 int main(void)                                                                 \

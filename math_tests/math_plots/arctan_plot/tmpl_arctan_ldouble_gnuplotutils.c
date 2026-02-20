@@ -16,11 +16,12 @@
  *  You should have received a copy of the GNU General Public License         *
  *  along with libtmpl.  If not, see <https://www.gnu.org/licenses/>.         *
  ******************************************************************************/
-#include "tmpl_math_plots.h"
-
-PLOT_FUNC(tmpl_LDouble_Arctan,
-          long double,
-          -10.0L,
-          10.0L,
-          100000ULL,
-          "tmpl_arctan_ldouble_plot.ps")
+#include "../../../libtmpl_tests.h"
+TMPL_PLOT_FUNC(
+    tmpl_LDouble_Arctan,
+    long double,
+    -10.0L,
+    +10.0L,
+    1E4,
+    "tmpl_arctan_ldouble_plot.ps"
+)
