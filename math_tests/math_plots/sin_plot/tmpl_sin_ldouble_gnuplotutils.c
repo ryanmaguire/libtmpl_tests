@@ -16,11 +16,12 @@
  *  You should have received a copy of the GNU General Public License         *
  *  along with libtmpl.  If not, see <https://www.gnu.org/licenses/>.         *
  ******************************************************************************/
-#include "tmpl_math_plots.h"
-
-PLOT_FUNC(tmpl_Double_Sin,
-          double,
-          -10.0,
-          10.0,
-          100000ULL,
-          "tmpl_sin_double_plot.ps")
+#include "../../../libtmpl_tests.h"
+TMPL_PLOT_FUNC(
+    tmpl_LDouble_Sin,
+    long double,
+    -10.0L,
+    +10.0L,
+    1E4,
+    "tmpl_sin_ldouble_plot.ps"
+)
