@@ -16,13 +16,13 @@
  *  You should have received a copy of the GNU General Public License         *
  *  along with libtmpl.  If not, see <https://www.gnu.org/licenses/>.         *
  ******************************************************************************/
-#include "tmpl_math_plots.h"
-#include <math.h>
-
-PLOT_DIFF(tmpl_Double_Sin,
-          sin,
-          double,
-          -1.0E6,
-          1.0E6,
-          10000ULL,
-          "tmpl_sin_double_diff_plot.ps")
+#include "../../../libtmpl_tests.h"
+TMPL_DIFF_PLOT(
+    tmpl_Float_Log,
+    logf,
+    float,
+    0.9F,
+    1.1F,
+    1E4,
+    "tmpl_log_float_diff_plot_near_one.ps"
+)

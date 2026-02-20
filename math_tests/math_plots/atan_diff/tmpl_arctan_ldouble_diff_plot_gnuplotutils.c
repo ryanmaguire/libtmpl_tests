@@ -16,11 +16,13 @@
  *  You should have received a copy of the GNU General Public License         *
  *  along with libtmpl.  If not, see <https://www.gnu.org/licenses/>.         *
  ******************************************************************************/
-#include "tmpl_math_plots.h"
-#include <math.h>
-static double sind(double x)
-{
-    return sin(fmod(x, 360.0) * tmpl_One_Pi / 180.0);
-}
-
-PLOT_DIFF(tmpl_Double_Sind, sind, double, 0.0, 1.0, 1E5, "sind_diff.ps")
+#include "../../../libtmpl_tests.h"
+TMPL_DIFF_PLOT(
+    tmpl_LDouble_Arctan,
+    atanl,
+    long double,
+    0.0L,
+    10.0L,
+    1E4,
+    "tmpl_arctan_ldouble_diff_plot.ps"
+)

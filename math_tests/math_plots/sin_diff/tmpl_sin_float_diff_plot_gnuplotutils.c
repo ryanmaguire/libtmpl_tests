@@ -16,7 +16,13 @@
  *  You should have received a copy of the GNU General Public License         *
  *  along with libtmpl.  If not, see <https://www.gnu.org/licenses/>.         *
  ******************************************************************************/
-#include "tmpl_math_plots.h"
-#include <math.h>
-PLOT_LOGDIFF(tmpl_Double_Arctan_Pade, atan, double, -3.0, 3.0, 1E4,
-             "tmpl_atan_pade_double_logdiff_plot.ps")
+#include "../../../libtmpl_tests.h"
+TMPL_DIFF_PLOT(
+    tmpl_Float_Sin,
+    sinf,
+    float,
+    0.1F,
+    10.0F,
+    1E4,
+    "tmpl_sin_float_diff_plot.ps"
+)

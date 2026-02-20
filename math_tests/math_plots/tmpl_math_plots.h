@@ -54,40 +54,6 @@ int main(void)                                                                 \
 /*  End of PLOT_FUNC macro.                                                   */
 
 /*  Macro for plotting libtmpl functions using GNU Plot Utils.                */
-#define PLOT_DIFF(f0, f1, type, begin, finish, samples, filename)              \
-int main(void)                                                                 \
-{                                                                              \
-    const type start = begin;                                                  \
-    const type end = finish;                                                   \
-    const size_t N = (size_t)samples;                                          \
-    const type dx = (end - start) / (type)N;                                   \
-    type x = start;                                                            \
-    FILE *fp = fopen("data.txt", "w");                                         \
-                                                                               \
-    if (!fp)                                                                   \
-    {                                                                          \
-        puts("fopen failed and returned NULL. Aborting.");                     \
-        return -1;                                                             \
-    }                                                                          \
-                                                                               \
-    while (x <= end)                                                           \
-    {                                                                          \
-        type y0 = f0(x);                                                       \
-        type y1 = f1(x);                                                       \
-        type diff = (y1 - y0)/y1;                                              \
-                                                                               \
-        fprintf(fp, "%e %e\n", (double)x, (double)diff);                       \
-        x += dx;                                                               \
-    }                                                                          \
-                                                                               \
-    fclose(fp);                                                                \
-    system("graph -T ps data.txt > " filename);                                \
-    system("rm -f data.txt");                                                  \
-    return 0;                                                                  \
-}
-/*  End of PLOT_FUNC macro.                                                   */
-
-/*  Macro for plotting libtmpl functions using GNU Plot Utils.                */
 #define PLOT_LOGDIFF(f0, f1, type, begin, finish, samples, filename)           \
 int main(void)                                                                 \
 {                                                                              \

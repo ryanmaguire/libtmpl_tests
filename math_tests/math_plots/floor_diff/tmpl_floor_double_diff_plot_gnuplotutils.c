@@ -16,7 +16,13 @@
  *  You should have received a copy of the GNU General Public License         *
  *  along with libtmpl.  If not, see <https://www.gnu.org/licenses/>.         *
  ******************************************************************************/
-#include "tmpl_math_plots.h"
-#include <math.h>
-PLOT_DIFF(tmpl_LDouble_Arctan, atanl, long double, 0.0L, 20.0L, 1E4,
-          "tmpl_arctan_ldouble_diff_plot.ps")
+#include "../../../libtmpl_tests.h"
+TMPL_DIFF_PLOT(
+    tmpl_Double_Floor,
+    floor,
+    double,
+    1.0,
+    10.0,
+    1E4,
+    "tmpl_floor_double_diff_plot.ps"
+)

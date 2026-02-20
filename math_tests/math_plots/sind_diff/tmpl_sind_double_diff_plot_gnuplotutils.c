@@ -16,7 +16,17 @@
  *  You should have received a copy of the GNU General Public License         *
  *  along with libtmpl.  If not, see <https://www.gnu.org/licenses/>.         *
  ******************************************************************************/
-#include "tmpl_math_plots.h"
-#include <math.h>
-PLOT_LOGDIFF(tmpl_Double_Arctan_Maclaurin, atan, double, 0.0, 0.5, 1E3,
-             "tmpl_atan_maclaurin_double_logdiff_plot.ps")
+#include "../../../libtmpl_tests.h"
+static double sind(double x)
+{
+    return sin(fmod(x, 360.0) * tmpl_double_deg_to_rad);
+}
+TMPL_DIFF_PLOT(
+    tmpl_Double_Sind,
+    sind,
+    double,
+    0.1,
+    10.0,
+    1E4,
+    "tmpl_sind_double_diff_plot.ps"
+)
