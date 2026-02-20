@@ -16,11 +16,12 @@
  *  You should have received a copy of the GNU General Public License         *
  *  along with libtmpl.  If not, see <https://www.gnu.org/licenses/>.         *
  ******************************************************************************/
-#include "tmpl_math_plots.h"
-
-PLOT_FUNC(tmpl_Float_Log,
-          float,
-          1.0E-2F,
-          1.0E2F,
-          100000ULL,
-          "tmpl_log_float_plot.ps")
+#include "../../../libtmpl_tests.h"
+TMPL_PLOT_FUNC(
+    tmpl_LDouble_Log,
+    long double,
+    +1.0E-01,
+    +1.0E+01,
+    1E4,
+    "tmpl_log_ldouble_plot.ps"
+)
