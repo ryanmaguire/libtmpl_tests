@@ -20,15 +20,15 @@
 #define TMPL_NSAMPS (1E7)
 #endif
 #include "../../../libtmpl_tests.h"
-static float kbmd20f(const float x)
+static float kbmd20(const float x)
 {
     const double x_double = TMPL_CAST(x, double);
     const double kbmd20_x = tmpl_Double_KBMD20(x_double, 1.0);
     return TMPL_CAST(kbmd20_x, float);
 }
-static double kbmd20(const double x)
+static float kbmd20f(const float x)
 {
-    return tmpl_Double_KBMD20(x, 1.0);
+    return tmpl_Float_KBMD20(x, 1.0);
 }
 TMPL_R_TO_R_VS_FROM_INTERVAL_UNIT_TEST(
     float, -0.5F, 0.5F, kbmd20, kbmd20f
