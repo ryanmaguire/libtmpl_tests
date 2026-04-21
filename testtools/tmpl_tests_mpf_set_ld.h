@@ -19,6 +19,8 @@
 #ifndef TMPL_TESTS_MPF_SET_LD_H
 #define TMPL_TESTS_MPF_SET_LD_H
 
+#ifndef NO_GMP
+
 #include <string.h>
 #include <gmp.h>
 
@@ -28,5 +30,7 @@ static inline void tmpl_tests_mpf_set_ld(mpf_t op, long double val)
     sprintf(buffer, "%.100LE", val);
     mpf_set_str(op, buffer, 10);
 }
+
+#endif
 
 #endif

@@ -19,6 +19,8 @@
 #ifndef TMPL_TESTS_2OP_GMP_UNIT_TEST_H
 #define TMPL_TESTS_2OP_GMP_UNIT_TEST_H
 
+#ifndef NO_GMP
+
 #include <gmp.h>
 #include <string.h>
 #include "tmpl_tests_mpf_get_ld.h"
@@ -106,5 +108,7 @@ FAIL:                                                                          \
     printf("    e = %+.40LE\n", TMPL_CAST(e, long double));                    \
     return -1;                                                                 \
 }
+
+#endif
 
 #endif

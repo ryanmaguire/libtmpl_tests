@@ -19,6 +19,8 @@
 #ifndef TMPL_TESTS_MPF_GET_LD_H
 #define TMPL_TESTS_MPF_GET_LD_H
 
+#ifndef NO_GMP
+
 #include <string.h>
 #include <gmp.h>
 
@@ -28,5 +30,7 @@ static inline long double tmpl_tests_mpf_get_ld(mpf_t op)
     gmp_sprintf(buffer, "%.100FE", op);
     return strtold(buffer, NULL);
 }
+
+#endif
 
 #endif
