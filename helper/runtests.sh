@@ -72,6 +72,10 @@ runtests() {
         elif [[ "$arg" == *"-l"* ]]; then
             LinkerFlags="$LinkerFlags ${arg#*}"
 
+        # Some architectures (armv7l) do not support libquadmath.
+        elif [ "$arg" = "-noquadmath" ]; then
+            LinkerFlags="${LinkerFlags//-lquadmath/}"
+
         # The user can add compiler options if they want.
         else
             ExtraArgs="$ExtraArgs ${arg#*}"
