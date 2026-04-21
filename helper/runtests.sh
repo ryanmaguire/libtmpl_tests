@@ -82,7 +82,7 @@ runtests() {
 
         # Same thing for GMP.
         elif [ "$arg" = "-nogmp" ]; then
-            LinkerFlags="${LinkerFlags//-lgmp/}"
+            LinkerFlags="${LinkerFlags//-lgmp/} -DNO_GMP"
 
         # Lastly, allow libcerf to be disabled..
         elif [ "$arg" = "-nocerf" ]; then
