@@ -76,6 +76,18 @@ runtests() {
         elif [ "$arg" = "-noquadmath" ]; then
             LinkerFlags="${LinkerFlags//-lquadmath/}"
 
+        # Allow gsl to be disabled (useful on macOS).
+        elif [ "$arg" = "-nogsl" ]; then
+            LinkerFlags="${LinkerFlags//-lgsl/}"
+
+        # Same thing for GMP.
+        elif [ "$arg" = "-nogmp" ]; then
+            LinkerFlags="${LinkerFlags//-lgmp/}"
+
+        # Lastly, allow libcerf to be disabled..
+        elif [ "$arg" = "-nocerf" ]; then
+            LinkerFlags="${LinkerFlags//-lcerf/}"
+
         # The user can add compiler options if they want.
         else
             ExtraArgs="$ExtraArgs ${arg#*}"
