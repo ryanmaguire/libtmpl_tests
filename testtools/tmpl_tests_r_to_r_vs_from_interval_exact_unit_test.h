@@ -64,7 +64,11 @@ int main(void)                                                                 \
             const type x = TMPL_CAST(n, type) * dx + start;                    \
             const type y = f0(x);                                              \
             const type z = f1(x);                                              \
-            if (y != z)                                                        \
+            const tmpl_Bool y_is_nan = TMPL_IS_NAN(y);                         \
+            const tmpl_Bool z_is_nan = TMPL_IS_NAN(z);                         \
+            if (y_is_nan && z_is_nan)                                          \
+                continue;                                                      \
+            else if ((y_is_nan != z_is_nan) || (y != z))                       \
             {                                                                  \
                 x_bad = x;                                                     \
                 y_bad = y;                                                     \
