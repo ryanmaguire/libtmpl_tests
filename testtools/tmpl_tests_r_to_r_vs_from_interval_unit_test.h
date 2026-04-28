@@ -50,7 +50,7 @@ int main(void)                                                                 \
     const type start = TMPL_CAST(left, type);                                  \
     const type end = TMPL_CAST(right, type);                                   \
     const size_t number_of_samples = NSAMPS(type);                             \
-    const type dx = (end - start) / TMPL_CAST(number_of_samples, type);        \
+    const type dx = (end - start) / TMPL_CAST(number_of_samples - 1, type);    \
     const type eps = TMPL_DEFAULT_TOLERANCE * TMPL_EPS(dx);                    \
     const type real_zero = TMPL_CAST(0, type);                                 \
     volatile int flag = 0;                                                     \

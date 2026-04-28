@@ -29,7 +29,7 @@ int main(void)                                                                 \
     const type start = TMPL_CAST(begin, type);                                 \
     const type end = TMPL_CAST(finish, type);                                  \
     const size_t number_of_samples = TMPL_CAST(samples, size_t);               \
-    const type dx = (end - start) / TMPL_CAST(number_of_samples, type);        \
+    const type dx = (end - start) / TMPL_CAST(number_of_samples - 1, type);    \
     type x = start;                                                            \
     FILE *fp = fopen("data.txt", "w");                                         \
     if (!fp)                                                                   \
