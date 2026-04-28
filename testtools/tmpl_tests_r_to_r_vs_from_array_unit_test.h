@@ -1,6 +1,46 @@
+/******************************************************************************
+ *                                  LICENSE                                   *
+ ******************************************************************************
+ *  This file is part of libtmpl_tests.                                       *
+ *                                                                            *
+ *  libtmpl_tests is free software: you can redistribute it and/or modify     *
+ *  it under the terms of the GNU General Public License as published by      *
+ *  the Free Software Foundation, either version 3 of the License, or         *
+ *  (at your option) any later version.                                       *
+ *                                                                            *
+ *  libtmpl_tests is distributed in the hope that it will be useful,          *
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of            *
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the             *
+ *  GNU General Public License for more details.                              *
+ *                                                                            *
+ *  You should have received a copy of the GNU General Public License         *
+ *  along with libtmpl_tests.  If not, see <https://www.gnu.org/licenses/>.   *
+ ******************************************************************************/
 #ifndef TMPL_TESTS_R_TO_R_VS_FROM_ARRAY_UNIT_TEST_H
 #define TMPL_TESTS_R_TO_R_VS_FROM_ARRAY_UNIT_TEST_H
+#include <libtmpl/include/compat/tmpl_cast.h>
+#include <libtmpl/include/helper/tmpl_array_size.h>
+#include <libtmpl/include/helper/tmpl_error_value.h>
+#include <libtmpl/include/generic/tmpl_eps.h>
+#include <libtmpl/include/generic/tmpl_is_nan.h>
+#include <stddef.h>
+#include <stdio.h>
 
+/******************************************************************************
+ *  Macro:                                                                    *
+ *      TMPL_R_TO_R_VS_FROM_ARRAY_UNIT_TEST                                   *
+ *  Purpose:                                                                  *
+ *      Test functions of the form f: R -> R from an input array.             *
+ *  Arguments:                                                                *
+ *      type:                                                                 *
+ *          The data type (float, double, int, etc.).                         *
+ *      f0:                                                                   *
+ *          The libtmpl function being tested.                                *
+ *      f1:                                                                   *
+ *          The external function being compared with.                        *
+ *      indata:                                                               *
+ *          The input array.                                                  *
+ ******************************************************************************/
 #define TMPL_R_TO_R_VS_FROM_ARRAY_UNIT_TEST(type, func0, func1, indata)        \
 int main(void)                                                                 \
 {                                                                              \
@@ -17,7 +57,9 @@ int main(void)                                                                 \
         const type err = TMPL_ERROR_VALUE(z0, z1);                             \
         const tmpl_Bool z0_is_nan = TMPL_IS_NAN(z0);                           \
         const tmpl_Bool z1_is_nan = TMPL_IS_NAN(z1);                           \
-        if ((z0_is_nan != z1_is_nan) || (err > eps))                           \
+        if (z0_is_nan && z1_is_nan)                                            \
+            continue;                                                          \
+        else if ((z0_is_nan != z1_is_nan) || (err > eps))                      \
         {                                                                      \
             puts("FAIL");                                                      \
             printf("    Input   = %+.40LE\n", TMPL_CAST(in[n], long double));  \
