@@ -21,6 +21,6 @@
 #endif
 #include "../../../libtmpl_tests.h"
 static long double dist(long double x, long double y){return fabsl(x - y);}
-TMPL_TEST_REAL2_FUNC_VS_REAL2_FUNC_UNIT_TEST(
+TMPL_R2_TO_R_VS_FROM_INTERVAL_UNIT_TEST(
     long double, -1.0E0L, 1.0E0L, tmpl_LDouble_Dist, dist
 )

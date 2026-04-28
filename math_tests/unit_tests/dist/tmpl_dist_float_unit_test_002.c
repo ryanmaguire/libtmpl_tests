@@ -21,6 +21,6 @@
 #endif
 #include "../../../libtmpl_tests.h"
 static float dist(float x, float y){return fabsf(x - y);}
-TMPL_TEST_REAL2_FUNC_VS_REAL2_FUNC_UNIT_TEST(
+TMPL_R2_TO_R_VS_FROM_INTERVAL_UNIT_TEST(
     float, -1.0E1F, 1.0E1F, tmpl_Float_Dist, dist
 )

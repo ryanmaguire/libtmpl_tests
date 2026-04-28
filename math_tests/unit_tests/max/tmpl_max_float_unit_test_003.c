@@ -20,6 +20,6 @@
 #define TMPL_NSAMPS (1E7)
 #endif
 #include "../../../libtmpl_tests.h"
-TMPL_TEST_REAL2_FUNC_VS_REAL2_FUNC_UNIT_TEST(
+TMPL_R2_TO_R_VS_FROM_INTERVAL_UNIT_TEST(
     float, -1.0E0F, 1.0E0F, tmpl_Float_Max, fmaxf
 )
