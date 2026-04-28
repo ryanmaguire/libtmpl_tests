@@ -1,6 +1,45 @@
+/******************************************************************************
+ *                                  LICENSE                                   *
+ ******************************************************************************
+ *  This file is part of libtmpl_tests.                                       *
+ *                                                                            *
+ *  libtmpl_tests is free software: you can redistribute it and/or modify     *
+ *  it under the terms of the GNU General Public License as published by      *
+ *  the Free Software Foundation, either version 3 of the License, or         *
+ *  (at your option) any later version.                                       *
+ *                                                                            *
+ *  libtmpl_tests is distributed in the hope that it will be useful,          *
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of            *
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the             *
+ *  GNU General Public License for more details.                              *
+ *                                                                            *
+ *  You should have received a copy of the GNU General Public License         *
+ *  along with libtmpl_tests.  If not, see <https://www.gnu.org/licenses/>.   *
+ ******************************************************************************/
 #ifndef TMPL_TESTS_R_TO_R_VS_FROM_INTERVAL_EXACT_UNIT_TEST_H
 #define TMPL_TESTS_R_TO_R_VS_FROM_INTERVAL_EXACT_UNIT_TEST_H
+#include <libtmpl/include/compat/tmpl_cast.h>
+#include <libtmpl/include/generic/tmpl_is_nan.h>
+#include <stddef.h>
+#include <stdio.h>
 
+/******************************************************************************
+ *  Macro:                                                                    *
+ *      TMPL_R_TO_R_VS_FROM_INTERVAL_EXACT_UNIT_TEST                          *
+ *  Purpose:                                                                  *
+ *      Test functions of the form f: R -> R across an interval [a, b].       *
+ *  Arguments:                                                                *
+ *      type:                                                                 *
+ *          The data type (float, double, int, etc.).                         *
+ *      left:                                                                 *
+ *          The left endpoint of the interval.                                *
+ *      right:                                                                *
+ *          The right endpoint of the interval.                               *
+ *      f0:                                                                   *
+ *          The libtmpl function being tested.                                *
+ *      f1:                                                                   *
+ *          The external function being compared with.                        *
+ ******************************************************************************/
 #define TMPL_R_TO_R_VS_FROM_INTERVAL_EXACT_UNIT_TEST(type, left, right, f0, f1)\
 int main(void)                                                                 \
 {                                                                              \
@@ -9,7 +48,7 @@ int main(void)                                                                 \
     const type start = TMPL_CAST(left, type);                                  \
     const type end = TMPL_CAST(right, type);                                   \
     const size_t number_of_samples = NSAMPS(type);                             \
-    const type dx = (end - start) / TMPL_CAST(number_of_samples, type);        \
+    const type dx = (end - start) / TMPL_CAST(number_of_samples - 1, type);    \
     const type real_zero = TMPL_CAST(0, type);                                 \
     volatile int flag = 0;                                                     \
     volatile type x_bad = real_zero;                                           \

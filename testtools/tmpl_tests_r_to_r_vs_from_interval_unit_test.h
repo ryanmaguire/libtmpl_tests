@@ -29,7 +29,7 @@
  *  Macro:                                                                    *
  *      TMPL_R_TO_R_VS_FROM_INTERVAL_UNIT_TEST                                *
  *  Purpose:                                                                  *
- *      Test functions of the form f: R -> R across and interval [a, b].      *
+ *      Test functions of the form f: R -> R across an interval [a, b].       *
  *  Arguments:                                                                *
  *      type:                                                                 *
  *          The data type (float, double, int, etc.).                         *
