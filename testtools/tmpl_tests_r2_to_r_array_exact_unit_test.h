@@ -21,7 +21,6 @@
 #include <libtmpl/include/compat/tmpl_cast.h>
 #include <libtmpl/include/helper/tmpl_array_size.h>
 #include <libtmpl/include/helper/tmpl_error_value.h>
-#include <libtmpl/include/generic/tmpl_eps.h>
 #include <libtmpl/include/generic/tmpl_is_nan.h>
 #include <stddef.h>
 #include <stdio.h>
