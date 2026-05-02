@@ -50,9 +50,10 @@ int main(void)                                                                 \
     size_t n;                                                                  \
     const type start = TMPL_CAST(left, type);                                  \
     const type end = TMPL_CAST(right, type);                                   \
-    const double total_number_of_samples = TMPL_CAST(NSAMPS(type), double);    \
-    const double sqrt_total = sqrt(total_number_of_samples);                   \
+    const double real_total = TMPL_CAST(NSAMPS(type), double);                 \
+    const double sqrt_total = sqrt(real_total);                                \
     const size_t number_of_samples = TMPL_CAST(sqrt_total, size_t);            \
+    const size_t total_samples = number_of_samples * number_of_samples;        \
     const type ds = (end - start) / TMPL_CAST(number_of_samples - 1, type);    \
     const type eps = TMPL_DEFAULT_TOLERANCE * TMPL_EPS(ds);                    \
     const type real_zero = TMPL_CAST(0, type);                                 \
@@ -63,7 +64,7 @@ int main(void)                                                                 \
     volatile type z0_bad = real_zero;                                          \
     volatile type z1_bad = real_zero;                                          \
     TMPL_OPENMP_BASE_PRAGMA                                                    \
-    for (n = zero; n < total_number_of_samples; ++n)                           \
+    for (n = zero; n < total_samples; ++n)                                     \
     {                                                                          \
         if (flag)                                                              \
             continue;                                                          \
