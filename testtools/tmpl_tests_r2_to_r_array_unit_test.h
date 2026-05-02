@@ -46,7 +46,7 @@ int main(void)                                                                 \
 {                                                                              \
     struct real2 {type x, y;} in[] = indata;                                   \
     const type out[] = outdata;                                                \
-    const type eps = 2 * TMPL_EPS(in[0].x);                                    \
+    const type eps = TMPL_DEFAULT_TOLERANCE * TMPL_EPS(in[0].x);               \
     const size_t zero = TMPL_CAST(0, size_t);                                  \
     const size_t number_of_samples = TMPL_ARRAY_SIZE(in);                      \
     size_t n;                                                                  \

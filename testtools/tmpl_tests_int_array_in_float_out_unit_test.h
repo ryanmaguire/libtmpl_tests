@@ -26,7 +26,7 @@ int main(void)                                                                 \
     const type in[] = arr;                                                     \
     const size_t len = sizeof(in) / sizeof(in[0]);                             \
     const ftype out = f(in, len);                                              \
-    const ftype eps = ((ftype)4) * TMPL_EPS(out);                              \
+    const ftype eps = TMPL_DEFAULT_TOLERANCE * TMPL_EPS(out);                  \
     const ftype tmp = (out - ans) / ans;                                       \
     const ftype err = (tmp > 0 ? tmp : -tmp);                                  \
     if (err > eps)                                                             \

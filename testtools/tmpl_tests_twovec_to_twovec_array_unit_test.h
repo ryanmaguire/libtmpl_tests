@@ -26,7 +26,7 @@ int main(void)                                                                 \
     const type out[] = oarr;                                                   \
     const size_t zero = TMPL_CAST(0, size_t);                                  \
     const size_t number_of_samples = TMPL_ARRAY_SIZE(in);                      \
-    const ftype eps = 2 * TMPL_EPS(out[0].dat[0]);                             \
+    const ftype eps = TMPL_DEFAULT_TOLERANCE * TMPL_EPS(out[0].dat[0]);        \
     size_t n;                                                                  \
     for (n = zero; n < number_of_samples; ++n)                                 \
     {                                                                          \

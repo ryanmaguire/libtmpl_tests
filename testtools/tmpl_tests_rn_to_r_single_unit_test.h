@@ -10,7 +10,7 @@ int main(void)                                                                 \
 {                                                                              \
     const type result = func(input);                                           \
     const type output = answer;                                                \
-    const type eps = 4 * TMPL_EPS(result);                                     \
+    const type eps = TMPL_DEFAULT_TOLERANCE * TMPL_EPS(result);                \
     const type err = TMPL_ERROR_VALUE(result, output);                         \
     if (err < eps)                                                             \
         puts("PASS");                                                          \

@@ -33,7 +33,8 @@ int main(void)                                                                 \
     const type y[] = iny;                                                      \
     const size_t zero = TMPL_CAST(0, size_t);                                  \
     const size_t number_of_samples = TMPL_ARRAY_SIZE(x);                       \
-    const long double eps = TMPL_CAST(2 * TMPL_EPS(x[0]), long double);        \
+    const type eps_type = TMPL_DEFAULT_TOLERANCE * TMPL_EPS(x[0]);             \
+    const long double eps = TMPL_CAST(eps_type, long double);                  \
     const long double eps_squared = eps * eps;                                 \
     size_t n;                                                                  \
     type s, e;                                                                 \

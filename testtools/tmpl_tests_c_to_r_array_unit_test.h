@@ -24,7 +24,7 @@ int main(void)                                                                 \
 {                                                                              \
     const type in[] = inarr;                                                   \
     const ftype out[] = outarr;                                                \
-    const ftype eps = 2 * TMPL_EPS(out[0]);                                    \
+    const ftype eps = TMPL_DEFAULT_TOLERANCE * TMPL_EPS(out[0]);               \
     const size_t zero = TMPL_CAST(0, size_t);                                  \
     const size_t number_of_samples = TMPL_ARRAY_SIZE(in);                      \
     size_t n;                                                                  \
