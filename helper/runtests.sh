@@ -46,6 +46,12 @@ runtests() {
     CC=gcc
     CPP=g++
     ExtraArgs="-O2 -flto -I/usr/local/include"
+    CWarn="-Wall -Wextra -Wmissing-field-initializers"
+    CWarn="$CWarn -Wfloat-conversion -Wmissing-declarations -Winit-self"
+    CWarn="$CWarn -Wnull-dereference -Wwrite-strings -Wdouble-promotion"
+    CPPWarn="$CWarn"
+    CWarn="$CWarn -Wstrict-prototypes -Wmissing-prototypes"
+    CWarn="$CWarn -Wold-style-definition"
     LinkerFlags="-L/usr/local/lib -lgsl -lcerf -lgmp -lm -ltmpl -lquadmath"
     TYPE="unit"
 
@@ -95,7 +101,7 @@ runtests() {
     done
 
     for file in $(find . -name "*$TYPE*.c" -type f | sort); do
-        $CC $ExtraArgs $file -o main $LinkerFlags
+        $CC $ExtraArgs $CWarn $file -o main $LinkerFlags
         printf "$(basename $file): "
 
         if [[ "$CC" == "emcc" ]]; then
@@ -109,7 +115,7 @@ runtests() {
     done
 
     for file in $(find . -name "*$TYPE*.cpp" -type f | sort); do
-        $CPP $ExtraArgs -std=c++17 $file -o main $LinkerFlags
+        $CPP $ExtraArgs $CPPWarn -std=c++17 $file -o main $LinkerFlags
         printf "$(basename $file): "
         ./main
         rm -f main
