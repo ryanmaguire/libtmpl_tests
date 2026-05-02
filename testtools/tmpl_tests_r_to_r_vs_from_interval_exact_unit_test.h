@@ -20,6 +20,7 @@
 #define TMPL_TESTS_R_TO_R_VS_FROM_INTERVAL_EXACT_UNIT_TEST_H
 #include <libtmpl/include/compat/tmpl_cast.h>
 #include <libtmpl/include/generic/tmpl_is_nan.h>
+#include <libtmpl/include/helper/tmpl_error_value.h>
 #include <stddef.h>
 #include <stdio.h>
 
@@ -51,6 +52,7 @@ int main(void)                                                                 \
     const type dx = (end - start) / TMPL_CAST(number_of_samples - 1, type);    \
     const type real_zero = TMPL_CAST(0, type);                                 \
     volatile int flag = 0;                                                     \
+    volatile type error = real_zero;                                           \
     volatile type x_bad = real_zero;                                           \
     volatile type y_bad = real_zero;                                           \
     volatile type z_bad = real_zero;                                           \
@@ -73,6 +75,7 @@ int main(void)                                                                 \
                 x_bad = x;                                                     \
                 y_bad = y;                                                     \
                 z_bad = z;                                                     \
+                error = TMPL_ERROR_VALUE(y_bad, z_bad);                        \
                 flag = 1;                                                      \
             }                                                                  \
         }                                                                      \
@@ -83,6 +86,7 @@ int main(void)                                                                 \
         printf("    Input   = %+.40LE\n", TMPL_CAST(x_bad, long double));      \
         printf("    libtmpl = %+.40LE\n", TMPL_CAST(y_bad, long double));      \
         printf("    Other   = %+.40LE\n", TMPL_CAST(z_bad, long double));      \
+        printf("    Error   = %+.40LE\n", TMPL_CAST(error, long double));      \
     }                                                                          \
     else                                                                       \
         puts("PASS");                                                          \
