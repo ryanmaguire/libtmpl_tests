@@ -21,5 +21,5 @@
 #endif
 #include "../../../libtmpl_tests.h"
 TMPL_R2_TO_R_VS_FROM_INTERVAL_UNIT_TEST(
-    long double, -1.0E6, 1.0E6, tmpl_LDouble_Arctan2, atan2l
+    long double, -1.0E6L, 1.0E6L, tmpl_LDouble_Arctan2, atan2l
 )
