@@ -310,6 +310,7 @@ int main(void)                                                                 \
 #include "testtools/tmpl_tests_plot_func.h"
 #include "testtools/tmpl_tests_r_to_r_array_unit_test.h"
 #include "testtools/tmpl_tests_r_to_r_array_exact_unit_test.h"
+#include "testtools/tmpl_tests_r_to_r_csv_accuracy_test.h"
 #include "testtools/tmpl_tests_r_to_r_vs_from_array_unit_test.h"
 #include "testtools/tmpl_tests_r_to_r_vs_from_interval_unit_test.h"
 #include "testtools/tmpl_tests_r_to_r_vs_from_interval_exact_unit_test.h"
