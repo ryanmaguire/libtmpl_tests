@@ -45,6 +45,7 @@
 runtests() {
     CC=gcc
     CPP=g++
+    Exclude=""
     ExtraArgs="-O2 -flto -I/usr/local/include"
     CWarn="-Wall -Wextra -Wmissing-field-initializers"
     CWarn="$CWarn -Wfloat-conversion -Wmissing-declarations -Winit-self"
@@ -93,6 +94,7 @@ runtests() {
         # Lastly, allow libcerf to be disabled..
         elif [ "$arg" = "-nocerf" ]; then
             LinkerFlags="${LinkerFlags//-lcerf/}"
+            Exclude="$Exclude *libcerf*"
 
         # Some compilers (Solaris C compiler, NVIDIA's nvcc) do not support
         # the link-time optimization flag. Remove this if requested.
