@@ -94,6 +94,11 @@ runtests() {
         elif [ "$arg" = "-nocerf" ]; then
             LinkerFlags="${LinkerFlags//-lcerf/}"
 
+        # Some compilers (Solaris C compiler, NVIDIA's nvcc) do not support
+        # the link-time optimization flag. Remove this if requested.
+        elif [ "$arg" = "-noflto" ]; then
+            ExtraArgs="${ExtraArgs/-flto/}"
+
         # The user can add compiler options if they want.
         else
             ExtraArgs="$ExtraArgs ${arg#*}"
