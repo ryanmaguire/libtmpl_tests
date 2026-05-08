@@ -94,7 +94,7 @@ runtests() {
         # Lastly, allow libcerf to be disabled..
         elif [ "$arg" = "-nocerf" ]; then
             LinkerFlags="${LinkerFlags//-lcerf/}"
-            Exclude="$Exclude *libcerf*"
+            Exclude="$Exclude ! -name *libcerf*"
 
         # Some compilers (Solaris C compiler, NVIDIA's nvcc) do not support
         # the link-time optimization flag. Remove this if requested.
@@ -107,7 +107,7 @@ runtests() {
         fi
     done
 
-    for file in $(find . -name "*$TYPE*.c" -type f | sort); do
+    for file in $(find . -name "*$TYPE*.c" "$Exclude" -type f | sort); do
         $CC $ExtraArgs $CWarn $file -o main $LinkerFlags
         printf "$(basename $file): "
 
@@ -121,7 +121,7 @@ runtests() {
         rm -f main
     done
 
-    for file in $(find . -name "*$TYPE*.cpp" -type f | sort); do
+    for file in $(find . -name "*$TYPE*.cpp" "$Exclude" -type f | sort); do
         $CPP $ExtraArgs $CPPWarn -std=c++17 $file -o main $LinkerFlags
         printf "$(basename $file): "
         ./main
