@@ -18,6 +18,7 @@
  ******************************************************************************/
 #include "../libtmpl_tests.h"
 #include <libtmpl/include/tmpl_doubledouble.h>
+#include <libtmpl/include/helper/tmpl_max.h>
 
 #ifndef TMPL_NO_QUADMATH
 #include <quadmath.h>
