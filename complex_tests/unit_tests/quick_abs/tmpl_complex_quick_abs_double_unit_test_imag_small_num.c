@@ -20,10 +20,10 @@
 #define IN_VAL sqrt(DNUM)
 #define OUT_VAL IN_VAL
 #define inarr {         \
-    {{+IN_VAL, +0.0}},  \
-    {{+IN_VAL, -0.0}},  \
-    {{-IN_VAL, +0.0}},  \
-    {{-IN_VAL, -0.0}}   \
+    {{+0.0, +IN_VAL}},  \
+    {{-0.0, +IN_VAL}},  \
+    {{+0.0, -IN_VAL}},  \
+    {{-0.0, -IN_VAL}}   \
 }
 #define outarr {OUT_VAL, OUT_VAL, OUT_VAL, OUT_VAL}
 TMPL_C_TO_R_ARRAY_UNIT_TEST(
