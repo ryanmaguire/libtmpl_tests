@@ -17,14 +17,7 @@
  *  along with libtmpl_tests.  If not, see <https://www.gnu.org/licenses/>.   *
  ******************************************************************************/
 #include "../../../libtmpl_tests.h"
-#define inarr0 {                \
-    {{+TMPL_NAN, +TMPL_NAN}},   \
-    {{+TMPL_NAN, -TMPL_NAN}},   \
-    {{-TMPL_NAN, +TMPL_NAN}},   \
-    {{-TMPL_NAN, -TMPL_NAN}}    \
-}
-
-#define inarr1 {                \
+#define inarr {                 \
     {{+TMPL_NAN, +TMPL_NAN}},   \
     {{+TMPL_NAN, -TMPL_NAN}},   \
     {{-TMPL_NAN, +TMPL_NAN}},   \
@@ -38,6 +31,6 @@
     {{TMPL_NAN, TMPL_NAN}}  \
 }
 
-TMPL_C2PTR_ARRAY_EXACT_UNIT_TEST(
-    tmpl_ComplexDouble, tmpl_CDouble_AddTo, inarr0, inarr1, outarr
+TMPL_C2PTR_DUP_ARRAY_EXACT_UNIT_TEST(
+    tmpl_ComplexDouble, tmpl_CDouble_AddTo, inarr, outarr
 )
