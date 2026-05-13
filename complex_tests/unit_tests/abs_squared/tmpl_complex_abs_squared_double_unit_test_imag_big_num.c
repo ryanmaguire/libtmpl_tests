@@ -20,10 +20,10 @@
 #define IN_VAL sqrt(BNUM)
 #define OUT_VAL BNUM
 #define inarr {         \
-    {{+IN_VAL, +0.0}},  \
-    {{+IN_VAL, -0.0}},  \
-    {{-IN_VAL, +0.0}},  \
-    {{-IN_VAL, -0.0}}   \
+    {{+0.0, +IN_VAL}},  \
+    {{-0.0, +IN_VAL}},  \
+    {{+0.0, -IN_VAL}},  \
+    {{-0.0, -IN_VAL}}   \
 }
 #define outarr {OUT_VAL, OUT_VAL, OUT_VAL, OUT_VAL}
 TMPL_C_TO_R_ARRAY_UNIT_TEST(

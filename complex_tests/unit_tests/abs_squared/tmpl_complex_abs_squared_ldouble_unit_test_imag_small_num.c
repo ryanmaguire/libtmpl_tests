@@ -20,10 +20,10 @@
 #define IN_VAL sqrtl(DNUML)
 #define OUT_VAL DNUML
 #define inarr {         \
-    {{+IN_VAL, +0.0L}}, \
-    {{+IN_VAL, -0.0L}}, \
-    {{-IN_VAL, +0.0L}}, \
-    {{-IN_VAL, -0.0L}}  \
+    {{+0.0L, +IN_VAL}}, \
+    {{-0.0L, +IN_VAL}}, \
+    {{+0.0L, -IN_VAL}}, \
+    {{-0.0L, -IN_VAL}}  \
 }
 #define outarr {OUT_VAL, OUT_VAL, OUT_VAL, OUT_VAL}
 TMPL_C_TO_R_ARRAY_UNIT_TEST(
