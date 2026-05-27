@@ -97,7 +97,8 @@ generate_flt128(tmpl_DoubleDouble * restrict const x0,
                 float128 * restrict const x1,
                 float128 * restrict const y1)
 {
-    double r0, r1, r2, r3;
+    /*  Volatile is needed for tests to pass when -march=native is set.       */
+    volatile double r0, r1, r2, r3;
     const double scale = TMPL_CAST(TMPL_QUAD_EPS, double) / TMPL_DBL_EPS;
 
     TMPL_RAND_REAL(double, r0);
@@ -452,3 +453,4 @@ get_ldl_error(const tmpl_LongDoubleDouble * restrict const z0,
 
     *rms_err = *rms_err / TMPL_CAST(number_of_samples, long double);
 }
+
