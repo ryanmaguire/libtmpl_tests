@@ -198,10 +198,10 @@ generate_pos_flt128l(tmpl_LongDoubleDouble * restrict const x0,
     TMPL_RAND_REAL(long double, r2);
     TMPL_RAND_REAL(long double, r3);
 
-    r0 = 128.0 * r0;
-    r1 = 128.0 * r1 * scale;
-    r2 = 128.0 * r2;
-    r3 = 128.0 * r3 * scale;
+    r0 = 128.0L * r0;
+    r1 = 128.0L * r1 * scale;
+    r2 = 128.0L * r2;
+    r3 = 128.0L * r3 * scale;
 
     *x0 = tmpl_LDoubleDouble_Create(r0, r1);
     *y0 = tmpl_LDoubleDouble_Create(r2, r3);
