@@ -25,7 +25,6 @@
 #include <quadmath.h>
 
 typedef __float128 float128;
-#define TMPL_QUAD_FORMAT_STRING "%.40QE"
 #define TMPL_QUAD_EPS (1.9259299443872358530559779425849273185381E-34L)
 
 static void quad_print(float128 val)
@@ -34,7 +33,7 @@ static void quad_print(float128 val)
     quadmath_snprintf(
         buffer,
         sizeof(buffer),
-        TMPL_QUAD_FORMAT_STRING,
+        %.40QE",
         val
     );
 
@@ -44,7 +43,6 @@ static void quad_print(float128 val)
 #else
 
 typedef long double float128;
-#define TMPL_QUAD_FORMAT_STRING "%.40LE"
 
 #if TMPL_LDOUBLE_TYPE == TMPL_LDOUBLE_128_BIT
 #define TMPL_QUAD_EPS (+1.9259299443872358530559779425849273185381E-34L)
@@ -57,7 +55,7 @@ typedef long double float128;
 
 static void quad_print(float128 val)
 {
-    printf(TMPL_QUAD_FORMAT_STRING, val);
+    printf("%.40LE\n", val);
 }
 
 static float128 fabsq(float128 val)
