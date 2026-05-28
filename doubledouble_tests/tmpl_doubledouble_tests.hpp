@@ -60,6 +60,11 @@ static void quad_print(float128 val)
     printf(TMPL_QUAD_FORMAT_STRING, val);
 }
 
+static float128 fabsq(float128 val)
+{
+    return fabsl(val);
+}
+
 #endif
 
 static inline float128 dd_to_flt128(tmpl_DoubleDouble z)
