@@ -165,7 +165,7 @@ generate_pos_flt128(tmpl_DoubleDouble * restrict const x0,
                     float128 * restrict const x1,
                     float128 * restrict const y1)
 {
-    double r0, r1, r2, r3;
+    volatile double r0, r1, r2, r3;
     const double scale = TMPL_CAST(TMPL_QUAD_EPS, double) / TMPL_DBL_EPS;
 
     TMPL_RAND_REAL(double, r0);
@@ -190,7 +190,7 @@ generate_pos_flt128l(tmpl_LongDoubleDouble * restrict const x0,
                      float128 * restrict const x1,
                      float128 * restrict const y1)
 {
-    long double r0, r1, r2, r3;
+    volatile long double r0, r1, r2, r3;
     const long double scale = TMPL_QUAD_EPS / TMPL_LDBL_EPS;
 
     TMPL_RAND_REAL(long double, r0);
@@ -215,7 +215,7 @@ generate_ld(tmpl_DoubleDouble * restrict const x0,
             long double * restrict const x1,
             long double * restrict const y1)
 {
-    long double r0, r1;
+    volatile long double r0, r1;
 
     TMPL_RAND_REAL(long double, r0);
     TMPL_RAND_REAL(long double, r1);
@@ -232,7 +232,7 @@ generate_ldl(tmpl_LongDoubleDouble * restrict const x0,
              long double * restrict const x1,
              long double * restrict const y1)
 {
-    long double r0, r1;
+    volatile long double r0, r1;
 
     TMPL_RAND_REAL(long double, r0);
     TMPL_RAND_REAL(long double, r1);
