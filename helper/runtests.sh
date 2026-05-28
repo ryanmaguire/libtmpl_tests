@@ -82,6 +82,7 @@ runtests() {
         # Some architectures (armv7l) do not support libquadmath.
         elif [ "$arg" = "-noquadmath" ]; then
             LinkerFlags="${LinkerFlags//-lquadmath/}"
+            ExtraArgs="$ExtraArgs -DTMPL_NO_QUADMATH"
 
         # Allow gsl to be disabled (useful on macOS).
         elif [ "$arg" = "-nogsl" ]; then
