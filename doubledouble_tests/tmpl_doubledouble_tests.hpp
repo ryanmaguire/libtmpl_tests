@@ -140,7 +140,7 @@ generate_flt128l(tmpl_LongDoubleDouble * restrict const x0,
                  float128 * restrict const x1,
                  float128 * restrict const y1)
 {
-    long double r0, r1, r2, r3;
+    volatile long double r0, r1, r2, r3;
     const long double scale = TMPL_QUAD_EPS / TMPL_LDBL_EPS;
 
     TMPL_RAND_REAL(long double, r0);
