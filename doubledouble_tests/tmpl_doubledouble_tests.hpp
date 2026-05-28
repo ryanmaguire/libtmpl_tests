@@ -21,32 +21,46 @@
 #include <libtmpl/include/helper/tmpl_max.h>
 
 #ifndef TMPL_NO_QUADMATH
+
 #include <quadmath.h>
+
 typedef __float128 float128;
 #define TMPL_QUAD_FORMAT_STRING "%.40QE"
-#define TMPL_QUAD_VAL(x) (x)
-#else
-#include <boost/multiprecision/float128.hpp>
-typedef boost::multiprecision::float128 float128;
-#define quadmath_snprintf snprintf
-#define fabsq(x) ((x) < 0 ? (x) : -(x))
-#define TMPL_QUAD_FORMAT_STRING "%s"
-#define TMPL_QUAD_VAL(x) (boost::lexical_cast<std::string>(x).c_str())
-#endif
 #define TMPL_QUAD_EPS (1.9259299443872358530559779425849273185381E-34L)
 
 static void quad_print(float128 val)
 {
-    char buffer[1024];
+    char buffer[256];
     quadmath_snprintf(
         buffer,
         sizeof(buffer),
         TMPL_QUAD_FORMAT_STRING,
-        TMPL_QUAD_VAL(val)
+        val
     );
 
     printf("%s\n", buffer);
 }
+
+#else
+
+typedef long double float128;
+#define TMPL_QUAD_FORMAT_STRING "%.40LE"
+
+#if TMPL_LDOUBLE_TYPE == TMPL_LDOUBLE_128_BIT
+#define TMPL_QUAD_EPS (+1.9259299443872358530559779425849273185381E-34L)
+#elif TMPL_LDOUBLE_TYPE == TMPL_LDOUBLE_DOUBLEDOUBLE
+#define TMPL_QUAD_EPS (+4.9303806576313237838233035330174139354575E-32L)
+#else
+#define TMPL_NO_QUADMATH_TESTS
+#define TMPL_QUAD_EPS (+2.2204460492503130808472633361816406250000E-16L)
+#endif
+
+static void quad_print(float128 val)
+{
+    printf(TMPL_QUAD_FORMAT_STRING, val);
+}
+
+#endif
 
 static inline float128 dd_to_flt128(tmpl_DoubleDouble z)
 {
@@ -453,4 +467,5 @@ get_ldl_error(const tmpl_LongDoubleDouble * restrict const z0,
 
     *rms_err = *rms_err / TMPL_CAST(number_of_samples, long double);
 }
+
 
