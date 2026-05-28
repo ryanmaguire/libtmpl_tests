@@ -325,11 +325,15 @@ fail_flt128l(tmpl_LongDoubleDouble x0,
     float128 x128 = ldd_to_flt128(x0);
     float128 y128 = ldd_to_flt128(y0);
     float128 z128 = ldd_to_flt128(z0);
+    long double z0_hi = z0.dat[0];
+    long double z0_lo = z0.dat[1];
     float128 err = fabsq((z128 - z1) / z1);
 
     puts("FAIL");
     quad_print(x128);
     quad_print(y128);
+    printf("    z0_hi = %.40LE\n", z0_hi);
+    printf("    z0_lo = %.40LE\n", z0_lo);
     quad_print(z128);
     quad_print(z1);
     quad_print(err);
@@ -470,5 +474,3 @@ get_ldl_error(const tmpl_LongDoubleDouble * restrict const z0,
 
     *rms_err = *rms_err / TMPL_CAST(number_of_samples, long double);
 }
-
-
