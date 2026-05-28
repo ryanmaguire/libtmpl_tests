@@ -33,7 +33,7 @@ static void quad_print(float128 val)
     quadmath_snprintf(
         buffer,
         sizeof(buffer),
-        %.40QE",
+        "%.40QE",
         val
     );
 
