@@ -17,6 +17,7 @@
  *  along with libtmpl_tests.  If not, see <https://www.gnu.org/licenses/>.   *
  ******************************************************************************/
 #include "../../../libtmpl_tests.h"
-#define xarr {1.0F+8.0E-16F, 2.0F+8.0E-16F, 1.0F-8.0E-16F}
-#define yarr {1.0F+4.0E-16F, 1.0F-4.0E-16F, 1.0F-1.0E-15F}
+#define VAL TMPL_FLT_EPS
+#define xarr {1.0F, 2.0F, 3.0F}
+#define yarr {VAL, 10.0F * VAL, 100.0F * VAL * VAL}
 TMPL_2OP_GMP_UNIT_TEST(float, tmpl_Float_Two_Sum, mpf_add, xarr, yarr)
