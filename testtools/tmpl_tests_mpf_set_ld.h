@@ -27,7 +27,7 @@
 static inline void tmpl_tests_mpf_set_ld(mpf_t op, long double val)
 {
     char buffer[192];
-    sprintf(buffer, "%.1700LE", val);
+    sprintf(buffer, "%.170LE", val);
     mpf_set_str(op, buffer, 10);
 }
 
