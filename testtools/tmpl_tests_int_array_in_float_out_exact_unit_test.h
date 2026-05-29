@@ -18,6 +18,7 @@
  ******************************************************************************/
 #ifndef TMPL_TESTS_INT_ARRAY_IN_FLOAT_OUT_EXACT_UNIT_TEST_H
 #define TMPL_TESTS_INT_ARRAY_IN_FLOAT_OUT_EXACT_UNIT_TEST_H
+#include <libtmpl/include/compat/tmpl_cast.h>
 #include <libtmpl/include/helper/tmpl_array_size.h>
 
 #define TMPL_INT_ARRAY_IN_FLOAT_OUT_EXACT_UNIT_TEST(type, ftype, f, arr, ans)  \
@@ -27,7 +28,11 @@ int main(void)                                                                 \
     const size_t len = TMPL_ARRAY_SIZE(in);                                    \
     const ftype out = f(in, len);                                              \
     if (out != ans)                                                            \
-        puts("FAIL");                                                          \
+    {                                                                          \
+        puts("FAIL:");                                                         \
+        printf("    out: %.40LE\n", TMPL_CAST(out, long double));              \
+        printf("    ans: %.40LE\n", TMPL_CAST(ans, long double));              \
+    }                                                                          \
     else                                                                       \
         puts("PASS");                                                          \
     return 0;                                                                  \
