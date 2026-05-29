@@ -33,7 +33,7 @@
 #define TMPL_DD_VS_GMP_POS_UNIT_TEST(ddtype, dtype, func, mpf_op)              \
 int main(void)                                                                 \
 {                                                                              \
-    const dtype start = TMPL_CAST(-1, dtype);                                  \
+    const dtype start = TMPL_CAST(0, dtype);                                   \
     const dtype end = TMPL_CAST(1, dtype);                                     \
     const mp_bitcnt_t number_of_bits = 512;                                    \
     const size_t zero = TMPL_CAST(0, size_t);                                  \
