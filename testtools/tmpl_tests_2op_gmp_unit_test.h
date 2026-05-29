@@ -82,19 +82,19 @@ int main(void)                                                                 \
         tmpl_tests_mpf_set_ld(s_mp, TMPL_CAST(s, long double));                \
         tmpl_tests_mpf_set_ld(e_mp, TMPL_CAST(e, long double));                \
         mpf_op(exact_mp, x_mp, y_mp);                                          \
-        mpf_op(err_mp, s_mp, e_mp);                                            \
+        mpf_add(err_mp, s_mp, e_mp);                                           \
         mpf_sub(err_mp, err_mp, exact_mp);                                     \
         mpf_div(err_mp, err_mp, exact_mp);                                     \
-        eval = tmpl_tests_mpf_get_ld(exact_mp);                                \
         err = tmpl_tests_mpf_get_ld(err_mp);                                   \
         if (TMPL_ABS(err) > eps_squared)                                       \
         {                                                                      \
+            eval = tmpl_tests_mpf_get_ld(exact_mp);                            \
             puts("FAIL");                                                      \
             printf("    Input x   = %+.40LE\n", TMPL_CAST(x[n], long double)); \
             printf("    Input y   = %+.40LE\n", TMPL_CAST(y[n], long double)); \
             printf("    libtmpl s = %+.40LE\n", TMPL_CAST(s, long double));    \
             printf("    libtmpl e = %+.40LE\n", TMPL_CAST(e, long double));    \
-            printf("    Exact Sum = %+.40LE\n", eval);                         \
+            printf("    Exact     = %+.40LE\n", eval);                         \
             printf("    Error     = %+.40LE\n", err);                          \
             return -1;                                                         \
         }                                                                      \
