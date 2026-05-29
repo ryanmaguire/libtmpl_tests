@@ -35,7 +35,7 @@ int main(void)                                                                 \
 {                                                                              \
     const dtype start = TMPL_CAST(-1, dtype);                                  \
     const dtype end = TMPL_CAST(1, dtype);                                     \
-    const mp_bitcnt_t number_of_bits = 256;                                    \
+    const mp_bitcnt_t number_of_bits = 512;                                    \
     const size_t zero = TMPL_CAST(0, size_t);                                  \
     const long double len_ld = TMPL_CAST(TMPL_NSAMPS, long double);            \
     const long double num_samps_ld = sqrtl(sqrtl(len_ld));                     \
@@ -105,14 +105,14 @@ int main(void)                                                                 \
                         long double ylo_bad = TMPL_CAST(y.dat[1], long double);\
                         long double eval = tmpl_tests_mpf_get_ld(exact_mp);    \
                         puts("FAIL");                                          \
-                        printf("    Input x hi = %+.40LE\n", xhi_bad);         \
-                        printf("    Input x lo = %+.40LE\n", xlo_bad);         \
-                        printf("    Input y hi = %+.40LE\n", yhi_bad);         \
-                        printf("    Input y lo = %+.40LE\n", ylo_bad);         \
-                        printf("    libtmpl hi = %+.40LE\n", hi);              \
-                        printf("    libtmpl lo = %+.40LE\n", lo);              \
-                        printf("    Exact      = %+.40LE\n", eval);            \
-                        printf("    Error      = %+.40LE\n", err);             \
+                        printf("    Input x hi = %+.50LE\n", xhi_bad);         \
+                        printf("    Input x lo = %+.50LE\n", xlo_bad);         \
+                        printf("    Input y hi = %+.50LE\n", yhi_bad);         \
+                        printf("    Input y lo = %+.50LE\n", ylo_bad);         \
+                        printf("    libtmpl hi = %+.50LE\n", hi);              \
+                        printf("    libtmpl lo = %+.50LE\n", lo);              \
+                        printf("    Exact      = %+.50LE\n", eval);            \
+                        printf("    Error      = %+.50LE\n", err);             \
                         return -1;                                             \
                     }                                                          \
                 }                                                              \
