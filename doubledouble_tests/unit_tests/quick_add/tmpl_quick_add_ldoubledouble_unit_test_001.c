@@ -17,27 +17,12 @@
  *  along with libtmpl_tests.  If not, see <https://www.gnu.org/licenses/>.   *
  ******************************************************************************/
 #ifndef TMPL_NSAMPS
-#define TMPL_NSAMPS (1E7)
+#define TMPL_NSAMPS (1874161)
 #endif
-#include "../../tmpl_doubledouble_tests.hpp"
-
-static inline float128 add128(float128 x, float128 y)
-{
-    return x + y;
-}
-
-static inline tmpl_LongDoubleDouble
-addLDD(tmpl_LongDoubleDouble x, tmpl_LongDoubleDouble y)
-{
-    return tmpl_LDoubleDouble_Quick_Add(&x, &y);
-}
-
-TMPL_TEST_MIXED_FUNC2_UNIT_TEST(
+#include "../../../libtmpl_tests.h"
+TMPL_DD_VS_GMP_POS_UNIT_TEST(
     tmpl_LongDoubleDouble,
-    float128,
-    generate_pos_flt128l,
-    compare_flt128l,
-    fail_flt128l,
-    addLDD,
-    add128
+    long double,
+    tmpl_LDoubleDouble_Quick_Add,
+    mpf_add
 )
