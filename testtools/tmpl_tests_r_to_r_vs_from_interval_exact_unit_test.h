@@ -50,12 +50,11 @@ int main(void)                                                                 \
     const type end = TMPL_CAST(right, type);                                   \
     const size_t number_of_samples = NSAMPS(type);                             \
     const type dx = (end - start) / TMPL_CAST(number_of_samples - 1, type);    \
-    const type real_zero = TMPL_CAST(0, type);                                 \
     volatile int flag = 0;                                                     \
-    volatile type error = real_zero;                                           \
-    volatile type x_bad = real_zero;                                           \
-    volatile type y_bad = real_zero;                                           \
-    volatile type z_bad = real_zero;                                           \
+    volatile long double error = 0.0L;                                         \
+    volatile long double x_bad = 0.0L;                                         \
+    volatile long double y_bad = 0.0L;                                         \
+    volatile long double z_bad = 0.0L;                                         \
     TMPL_OPENMP_BASE_PRAGMA                                                    \
     for (n = zero; n < number_of_samples; ++n)                                 \
     {                                                                          \
@@ -72,9 +71,9 @@ int main(void)                                                                 \
                 continue;                                                      \
             else if ((y_is_nan != z_is_nan) || (y != z))                       \
             {                                                                  \
-                x_bad = x;                                                     \
-                y_bad = y;                                                     \
-                z_bad = z;                                                     \
+                x_bad = TMPL_CAST(x, long double);                             \
+                y_bad = TMPL_CAST(y, long double);                             \
+                z_bad = TMPL_CAST(z, long double);                             \
                 error = TMPL_ERROR_VALUE(y_bad, z_bad);                        \
                 flag = 1;                                                      \
             }                                                                  \
@@ -83,10 +82,10 @@ int main(void)                                                                 \
     if (flag)                                                                  \
     {                                                                          \
         puts("FAIL");                                                          \
-        printf("    Input   = %+.40LE\n", TMPL_CAST(x_bad, long double));      \
-        printf("    libtmpl = %+.40LE\n", TMPL_CAST(y_bad, long double));      \
-        printf("    Other   = %+.40LE\n", TMPL_CAST(z_bad, long double));      \
-        printf("    Error   = %+.40LE\n", TMPL_CAST(error, long double));      \
+        printf("    Input   = %+.40LE\n", x_bad);                              \
+        printf("    libtmpl = %+.40LE\n", y_bad);                              \
+        printf("    Other   = %+.40LE\n", z_bad);                              \
+        printf("    Error   = %+.40LE\n", error);                              \
     }                                                                          \
     else                                                                       \
         puts("PASS");                                                          \
@@ -94,3 +93,4 @@ int main(void)                                                                 \
 }
 
 #endif
+
