@@ -265,6 +265,7 @@ int main(void)                                                                 \
     const type eps = TMPL_DEFAULT_TOLERANCE * TMPL_EPS(real_zero);             \
     TMPL_OPEN_FILE(fp, csv);                                                   \
     line = fgets(buffer, sizeof(buffer), fp);                                  \
+    (void)real_zero;                                                           \
     while (line)                                                               \
     {                                                                          \
         const type x = TMPL_STRING_TO_REAL(x, line, &start);                   \
