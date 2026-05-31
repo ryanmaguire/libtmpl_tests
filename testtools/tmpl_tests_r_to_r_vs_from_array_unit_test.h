@@ -50,6 +50,7 @@ int main(void)                                                                 \
     const size_t number_of_samples = TMPL_ARRAY_SIZE(in);                      \
     const type real_zero = TMPL_CAST(0, type);                                 \
     const type eps = TMPL_DEFAULT_TOLERANCE * TMPL_EPS(real_zero);             \
+    (void)real_zero;                                                           \
     for (n = zero; n < number_of_samples; ++n)                                 \
     {                                                                          \
         const type z0 = func0(in[n]);                                          \
