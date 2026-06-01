@@ -1,0 +1,91 @@
+tmpl_Long_Array_Double_Sum:
+    aarch64
+    ppc64le
+        Implement double-double method when long is more than 52 bits wide.
+        This is already implemented in tmpl_LLong_Array_Double_Sum.
+tmpl_CLDouble_Abs:
+    aarch64
+    ppc64le
+        Cause is tmpl_LDouble_Sqrt producing 2-3 ULP error on
+        hardware using 128-bit quadruple or 128-bit double-double
+        representations of long double. Fixing tmpl_LDouble_Sqrt fixes this.
+tmpl_UInt_Trailing_Zeros:
+    ppc64le
+        uint version is returning 32 instead of zero for trailing_zeros(0).
+tmpl_LDouble_Ideal_Cyl_Fresnel_d2Psi_dPhi2:
+    aarch64
+        Fixing tmpl_LDouble_Cos and tmpl_LDouble_Sqrt will fix this function.
+tmpl_LDouble_Ideal_Cyl_Fresnel_d2Psi_dPhi2_Deg:
+    aarch64
+        10^-32 relative error instead of 10^-34. Need to investigate.
+        Likely caused by sqrt needing to be fixed.
+tmpl_LDouble_Arccos:
+    aarch64
+        Tail-end function needs one more term for quadruple precision.
+tmpl_LDouble_Arcsin:
+    aarch64
+        Tail-end function needs one more term for quadruple precision.
+tmpl_LDouble_Arctan:
+tmpl_LDouble_Arctan2:
+    aarch64
+        Need to look into this. Failing with about 10 ULP error, not 1 or 2.
+tmpl_LDouble_Cbrt:
+    ppc64le:
+        Double-double implementation is not giving exact results when x = 1.
+        Error is 10^-36, below 1 ULP, but cbrt(1) should return 1, exactly.
+tmpl_LDouble_Cos:
+    aarch64
+    ppc64le
+        Long double implementation is just a call to the 64-bit double function.
+        Need to implement a true long double cosine function.
+tmpl_Float_Erfc:
+tmpl_Double_Erfc:
+tmpl_LDouble_Erfc:
+    aarch64
+    ppc64le
+    mips64
+        Need to provide a true implementation.
+        Current one lazily uses other erf functions which produces
+        large round-off errors for various inputs.
+tmpl_LDouble_Hypot:
+    aarch64
+        Getting 10^-31 relative error, not 10^-34. Need to investigate.
+        Almost certainly caused by errors in tmpl_LDouble_Sqrt for quadruple.
+tmpl_Float_Log:
+tmpl_Double_Log:
+tmpl_LDouble_Log:
+    aarch64
+    ppc64le
+    mips64
+        Inputs very close to 1 have 4-10 ULP errors, not 1 or 2. Need to fix.
+tmpl_LDouble_Sinh:
+    aarch64
+    mips64
+        Need to rewrite and provide a more accurate implementation.
+tmpl_LDouble_Sin:
+    aarch64
+    ppc64le
+        Long double implementation is just a call to the 64-bit double function.
+        Need to implement a true long double sine function.
+tmpl_LDouble_Sqrt:
+    aarch64
+        Getting large errors (10^-32, not 10^-34).
+        Likely the cause of other functions failing their unit test.
+        Need to fix.
+tmpl_LDouble_Tanh:
+    aarch64
+    mips64
+        Need to rewrite and provide a more accurate implementation.
+tmpl_LDouble_Tan:
+    aarch64
+    ppc64le
+        Needs a full rewrite to provide an accurate implementation.
+tmpl_3DLDouble_L2_Norm:
+    aarch64
+    ppc64le
+        Cause is tmpl_LDouble_Sqrt. Need to fix that function first.
+tmpl_3DLDouble_Normalize:
+    aarch64
+    ppc64le
+        Same, fix tmpl_LDouble_Sqrt to fix this function.
+
