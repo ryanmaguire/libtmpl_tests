@@ -7,37 +7,48 @@ tmpl_Long_Array_Double_Sum:
     x86_64
         Implement double-double method when long is more than 52 bits wide.
         This is already implemented in tmpl_LLong_Array_Double_Sum.
-tmpl_UInt_Trailing_Zeros:
-    ppc64le
-        uint version is returning 32 instead of zero for trailing_zeros(0).
-        This is caused by the ppc64le assembly version not handling zero.
-        Simple fix, handle zero correctly.
 tmpl_LDouble_Ideal_Cyl_Fresnel_d2Psi_dPhi2:
     aarch64
+    sparc64
+    sun4v
+    x86_64
         Fixing tmpl_LDouble_Cos and tmpl_LDouble_Sqrt will fix this function.
 tmpl_LDouble_Ideal_Cyl_Fresnel_d2Psi_dPhi2_Deg:
     aarch64
+    sparc64
+    sun4v
         10^-32 relative error instead of 10^-34. Need to investigate.
         Likely caused by sqrt needing to be fixed.
 tmpl_LDouble_Arctan:
 tmpl_LDouble_Arctan2:
     aarch64
+    sparc64
+    sun4v
         Need to look into this. Failing with about 10 ULP error, not 1 or 2.
 tmpl_LDouble_Cbrt:
-    ppc64le:
+    ppc64
+    ppc64le
         Double-double implementation is not giving exact results when x = 1.
         Error is 10^-36, below 1 ULP, but cbrt(1) should return 1, exactly.
 tmpl_LDouble_Cos:
     aarch64
+    ppc64
     ppc64le
+    sparc64
+    sun4v
+    x86_64
         Long double implementation is just a call to the 64-bit double function.
         Need to implement a true long double cosine function.
 tmpl_Float_Erfc:
 tmpl_Double_Erfc:
 tmpl_LDouble_Erfc:
     aarch64
-    ppc64le
     mips64
+    ppc64
+    ppc64le
+    sparc64
+    sun4v
+    x86_64
         Need to provide a true implementation.
         Current one lazily uses other erf functions which produces
         large round-off errors for various inputs.
@@ -45,25 +56,43 @@ tmpl_Float_Log:
 tmpl_Double_Log:
 tmpl_LDouble_Log:
     aarch64
-    ppc64le
     mips64
+    ppc64
+    ppc64le
+    sparc64
+    sun4v
+    x86_64
         Inputs very close to 1 have 4-10 ULP errors, not 1 or 2. Need to fix.
 tmpl_LDouble_Sinh:
     aarch64
     mips64
+    sparc64
+    sun4v
+    x86_64
         Need to rewrite and provide a more accurate implementation.
 tmpl_LDouble_Sin:
     aarch64
+    ppc64
     ppc64le
+    sparc64
+    sun4v
+    x86_64
         Long double implementation is just a call to the 64-bit double function.
         Need to implement a true long double sine function.
 tmpl_LDouble_Tanh:
     aarch64
     mips64
+    sparc64
+    sun4v
+    x86_64
         Need to rewrite and provide a more accurate implementation.
 tmpl_LDouble_Tan:
     aarch64
+    ppc64
     ppc64le
+    sparc64
+    sun4v
+    x86_64
         Needs a full rewrite to provide an accurate implementation.
 
 Fixing tmpl_LDouble_Sqrt fixes all of these functions too.
