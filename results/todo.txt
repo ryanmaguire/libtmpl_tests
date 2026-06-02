@@ -1,17 +1,17 @@
 tmpl_Long_Array_Double_Sum:
     aarch64
+    ppc64
     ppc64le
+    sparc64
+    sun4v
+    x86_64
         Implement double-double method when long is more than 52 bits wide.
         This is already implemented in tmpl_LLong_Array_Double_Sum.
-tmpl_CLDouble_Abs:
-    aarch64
-    ppc64le
-        Cause is tmpl_LDouble_Sqrt producing 2-3 ULP error on
-        hardware using 128-bit quadruple or 128-bit double-double
-        representations of long double. Fixing tmpl_LDouble_Sqrt fixes this.
 tmpl_UInt_Trailing_Zeros:
     ppc64le
         uint version is returning 32 instead of zero for trailing_zeros(0).
+        This is caused by the ppc64le assembly version not handling zero.
+        Simple fix, handle zero correctly.
 tmpl_LDouble_Ideal_Cyl_Fresnel_d2Psi_dPhi2:
     aarch64
         Fixing tmpl_LDouble_Cos and tmpl_LDouble_Sqrt will fix this function.
@@ -19,12 +19,6 @@ tmpl_LDouble_Ideal_Cyl_Fresnel_d2Psi_dPhi2_Deg:
     aarch64
         10^-32 relative error instead of 10^-34. Need to investigate.
         Likely caused by sqrt needing to be fixed.
-tmpl_LDouble_Arccos:
-    aarch64
-        Tail-end function needs one more term for quadruple precision.
-tmpl_LDouble_Arcsin:
-    aarch64
-        Tail-end function needs one more term for quadruple precision.
 tmpl_LDouble_Arctan:
 tmpl_LDouble_Arctan2:
     aarch64
@@ -47,10 +41,6 @@ tmpl_LDouble_Erfc:
         Need to provide a true implementation.
         Current one lazily uses other erf functions which produces
         large round-off errors for various inputs.
-tmpl_LDouble_Hypot:
-    aarch64
-        Getting 10^-31 relative error, not 10^-34. Need to investigate.
-        Almost certainly caused by errors in tmpl_LDouble_Sqrt for quadruple.
 tmpl_Float_Log:
 tmpl_Double_Log:
 tmpl_LDouble_Log:
@@ -67,11 +57,6 @@ tmpl_LDouble_Sin:
     ppc64le
         Long double implementation is just a call to the 64-bit double function.
         Need to implement a true long double sine function.
-tmpl_LDouble_Sqrt:
-    aarch64
-        Getting large errors (10^-32, not 10^-34).
-        Likely the cause of other functions failing their unit test.
-        Need to fix.
 tmpl_LDouble_Tanh:
     aarch64
     mips64
@@ -80,12 +65,24 @@ tmpl_LDouble_Tan:
     aarch64
     ppc64le
         Needs a full rewrite to provide an accurate implementation.
+
+Fixing tmpl_LDouble_Sqrt fixes all of these functions too.
+tmpl_CLDouble_Abs:
+    aarch64
+    ppc64le
+tmpl_LDouble_Arccos:
+    aarch64
+    sparc64
+    sun4v
+tmpl_LDouble_Arcsin:
+    aarch64
+tmpl_LDouble_Sqrt:
+    aarch64
+tmpl_LDouble_Hypot:
+    aarch64
 tmpl_3DLDouble_L2_Norm:
     aarch64
     ppc64le
-        Cause is tmpl_LDouble_Sqrt. Need to fix that function first.
 tmpl_3DLDouble_Normalize:
     aarch64
     ppc64le
-        Same, fix tmpl_LDouble_Sqrt to fix this function.
-
