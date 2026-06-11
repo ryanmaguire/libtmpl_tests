@@ -108,7 +108,7 @@ runtests() {
         fi
     done
 
-    for file in $(find . -name "*$TYPE*.c" -type f | sort); do
+    for file in $(find . -name "*${TYPE}_test*.c" -type f | sort); do
         filename_without_path=$(basename -- $file)
         if [[ $Exclude == *"$filename_without_path"* ]]; then
             continue;
@@ -127,7 +127,7 @@ runtests() {
         rm -f main
     done
 
-    for file in $(find . -name "*$TYPE*.cpp" -type f | sort); do
+    for file in $(find . -name "*${TYPE}_test*.cpp" -type f | sort); do
         filename_without_path=$(basename -- $file)
         if [[ $Exclude == *"$filename_without_path"* ]]; then
             continue;
