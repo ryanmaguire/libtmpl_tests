@@ -45,6 +45,10 @@
 runtests() {
     CC=gcc
     CPP=g++
+    RUSTC=rustc
+    RustLinkerFlags="-L /usr/local/lib -l tmpl -C linker-plugin-lto"
+    RustCompilerFlags="-C opt-level=3 -C lto=on  -C target-cpu=native"
+    RustFlags="$RustLinkerFlags $RustCompilerFlags"
     Exclude=""
     ExtraArgs="-O2 -flto -I/usr/local/include"
     CWarn="-Wall -Wextra -Wmissing-field-initializers"
@@ -70,6 +74,10 @@ runtests() {
         # Check if the user wants to use a different C++ compiler.
         elif [[ "$arg" == *"-cpp"* ]]; then
             CPP=${arg#*=}
+
+        # Check if the user wants to use a different rust compiler.
+        elif [[ "$arg" == *"-rustc"* ]]; then
+            RUSTC=${arg#*=}
 
         # Check which type of test we're running.
         elif [[ "$arg" == *"-type"* ]]; then
@@ -134,6 +142,18 @@ runtests() {
         fi
 
         $CPP $ExtraArgs $CPPWarn $file -o main $LinkerFlags
+        printf "$(basename $file): "
+        ./main
+        rm -f main
+    done
+
+    for file in $(find . -name "*${TYPE}_test*.rs" -type f | sort); do
+        filename_without_path=$(basename -- $file)
+        if [[ $Exclude == *"$filename_without_path"* ]]; then
+            continue;
+        fi
+
+        $RUSTC $RustFlags $file -o main
         printf "$(basename $file): "
         ./main
         rm -f main
