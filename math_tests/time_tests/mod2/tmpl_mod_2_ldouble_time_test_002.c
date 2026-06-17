@@ -23,7 +23,7 @@
 
 static long double mod2l(const long double x)
 {
-    return x - 2.0L * truncl(0.5L * x);
+    return fmodl(x, 2.0L);
 }
 
 TMPL_TEST_REAL_FUNC_VS_REAL_FUNC_TIME_TEST(

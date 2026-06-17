@@ -17,12 +17,15 @@
  *  along with libtmpl_tests.  If not, see <https://www.gnu.org/licenses/>.   *
  ******************************************************************************/
 #ifndef TMPL_NSAMPS
-#define TMPL_NSAMPS (3E8)
+#define TMPL_NSAMPS (3E7)
 #endif
 #include "../../../libtmpl_tests.h"
-static float mod2(float x){
-    return x - 2.0F*truncf(0.5F*x);
+
+static float mod2f(const float x)
+{
+    return x - 2.0F * truncf(0.5F * x);
 }
+
 TMPL_TEST_REAL_FUNC_VS_REAL_FUNC_TIME_TEST(
-    float, -1.0E6F, 1.0E6F, tmpl_Float_Mod_2, mod2
+    float, -1.0E6F, 1.0E6F, tmpl_Float_Mod_2, mod2f
 )
