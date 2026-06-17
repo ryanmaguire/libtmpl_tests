@@ -16,7 +16,12 @@
  *  You should have received a copy of the GNU General Public License         *
  *  along with libtmpl.  If not, see <https://www.gnu.org/licenses/>.         *
  ******************************************************************************/
-#include "tmpl_vec3_time_tests.h"
+#include "../../../libtmpl_tests.h"
 #include <Vector3D.h>
-TEST1(float, tmpl_ThreeVectorFloat, struct v3D32_t,
-      tmpl_3DFloat_Add, Vector3D_Add_flt32)
+TMPL_VEC3_VS_XYZ_TIME_TESTS(
+    float,
+    tmpl_ThreeVectorFloat,
+    struct v3D32_t,
+    tmpl_3DFloat_Add,
+    Vector3D_Add_flt32
+)
