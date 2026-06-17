@@ -17,9 +17,9 @@
  *  along with libtmpl.  If not, see <https://www.gnu.org/licenses/>.         *
  ******************************************************************************/
 #ifndef TMPL_NSAMPS
-#define TMPL_NSAMPS (3E7)
+#define TMPL_NSAMPS (3E8)
 #endif
 #include "../../../libtmpl_tests.h"
 TMPL_TEST_REAL_FUNC_VS_REAL_FUNC_TIME_TEST(
-    float, -1.0F, 1.0F, tmpl_Float_Exp, expf
+    long double, -708.0L, 708.0L, tmpl_LDouble_Exp, expl
 )
