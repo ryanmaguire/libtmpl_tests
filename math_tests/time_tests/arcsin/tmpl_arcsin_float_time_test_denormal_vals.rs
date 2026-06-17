@@ -16,10 +16,17 @@
  *  You should have received a copy of the GNU General Public License         *
  *  along with libtmpl_tests.  If not, see <https://www.gnu.org/licenses/>.   *
  ******************************************************************************/
-#ifndef TMPL_NSAMPS
-#define TMPL_NSAMPS (3E8)
-#endif
-#include "../../../libtmpl_tests.h"
-TMPL_TEST_REAL_FUNC_VS_REAL_FUNC_TIME_TEST(
-    double, -DBL_MIN, DBL_MIN, tmpl_Double_Arcsin, asin
-)
+include!("../../../libtmpl_tests.rs");
+unsafe extern "C" {
+    safe fn tmpl_Float_Arcsin(x: raw::c_float) -> raw::c_float;
+}
+
+tmpl_r_to_r_vs_from_interval_time_test!(
+    raw::c_float,
+    f32,
+    0.0f32,
+    f32::MIN_POSITIVE,
+    10_000_000,
+    tmpl_Float_Arcsin,
+    f32::asin
+);
