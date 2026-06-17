@@ -16,5 +16,5 @@
  *  You should have received a copy of the GNU General Public License         *
  *  along with libtmpl.  If not, see <https://www.gnu.org/licenses/>.         *
  ******************************************************************************/
-#include "tmpl_vec3_time_tests.h"
-TEST6(Cross_Product)
+#include "../tmpl_vec3_time_tests.h"
+TEST6(Add)
