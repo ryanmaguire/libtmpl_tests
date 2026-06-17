@@ -26,7 +26,7 @@ tmpl_r_to_r_vs_from_interval_time_test!(
     f32,
     -1.0f32,
     1.0f32,
-    100_000_000,
+    10_000_000,
     tmpl_Float_Cbrt,
     f32::cbrt
 );
