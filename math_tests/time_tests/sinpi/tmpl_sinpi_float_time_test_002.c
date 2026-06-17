@@ -21,5 +21,5 @@
 #endif
 #include "../../../libtmpl_tests.h"
 TMPL_TEST_REAL_FUNC_VS_REAL_FUNC_TIME_TEST(
-    float, -1.0E1F, 1.0E1F, tmpl_Float_CosPi, cospif
+    float, -1.0E1F, 1.0E1F, tmpl_Float_SinPi, sinpif
 )
