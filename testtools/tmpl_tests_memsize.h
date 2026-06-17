@@ -94,11 +94,16 @@ static inline size_t tmpl_tests_memsize(void)
  *  risk attempting to malloc the whole computer!                             */
 #define NSAMPS(a) (4 * tmpl_tests_memsize() / (5*sizeof(a)))
 
+/*  Same thing for two types. Use the larger type for the sample size.        */
+#define MAX_SIZE(a, b) (sizeof(a) < sizeof(b) ? sizeof(b) : sizeof(a))
+#define NSAMPS2(a, b) (4 * memsize() / (5 * MAX_SIZE(a, b)))
+
 #else
 /*  Else for #ifndef TMPL_NSAMPS.                                             */
 
 /*  If the user provided a requested sample size, simply cast it to size_t.   */
 #define NSAMPS(a) TMPL_CAST(TMPL_NSAMPS, size_t)
+#define NSAMPS2(a, b) TMPL_CAST(TMPL_NSAMPS, size_t)
 
 #endif
 /*  End of #ifndef TMPL_NSAMPS.                                               */
