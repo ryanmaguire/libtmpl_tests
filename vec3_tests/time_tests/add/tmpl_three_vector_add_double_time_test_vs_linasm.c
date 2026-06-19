@@ -18,7 +18,7 @@
  ******************************************************************************/
 #include "../../../libtmpl_tests.h"
 #include <Vector3D.h>
-TMPL_THREEVEC_VS_XYZ_TIME_TESTS(
+TMPL_THREEVEC2_VS_XYZ_TIME_TESTS(
     double,
     tmpl_ThreeVectorDouble,
     struct v3D64_t,
