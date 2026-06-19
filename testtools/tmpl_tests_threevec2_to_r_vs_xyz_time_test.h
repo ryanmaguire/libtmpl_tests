@@ -16,8 +16,8 @@
  *  You should have received a copy of the GNU General Public License         *
  *  along with libtmpl_tests.  If not, see <https://www.gnu.org/licenses/>.   *
  ******************************************************************************/
-#ifndef TMPL_TESTS_THREEVEC_TO_R_VS_XYZ_TIME_TESTS_H
-#define TMPL_TESTS_THREEVEC_TO_R_VS_XYZ_TIME_TESTS_H
+#ifndef TMPL_TESTS_THREEVEC2_TO_R_VS_XYZ_TIME_TESTS_H
+#define TMPL_TESTS_THREEVEC2_TO_R_VS_XYZ_TIME_TESTS_H
 #include <libtmpl/include/compat/tmpl_cast.h>
 #include <libtmpl/include/tmpl_variadic.h>
 #include <stdio.h>
@@ -26,13 +26,13 @@
 #include "tmpl_tests_memsize.h"
 #include "tmpl_tests_rand_real.h"
 
-#define TMPL_THREEVEC_TO_R_VS_XYZ_TIME_TESTS(ctype, ttype, ltype, f0, f1)      \
+#define TMPL_THREEVEC2_TO_R_VS_XYZ_TIME_TESTS(ctype, ttype, ltype, f0, f1)     \
 int main(void)                                                                 \
 {                                                                              \
-    ltype *A;                                                                  \
-    ttype *X;                                                                  \
-    ctype *B, *Y;                                                              \
-    const size_t number_of_samples = NSAMPS2(ttype, ltype) / 4;                \
+    ltype *A, *B;                                                              \
+    ttype *X, *Y;                                                              \
+    ctype *C, *Z;                                                              \
+    const size_t number_of_samples = NSAMPS2(ttype, ltype) / 6;                \
     size_t n;                                                                  \
     clock_t t1, t2;                                                            \
     long double max = 0.0L;                                                    \
@@ -40,52 +40,63 @@ int main(void)                                                                 \
     long double tmp = 0.0L;                                                    \
     double libtmpl_time, other_time;                                           \
     int success = 0;                                                           \
-    TMPL_MALLOC_VARS(success, ltype, number_of_samples, &A);                   \
-    TMPL_MALLOC_VARS(success, ttype, number_of_samples, &X);                   \
-    TMPL_MALLOC_VARS(success, ctype, number_of_samples, &B, &Y);               \
+    TMPL_MALLOC_VARS(success, ltype, number_of_samples, &A, &B);               \
+    TMPL_MALLOC_VARS(success, ttype, number_of_samples, &X, &Y);               \
+    TMPL_MALLOC_VARS(success, ctype, number_of_samples, &C, &Z);               \
     if (!success)                                                              \
     {                                                                          \
-        TMPL_FREE_VARS(ltype, &A);                                             \
-        TMPL_FREE_VARS(ttype, &X);                                             \
-        TMPL_FREE_VARS(ctype, &B, &Y);                                         \
+        TMPL_FREE_VARS(ltype, &A, &B);                                         \
+        TMPL_FREE_VARS(ttype, &X, &Y);                                         \
+        TMPL_FREE_VARS(ctype, &C, &Z);                                         \
         puts("malloc failed and returned NULL. Aborting.");                    \
         return -1;                                                             \
     }                                                                          \
     for (n = 0U; n < number_of_samples; ++n)                                   \
     {                                                                          \
-        ctype u0, u1, u2;                                                      \
+        ctype u0, u1, u2, v0, v1, v2;                                          \
         TMPL_RAND_REAL(ctype, u0);                                             \
         TMPL_RAND_REAL(ctype, u1);                                             \
         TMPL_RAND_REAL(ctype, u2);                                             \
+        TMPL_RAND_REAL(ctype, v0);                                             \
+        TMPL_RAND_REAL(ctype, v1);                                             \
+        TMPL_RAND_REAL(ctype, v2);                                             \
                                                                                \
         X[n].dat[0] = u0;                                                      \
         X[n].dat[1] = u1;                                                      \
         X[n].dat[2] = u2;                                                      \
                                                                                \
+        Y[n].dat[0] = v0;                                                      \
+        Y[n].dat[1] = v1;                                                      \
+        Y[n].dat[2] = v2;                                                      \
+                                                                               \
         A[n].x = u0;                                                           \
         A[n].y = u1;                                                           \
         A[n].z = u2;                                                           \
+                                                                               \
+        B[n].x = v0;                                                           \
+        B[n].y = v1;                                                           \
+        B[n].z = v2;                                                           \
     }                                                                          \
                                                                                \
     printf(#f0 " vs. " #f1"\n");                                               \
     printf("samples: %zu\n", number_of_samples);                               \
     t1 = clock();                                                              \
     for (n = 0U; n < number_of_samples; ++n)                                   \
-        Y[n] = f0(&X[n]);                                                      \
+        Z[n] = f0(&X[n], &Y[n]);                                               \
     t2 = clock();                                                              \
     libtmpl_time = TMPL_CAST(t2 - t1, double) / CLOCKS_PER_SEC;                \
     printf("libtmpl: %f seconds\n",  libtmpl_time);                            \
                                                                                \
     t1 = clock();                                                              \
     for (n = 0U; n < number_of_samples; ++n)                                   \
-        B[n] = f1(&A[n]);                                                      \
+        C[n] = f1(&A[n], &B[n]);                                               \
     t2 = clock();                                                              \
     other_time = TMPL_CAST(t2 - t1, double) / CLOCKS_PER_SEC;                  \
     printf("other:   %f seconds\n",  other_time);                              \
                                                                                \
     for (n = 0U; n < number_of_samples; ++n)                                   \
     {                                                                          \
-        tmp = fabsl(TMPL_CAST(Y[n] - B[n], long double));                      \
+        tmp = fabsl(TMPL_CAST(Z[n] - C[n], long double));                      \
         rms += tmp * tmp;                                                      \
                                                                                \
         if (max < tmp)                                                         \
@@ -96,9 +107,9 @@ int main(void)                                                                 \
                                                                                \
     printf("max err: %Le\n", max);                                             \
     printf("rms err: %Le\n", rms);                                             \
-    TMPL_FREE_VARS(ltype, &A);                                                 \
-    TMPL_FREE_VARS(ttype, &X);                                                 \
-    TMPL_FREE_VARS(ctype, &B, &Y);                                             \
+    TMPL_FREE_VARS(ltype, &A, &B);                                             \
+    TMPL_FREE_VARS(ttype, &X, &Y);                                             \
+    TMPL_FREE_VARS(ctype, &C, &Z);                                             \
     return 0;                                                                  \
 }
 

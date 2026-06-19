@@ -16,7 +16,21 @@
  *  You should have received a copy of the GNU General Public License         *
  *  along with libtmpl.  If not, see <https://www.gnu.org/licenses/>.         *
  ******************************************************************************/
-#include "tmpl_vec3_time_tests.h"
+#include "../../../libtmpl_tests.h"
 #include <Vector3D.h>
-TEST3(double, tmpl_ThreeVectorDouble, struct v3D64_t,
-      tmpl_3DDouble_Dot_Product, Vector3D_ScalarProduct_flt64)
+double Vector3D_Angle_flt64(const struct v3D64_t * p, const struct v3D64_t * q)
+{
+    struct v3D64_t cross = *p;
+    const double dot_product = Vector3D_ScalarProduct_flt64(p, q);
+    double cross_norm;
+    Vector3D_VectorProduct_flt64(&cross, q);
+    cross_norm = Vector3D_Abs_flt64(&cross);
+    return atan2(cross_norm, dot_product);
+}
+TMPL_THREEVEC2_TO_R_VS_XYZ_TIME_TESTS(
+    double,
+    tmpl_ThreeVectorDouble,
+    struct v3D64_t,
+    tmpl_3DDouble_Angle,
+    Vector3D_Angle_flt64
+)
