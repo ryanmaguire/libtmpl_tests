@@ -96,7 +96,7 @@ static inline size_t tmpl_tests_memsize(void)
 
 /*  Same thing for two types. Use the larger type for the sample size.        */
 #define MAX_SIZE(a, b) (sizeof(a) < sizeof(b) ? sizeof(b) : sizeof(a))
-#define NSAMPS2(a, b) (4 * memsize() / (5 * MAX_SIZE(a, b)))
+#define NSAMPS2(a, b) (4 * tmpl_tests_memsize() / (5 * MAX_SIZE(a, b)))
 
 #else
 /*  Else for #ifndef TMPL_NSAMPS.                                             */
