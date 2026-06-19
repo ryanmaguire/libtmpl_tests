@@ -16,8 +16,8 @@
  *  You should have received a copy of the GNU General Public License         *
  *  along with libtmpl_tests.  If not, see <https://www.gnu.org/licenses/>.   *
  ******************************************************************************/
-#ifndef TMPL_TESTS_VEC3_VS_XYZ_TIME_TESTS_H
-#define TMPL_TESTS_VEC3_VS_XYZ_TIME_TESTS_H
+#ifndef TMPL_TESTS_THREEVEC2_VS_XYZ_TIME_TESTS_H
+#define TMPL_TESTS_THREEVEC2_VS_XYZ_TIME_TESTS_H
 #include <libtmpl/include/compat/tmpl_cast.h>
 #include <libtmpl/include/tmpl_variadic.h>
 #include <stdio.h>
@@ -26,7 +26,7 @@
 #include "tmpl_tests_memsize.h"
 #include "tmpl_tests_rand_real.h"
 
-#define TMPL_VEC3_VS_XYZ_TIME_TESTS(ctype, ttype, ltype, f0, f1)               \
+#define TMPL_THREEVEC2_VS_XYZ_TIME_TESTS(ctype, ttype, ltype, f0, f1)          \
 int main(void)                                                                 \
 {                                                                              \
     ttype *X, *Y, *Z;                                                          \

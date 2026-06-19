@@ -328,7 +328,8 @@ int main(void)                                                                 \
 #include "testtools/tmpl_tests_twovec_to_twovec_array_unit_test.h"
 #include "testtools/tmpl_tests_twovec_to_twovec_array_exact_unit_test.h"
 #include "testtools/tmpl_tests_twovec2_to_twovec_array_exact_unit_test.h"
-#include "testtools/tmpl_tests_vec3_vs_xyz_time_test.h"
+#include "testtools/tmpl_tests_threevec_to_r_vs_xyz_time_test.h"
+#include "testtools/tmpl_tests_threevec2_vs_xyz_time_test.h"
 
 #ifdef __cplusplus
 #include "testtools/tmpl_tests_c_to_c_vs_from_array_unit_test.hpp"
