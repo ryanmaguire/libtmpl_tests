@@ -18,7 +18,7 @@
  ******************************************************************************/
 #include "../../../libtmpl_tests.h"
 #include <Vector3D.h>
-TMPL_VEC3_VS_XYZ_TIME_TESTS(
+TMPL_THREEVEC_VS_XYZ_TIME_TESTS(
     float,
     tmpl_ThreeVectorFloat,
     struct v3D32_t,
