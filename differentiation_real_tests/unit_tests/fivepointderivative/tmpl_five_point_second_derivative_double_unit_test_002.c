@@ -25,7 +25,7 @@ int main(void)
     const double h = 1.0E-4;
     const double tol = 1.0E-4;
     const double y0 = tmpl_Double_Five_Point_Second_Derivative(f, x0, h);
-    const double ans = tmpl_Double_Euler_E;
+    const double ans = tmpl_double_euler_e;
     const double err = tmpl_Double_Abs(y0 - ans);
 
     if (err > tol)

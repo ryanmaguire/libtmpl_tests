@@ -24,7 +24,7 @@ int main(void)
     const double x0 = 1.0;
     const double tol = 1.0E-6;
     const double y0 = tmpl_Double_Derivative(tmpl_Double_Exp, x0);
-    const double ans = tmpl_Double_Euler_E;
+    const double ans = tmpl_double_euler_e;
     const double err = tmpl_Double_Abs(y0 - ans);
 
     if (err > tol)
