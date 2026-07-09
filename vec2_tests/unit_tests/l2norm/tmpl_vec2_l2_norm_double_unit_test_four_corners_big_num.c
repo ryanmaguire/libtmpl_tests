@@ -17,7 +17,7 @@
  *  along with libtmpl_tests.  If not, see <https://www.gnu.org/licenses/>.   *
  ******************************************************************************/
 #include "../../../libtmpl_tests.h"
-#define val BNUM / tmpl_Double_Sqrt_Two
+#define val BNUM / tmpl_double_sqrt_two
 #define inarr {                     \
     {{+0.5 * BNUM, +0.5 * BNUM}},   \
     {{+0.5 * BNUM, -0.5 * BNUM}},   \

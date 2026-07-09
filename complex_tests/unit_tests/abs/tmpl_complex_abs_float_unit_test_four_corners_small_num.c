@@ -17,7 +17,7 @@
  *  along with libtmpl_tests.  If not, see <https://www.gnu.org/licenses/>.   *
  ******************************************************************************/
 #include "../../../libtmpl_tests.h"
-#define val tmpl_Float_Sqrt_Two * DNUMF
+#define val tmpl_float_sqrt_two * DNUMF
 #define inarr {         \
     {{+DNUMF, +DNUMF}}, \
     {{+DNUMF, -DNUMF}}, \
