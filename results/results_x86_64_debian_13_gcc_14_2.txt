@@ -45,7 +45,6 @@ tmpl_erfc_float_unit_test_002.c: FAIL
     libtmpl = -NAN
     Other   = +2.0000000000000000000000000000000000000000E+00
     Error   = -NAN
-tmpl_erfc_float_unit_test_003.c: PASS
 tmpl_erfc_ldouble_unit_test_001.c: FAIL
     Input   = -1.0000000000000000000000000000000000000000E+06
     libtmpl = -NAN
