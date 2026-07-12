@@ -1,6 +1,3 @@
-tmpl_array_double_sum_long_unit_test_005.c: FAIL:
-    out: 0.0000000000000000000000000000000000000000E+00
-    ans: 2.0000000000000000000000000000000000000000E+00
 tmpl_ideal_cyl_fresnel_d2psi_dphi2_ldouble_unit_test_001.c: FAIL
     Result: 5.6615117239070633E+09
     Answer: 5.6615117239070639E+09
