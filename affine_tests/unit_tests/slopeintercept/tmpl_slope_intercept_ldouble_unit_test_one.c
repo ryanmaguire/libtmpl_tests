@@ -17,12 +17,12 @@
  *  along with libtmpl_tests.  If not, see <https://www.gnu.org/licenses/>.   *
  ******************************************************************************/
 #include "../../../libtmpl_tests.h"
-#define indata {{1.0, 1.0}, {2.0, 1.0}, {1.5, 2.5}, {0.5, 2.5}}
-#define outdata {{{1.0, 1.0}}, {{2.0, 1.0}}, {{1.5, 2.5}}, {{0.5, 2.5}}}
+#define indata {{1.0L, 1.0L}, {2.0L, 1.0L}, {1.5L, 2.5L}, {0.5L, 2.5L}}
+#define outdata {{{1.0L, 1.0L}}, {{2.0L, 1.0L}}, {{1.5L, 2.5L}}, {{0.5L, 2.5L}}}
 TMPL_R2_TO_TWOVEC_ARRAY_UNIT_TEST(
-    double,
-    tmpl_AffineDouble,
-    tmpl_AffDouble_Slope_Intercept,
+    long double,
+    tmpl_AffineLongDouble,
+    tmpl_AffLDouble_Slope_Intercept,
     indata,
     outdata
 )
