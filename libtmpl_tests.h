@@ -291,7 +291,8 @@ int main(void)                                                                 \
     return 0;                                                                  \
 }
 
-#include "testtools/tmpl_tests_2op_gmp_unit_test.h"
+#include "testtools/tmpl_tests_2op_vs_gmp_array_unit_test.h"
+#include "testtools/tmpl_tests_2op_vs_gmp_interval_unit_test.h"
 #include "testtools/tmpl_tests_c_to_r_array_unit_test.h"
 #include "testtools/tmpl_tests_c_to_r_array_exact_unit_test.h"
 #include "testtools/tmpl_tests_c_to_c_array_unit_test.h"
