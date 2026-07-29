@@ -98,6 +98,14 @@ int main(void)                                                                 \
     return 0;                                                                  \
 }
 
+#else
+
+#define TMPL_2OP_VS_GMP_INTERVAL_UNIT_TEST(dtype, func, mpf_op)                \
+int main(void)                                                                 \
+{                                                                              \
+    puts("NOT TESTED");                                                        \
+}
+
 #endif
 
 #endif

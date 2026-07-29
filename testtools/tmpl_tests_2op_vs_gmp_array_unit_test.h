@@ -114,6 +114,14 @@ FAIL:                                                                          \
     return -1;                                                                 \
 }
 
+#else
+
+#define TMPL_2OP_VS_GMP_ARRAY_UNIT_TEST(type, func, mpf_op, inx, iny)          \
+int main(void)                                                                 \
+{                                                                              \
+    puts("NOT TESTED");                                                        \
+}
+
 #endif
 
 #endif

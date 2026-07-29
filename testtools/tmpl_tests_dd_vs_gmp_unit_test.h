@@ -123,6 +123,14 @@ int main(void)                                                                 \
     return 0;                                                                  \
 }
 
+#else
+
+#define TMPL_DD_VS_GMP_UNIT_TEST(ddtype, dtype, func, mpf_op)                  \
+int main(void)                                                                 \
+{                                                                              \
+    puts("NOT TESTED");                                                        \
+}
+
 #endif
 
 #endif
