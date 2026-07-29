@@ -16,8 +16,8 @@
  *  You should have received a copy of the GNU General Public License         *
  *  along with libtmpl_tests.  If not, see <https://www.gnu.org/licenses/>.   *
  ******************************************************************************/
-#ifndef TMPL_TESTS_2OP_GMP_UNIT_TEST_H
-#define TMPL_TESTS_2OP_GMP_UNIT_TEST_H
+#ifndef TMPL_TESTS_2OP_VS_GMP_ARRAY_UNIT_TEST_H
+#define TMPL_TESTS_2OP_VS_GMP_ARRAY_UNIT_TEST_H
 
 #ifndef NO_GMP
 
@@ -30,7 +30,7 @@
 #include "tmpl_tests_mpf_get_ld.h"
 #include "tmpl_tests_mpf_set_ld.h"
 
-#define TMPL_2OP_GMP_UNIT_TEST(type, func, mpf_op, inx, iny)                   \
+#define TMPL_2OP_VS_GMP_ARRAY_UNIT_TEST(type, func, mpf_op, inx, iny)          \
 int main(void)                                                                 \
 {                                                                              \
     const type x[] = inx;                                                      \

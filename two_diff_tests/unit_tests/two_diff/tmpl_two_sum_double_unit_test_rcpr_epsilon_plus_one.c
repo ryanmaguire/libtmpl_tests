@@ -20,4 +20,4 @@
 #define VAL (1.0 / TMPL_DBL_EPS)
 #define xarr {VAL, 10.0 * VAL, 100.0 * VAL * VAL}
 #define yarr {1.0, 2.0, 3.0}
-TMPL_2OP_GMP_UNIT_TEST(double, tmpl_Double_Two_Diff, mpf_sub, xarr, yarr)
+TMPL_2OP_VS_GMP_ARRAY_UNIT_TEST(double, tmpl_Double_Two_Diff, mpf_sub, xarr, yarr)

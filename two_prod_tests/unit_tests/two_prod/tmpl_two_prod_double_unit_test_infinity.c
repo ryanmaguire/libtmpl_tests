@@ -19,4 +19,4 @@
 #include "../../../libtmpl_tests.h"
 #define xarr {TMPL_INFINITY, 1.0, TMPL_INFINITY}
 #define yarr {1.0, TMPL_INFINITY, TMPL_INFINITY}
-TMPL_2OP_GMP_UNIT_TEST(double, tmpl_Double_Two_Prod, mpf_mul, xarr, yarr)
+TMPL_2OP_VS_GMP_ARRAY_UNIT_TEST(double, tmpl_Double_Two_Prod, mpf_mul, xarr, yarr)

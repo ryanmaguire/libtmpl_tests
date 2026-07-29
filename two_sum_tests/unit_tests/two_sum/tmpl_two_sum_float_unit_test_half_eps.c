@@ -20,4 +20,4 @@
 #define VAL (0.5F * TMPL_FLT_EPS)
 #define xarr {1.0F, 0.5F + VAL, 2.0F, 0.5F + VAL}
 #define yarr {VAL, VAL, VAL, 0.25F + VAL}
-TMPL_2OP_GMP_UNIT_TEST(float, tmpl_Float_Two_Sum, mpf_add, xarr, yarr)
+TMPL_2OP_VS_GMP_ARRAY_UNIT_TEST(float, tmpl_Float_Two_Sum, mpf_add, xarr, yarr)

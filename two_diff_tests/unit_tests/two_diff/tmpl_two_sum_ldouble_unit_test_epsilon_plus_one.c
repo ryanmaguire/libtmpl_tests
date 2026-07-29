@@ -20,6 +20,6 @@
 #define VAL TMPL_LDBL_EPS
 #define xarr {VAL, 10.0L * VAL, 100.0L * VAL * VAL}
 #define yarr {1.0L, 2.0L, 3.0L}
-TMPL_2OP_GMP_UNIT_TEST(
+TMPL_2OP_VS_GMP_ARRAY_UNIT_TEST(
     long double, tmpl_LDouble_Two_Diff, mpf_sub, xarr, yarr
 )

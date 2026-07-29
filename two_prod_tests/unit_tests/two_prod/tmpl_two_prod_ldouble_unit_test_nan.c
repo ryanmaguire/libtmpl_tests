@@ -19,6 +19,6 @@
 #include "../../../libtmpl_tests.h"
 #define xarr {TMPL_NANL, 1.0L, TMPL_NANL}
 #define yarr {1.0L, TMPL_NANL, TMPL_NANL}
-TMPL_2OP_GMP_UNIT_TEST(
+TMPL_2OP_VS_GMP_ARRAY_UNIT_TEST(
     long double, tmpl_LDouble_Two_Prod, mpf_mul, xarr, yarr
 )
