@@ -38,6 +38,6 @@
     {{-2.0L, 0.0L}}   \
 }
 
-TMPL_TWOVEC2_TO_TWOVEC_ARRAY_EXACT_UNIT_TEST(
+TMPL_2DAT2_PTR_TO_DAT2_ARRAY_EXACT_UNIT_TEST(
     tmpl_TwoVectorLongDouble, tmpl_2DLDouble_Add, inarr0, inarr1, outarr
 )
