@@ -38,6 +38,6 @@
     {{+1.0, -2.0}}  \
 }
 
-TMPL_TWOVEC2_TO_TWOVEC_ARRAY_EXACT_UNIT_TEST(
+TMPL_2DAT2_PTR_TO_DAT2_ARRAY_EXACT_UNIT_TEST(
     tmpl_AffineDouble, tmpl_AffDouble_Compose, inarr0, inarr1, outarr
 )

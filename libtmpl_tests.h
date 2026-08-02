@@ -291,6 +291,7 @@ int main(void)                                                                 \
     return 0;                                                                  \
 }
 
+#include "testtools/tmpl_tests_2dat2_ptr_to_dat2_array_exact_unit_test.h"
 #include "testtools/tmpl_tests_2dat2_to_dat2_array_exact_unit_test.h"
 #include "testtools/tmpl_tests_2dat2_to_dat2_array_unit_test.h"
 #include "testtools/tmpl_tests_2dat2_ptr_to_void_array_exact_unit_test.h"
@@ -332,8 +333,6 @@ int main(void)                                                                 \
 #include "testtools/tmpl_tests_twovec_to_r_array_exact_unit_test.h"
 #include "testtools/tmpl_tests_twovec_to_twovec_array_unit_test.h"
 #include "testtools/tmpl_tests_twovec_to_twovec_array_exact_unit_test.h"
-#include "testtools/tmpl_tests_twovec2_to_twovec_array_exact_unit_test.h"
-#include "testtools/tmpl_tests_twovec2_to_void_array_exact_unit_test.h"
 #include "testtools/tmpl_tests_threevec_to_r_vs_xyz_time_test.h"
 #include "testtools/tmpl_tests_threevec2_vs_xyz_time_test.h"
 #include "testtools/tmpl_tests_threevec2_to_r_vs_arr_time_test.h"
