@@ -19,7 +19,7 @@
 #ifndef TMPL_TESTS_C_TO_C_ARRAY_EXACT_UNIT_TEST_H
 #define TMPL_TESTS_C_TO_C_ARRAY_EXACT_UNIT_TEST_H
 
-#define TMPL_C_TO_C_ARRAY_EXACT_UNIT_TEST(type, func, inarr, outarr)           \
+#define TMPL_DAT2_TO_DAT2_ARRAY_EXACT_UNIT_TEST(type, func, inarr, outarr)     \
 int main(void)                                                                 \
 {                                                                              \
     const type in[] = inarr;                                                   \
