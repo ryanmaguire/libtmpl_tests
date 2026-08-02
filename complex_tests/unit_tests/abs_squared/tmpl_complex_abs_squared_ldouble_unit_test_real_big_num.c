@@ -26,7 +26,7 @@
     {{-IN_VAL, -0.0L}}  \
 }
 #define outarr {OUT_VAL, OUT_VAL, OUT_VAL, OUT_VAL}
-TMPL_C_TO_R_ARRAY_UNIT_TEST(
+TMPL_DAT2_TO_R_ARRAY_UNIT_TEST(
     tmpl_ComplexLongDouble, long double,
     tmpl_CLDouble_Abs_Squared, inarr, outarr
 )

@@ -24,6 +24,6 @@
     {{-0.5L * BNUML, -0.5L * BNUML}}    \
 }
 #define outarr {+0.5L * BNUML, -0.5L * BNUML, +0.5L * BNUML, -0.5L * BNUML}
-TMPL_C_TO_R_ARRAY_UNIT_TEST(
+TMPL_DAT2_TO_R_ARRAY_UNIT_TEST(
     tmpl_ComplexLongDouble, long double, tmpl_CLDouble_Imag_Part, inarr, outarr
 )

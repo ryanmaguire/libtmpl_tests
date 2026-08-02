@@ -24,6 +24,6 @@
     {{-BNUML, -0.0L}}   \
 }
 #define outarr {BNUML, BNUML, BNUML, BNUML}
-TMPL_C_TO_R_ARRAY_UNIT_TEST(
+TMPL_DAT2_TO_R_ARRAY_UNIT_TEST(
     tmpl_ComplexLongDouble, long double, tmpl_CLDouble_Abs, inarr, outarr
 )

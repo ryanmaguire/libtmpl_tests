@@ -24,6 +24,6 @@
     {{-0.5 * BNUM, -0.5 * BNUM}}    \
 }
 #define outarr {+0.5 * BNUM, -0.5 * BNUM, +0.5 * BNUM, -0.5 * BNUM}
-TMPL_C_TO_R_ARRAY_UNIT_TEST(
+TMPL_DAT2_TO_R_ARRAY_UNIT_TEST(
     tmpl_ComplexDouble, double, tmpl_CDouble_Imag_Part, inarr, outarr
 )

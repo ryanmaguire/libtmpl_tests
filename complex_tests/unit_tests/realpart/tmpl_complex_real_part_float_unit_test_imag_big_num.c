@@ -24,6 +24,6 @@
     {{-0.0F, -BNUMF}}   \
 }
 #define outarr {0.0F, 0.0F, 0.0F, 0.0F}
-TMPL_C_TO_R_ARRAY_UNIT_TEST(
+TMPL_DAT2_TO_R_ARRAY_UNIT_TEST(
     tmpl_ComplexFloat, float, tmpl_CFloat_Real_Part, inarr, outarr
 )

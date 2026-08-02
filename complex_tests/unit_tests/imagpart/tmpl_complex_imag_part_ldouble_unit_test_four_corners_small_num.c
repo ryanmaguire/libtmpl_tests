@@ -25,6 +25,6 @@
     {{-DNUML, -DNUML}}  \
 }
 #define outarr {val, -val, val, -val}
-TMPL_C_TO_R_ARRAY_UNIT_TEST(
+TMPL_DAT2_TO_R_ARRAY_UNIT_TEST(
     tmpl_ComplexLongDouble, long double, tmpl_CLDouble_Imag_Part, inarr, outarr
 )

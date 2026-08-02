@@ -16,10 +16,10 @@
  *  You should have received a copy of the GNU General Public License         *
  *  along with libtmpl_tests.  If not, see <https://www.gnu.org/licenses/>.   *
  ******************************************************************************/
-#ifndef TMPL_TESTS_C_TO_R_ARRAY_UNIT_TEST_H
-#define TMPL_TESTS_C_TO_R_ARRAY_UNIT_TEST_H
+#ifndef TMPL_TESTS_DAT2_TO_R_ARRAY_UNIT_TEST_H
+#define TMPL_TESTS_DAT2_TO_R_ARRAY_UNIT_TEST_H
 
-#define TMPL_C_TO_R_ARRAY_UNIT_TEST(type, ftype, func, inarr, outarr)          \
+#define TMPL_DAT2_TO_R_ARRAY_UNIT_TEST(type, ftype, func, inarr, outarr)       \
 int main(void)                                                                 \
 {                                                                              \
     const type in[] = inarr;                                                   \

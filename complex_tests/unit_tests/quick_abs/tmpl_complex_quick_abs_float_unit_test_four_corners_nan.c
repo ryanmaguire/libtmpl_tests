@@ -25,6 +25,6 @@
     {{-TMPL_NANF, -TMPL_NANF}}  \
 }
 #define outarr {val, val, val, val}
-TMPL_C_TO_R_ARRAY_EXACT_UNIT_TEST(
+TMPL_DAT2_TO_R_ARRAY_UNIT_TEST(
     tmpl_ComplexFloat, float, tmpl_CFloat_Quick_Abs, inarr, outarr
 )

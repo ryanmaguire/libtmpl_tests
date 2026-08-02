@@ -16,14 +16,14 @@
  *  You should have received a copy of the GNU General Public License         *
  *  along with libtmpl_tests.  If not, see <https://www.gnu.org/licenses/>.   *
  ******************************************************************************/
-#ifndef TMPL_TESTS_C_TO_R_ARRAY_EXACT_UNIT_TEST_H
-#define TMPL_TESTS_C_TO_R_ARRAY_EXACT_UNIT_TEST_H
+#ifndef TMPL_TEST_DAT2_TO_R_ARRAY_EXACT_UNIT_TEST_H
+#define TMPL_TEST_DAT2_TO_R_ARRAY_EXACT_UNIT_TEST_H
 
-#define TMPL_C_TO_R_ARRAY_EXACT_UNIT_TEST(type, ftype, func, inarr, outarr)    \
+#define TMPL_DAT2_TO_R_ARRAY_EXACT_UNIT_TEST_H(type, ftype, func, iarr, oarr)  \
 int main(void)                                                                 \
 {                                                                              \
-    const type in[] = inarr;                                                   \
-    const ftype out[] = outarr;                                                \
+    const type in[] = iarr;                                                    \
+    const ftype out[] = oarr;                                                  \
     const size_t zero = TMPL_CAST(0, size_t);                                  \
     const size_t number_of_samples = TMPL_ARRAY_SIZE(in);                      \
     size_t n;                                                                  \
