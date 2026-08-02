@@ -16,15 +16,33 @@
  *  You should have received a copy of the GNU General Public License         *
  *  along with libtmpl_tests.  If not, see <https://www.gnu.org/licenses/>.   *
  ******************************************************************************/
-#ifndef TMPL_TESTS_C2PTR_ARRAY_EXACT_UNIT_TEST_H
-#define TMPL_TESTS_C2PTR_ARRAY_EXACT_UNIT_TEST_H
+#ifndef TMPL_TESTS_DAT2_2PTR_TO_VOID_ARRAY_EXACT_UNIT_TEST_H
+#define TMPL_TESTS_DAT2_2PTR_TO_VOID_ARRAY_EXACT_UNIT_TEST_H
 
-#define TMPL_C2PTR_ARRAY_EXACT_UNIT_TEST(type, func, iarr0, iarr1, outarr)     \
+/******************************************************************************
+ *  Macro:                                                                    *
+ *      TMPL_DAT2_2PTR_TO_VOID_ARRAY_EXACT_UNIT_TEST                          *
+ *  Purpose:                                                                  *
+ *      Unit tests for functions of the form void f(p, q) where p and q are   *
+ *      pointers to structs containing type dat[2] array.                     *
+ *  Arguments:                                                                *
+ *      type:                                                                 *
+ *          The type of the data (float, double, long double).                *
+ *      func:                                                                 *
+ *          The libtmpl function being tested.                                *
+ *      ia0:                                                                  *
+ *          The first input argument.                                         *
+ *      ia1:                                                                  *
+ *          The second input argument.                                        *
+ *      oarr:                                                                 *
+ *          The solution array.                                               *
+ ******************************************************************************/
+#define TMPL_DAT2_2PTR_TO_VOID_ARRAY_EXACT_UNIT_TEST(type, func, ia0, ia1, oa) \
 int main(void)                                                                 \
 {                                                                              \
-    const type in0[] = iarr0;                                                  \
-    const type in1[] = iarr1;                                                  \
-    const type out[] = outarr;                                                 \
+    const type in0[] = ia0;                                                    \
+    const type in1[] = ia1;                                                    \
+    const type out[] = oa;                                                     \
     const size_t zero = TMPL_CAST(0, size_t);                                  \
     const size_t number_of_samples = TMPL_ARRAY_SIZE(in0);                     \
     size_t n;                                                                  \

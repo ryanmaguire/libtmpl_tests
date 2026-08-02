@@ -299,7 +299,7 @@ int main(void)                                                                 \
 #include "testtools/tmpl_tests_c_to_c_array_exact_unit_test.h"
 #include "testtools/tmpl_tests_c2_to_c_array_exact_unit_test.h"
 #include "testtools/tmpl_tests_c2_to_c_array_unit_test.h"
-#include "testtools/tmpl_tests_c2ptr_array_exact_unit_test.h"
+#include "testtools/tmpl_tests_dat2_ptr2_to_void_array_exact_unit_test.h"
 #include "testtools/tmpl_tests_c2ptr_dup_array_exact_unit_test.h"
 #include "testtools/tmpl_tests_dd_vs_gmp_unit_test.h"
 #include "testtools/tmpl_tests_dd_vs_gmp_pos_unit_test.h"
