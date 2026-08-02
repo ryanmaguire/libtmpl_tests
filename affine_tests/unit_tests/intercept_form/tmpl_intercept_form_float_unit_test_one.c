@@ -17,8 +17,20 @@
  *  along with libtmpl_tests.  If not, see <https://www.gnu.org/licenses/>.   *
  ******************************************************************************/
 #include "../../../libtmpl_tests.h"
-#define indata {{1.0F, 1.0F}, {2.0F, 1.0F}, {3.0F, 2.0F}, {0.5F, 2.0F}}
-#define outdata {{{1.0F, 1.0F}}, {{2.0F, 1.0F}}, {{1.5F, 2.0F}}, {{4.0F, 2.0F}}}
+#define indata {        \
+    {+1.0F, +1.0F},     \
+    {+2.0F, +1.0F},     \
+    {+4.0F, +2.0F},     \
+    {+0.5F, +2.0F}      \
+}
+
+#define outdata {       \
+    {{-1.0F, +1.0F}},   \
+    {{-0.5F, +1.0F}},   \
+    {{-0.5F, +2.0F}},   \
+    {{-4.0F, +2.0F}}    \
+}
+
 TMPL_R2_TO_TWOVEC_ARRAY_UNIT_TEST(
     float,
     tmpl_AffineFloat,
