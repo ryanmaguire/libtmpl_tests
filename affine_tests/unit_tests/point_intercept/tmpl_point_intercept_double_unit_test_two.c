@@ -18,23 +18,23 @@
  ******************************************************************************/
 #include "../../../libtmpl_tests.h"
 #define indata {        \
-    {1.0L, 1.0L, 1.0L}, \
-    {2.0L, 1.0L, 1.0L}, \
-    {2.0L, 2.0L, 1.0L}, \
-    {0.5L, 2.0L, 1.0L}  \
+    {1.0, 1.0, 2.0},    \
+    {2.0, 1.0, 2.0},    \
+    {2.0, 2.0, 2.0},    \
+    {0.5, 2.0, 2.0}     \
 }
 
 #define outdata {       \
-    {{+0.00L, +1.00L}}, \
-    {{+0.00L, +1.00L}}, \
-    {{+0.50L, +1.00L}}, \
-    {{+2.00L, +1.00L}}  \
+    {{-1.00, +2.00}},   \
+    {{-0.50, +2.00}},   \
+    {{+0.00, +2.00}},   \
+    {{+0.00, +2.00}}    \
 }
 
 TMPL_R3_TO_TWOVEC_ARRAY_UNIT_TEST(
-    float,
-    tmpl_AffineFloat,
-    tmpl_AffFloat_Point_Intercept,
+    double,
+    tmpl_AffineDouble,
+    tmpl_AffDouble_Point_Intercept,
     indata,
     outdata
 )
