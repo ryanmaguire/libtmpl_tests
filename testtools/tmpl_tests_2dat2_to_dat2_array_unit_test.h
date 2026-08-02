@@ -16,15 +16,15 @@
  *  You should have received a copy of the GNU General Public License         *
  *  along with libtmpl_tests.  If not, see <https://www.gnu.org/licenses/>.   *
  ******************************************************************************/
-#ifndef TMPL_TESTS_C2_TO_C_ARRAY_UNIT_TEST_H
-#define TMPL_TESTS_C2_TO_C_ARRAY_UNIT_TEST_H
+#ifndef TMPL_TESTS_2DAT2_TO_DAT2_ARRAY_UNIT_TEST_H
+#define TMPL_TESTS_2DAT2_TO_DAT2_ARRAY_UNIT_TEST_H
 
-#define TMPL_C2_TO_C_ARRAY_UNIT_TEST(type, ftype, func, inarr0, inarr1, outarr)\
+#define TMPL_2DAT2_TO_DAT2_ARRAY_UNIT_TEST(type, ftype, func, ia0, ia1, oa)    \
 int main(void)                                                                 \
 {                                                                              \
-    const type in0[] = inarr0;                                                 \
-    const type in1[] = inarr1;                                                 \
-    const type out[] = outarr;                                                 \
+    const type in0[] = ia0;                                                    \
+    const type in1[] = ia1;                                                    \
+    const type out[] = oa;                                                     \
     const size_t zero = TMPL_CAST(0, size_t);                                  \
     const size_t number_of_samples = TMPL_ARRAY_SIZE(in0);                     \
     const ftype eps = TMPL_DEFAULT_TOLERANCE * TMPL_EPS(out[0].dat[0]);        \

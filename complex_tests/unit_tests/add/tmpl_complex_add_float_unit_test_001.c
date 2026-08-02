@@ -38,6 +38,6 @@
     {{-2.0F, 0.0F}}   \
 }
 
-TMPL_C2_TO_C_ARRAY_EXACT_UNIT_TEST(
+TMPL_2DAT2_TO_DAT2_ARRAY_EXACT_UNIT_TEST(
     tmpl_ComplexFloat, tmpl_CFloat_Add, inarr0, inarr1, outarr
 )

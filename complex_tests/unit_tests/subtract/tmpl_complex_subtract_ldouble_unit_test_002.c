@@ -38,6 +38,6 @@
     {{-1.0L, +1.0L}}  \
 }
 
-TMPL_C2_TO_C_ARRAY_EXACT_UNIT_TEST(
+TMPL_2DAT2_TO_DAT2_ARRAY_EXACT_UNIT_TEST(
     tmpl_ComplexLongDouble, tmpl_CLDouble_Subtract, inarr0, inarr1, outarr
 )

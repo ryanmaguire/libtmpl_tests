@@ -38,6 +38,6 @@
     {{0.0, -1.0}}  \
 }
 
-TMPL_C2_TO_C_ARRAY_UNIT_TEST(
+TMPL_2DAT2_TO_DAT2_ARRAY_UNIT_TEST(
     tmpl_ComplexDouble, double, tmpl_CDouble_Divide, inarr0, inarr1, outarr
 )

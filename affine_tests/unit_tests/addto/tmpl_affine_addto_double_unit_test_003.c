@@ -38,6 +38,6 @@
     {{0.0, 0.0}}    \
 }
 
-TMPL_TWOVEC2_TO_VOID_ARRAY_EXACT_UNIT_TEST(
+TMPL_2DAT2_PTR_TO_VOID_ARRAY_EXACT_UNIT_TEST(
     tmpl_AffineDouble, tmpl_AffDouble_AddTo, inarr0, inarr1, outarr
 )
