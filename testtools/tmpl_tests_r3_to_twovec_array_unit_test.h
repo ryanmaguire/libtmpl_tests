@@ -62,7 +62,11 @@ int main(void)                                                                 \
         const tmpl_Bool y_val_is_nan = TMPL_IS_NAN(output.dat[1]);             \
         const tmpl_Bool x_out_is_nan = TMPL_IS_NAN(out[n].dat[0]);             \
         const tmpl_Bool y_out_is_nan = TMPL_IS_NAN(out[n].dat[1]);             \
-        if ((x_val_is_nan == x_out_is_nan) && (y_val_is_nan == y_out_is_nan))  \
+        const tmpl_Bool x_nan_match = (x_val_is_nan == x_out_is_nan);          \
+        const tmpl_Bool x_nan_pass = (x_val_is_nan && x_nan_match);            \
+        const tmpl_Bool y_nan_match = (y_val_is_nan == y_out_is_nan);          \
+        const tmpl_Bool y_nan_pass = (y_val_is_nan && y_nan_match);            \
+        if (x_nan_pass && y_nan_pass)                                          \
             continue;                                                          \
         else if ((xerr > eps) || (yerr > eps))                                 \
         {                                                                      \
@@ -73,14 +77,14 @@ int main(void)                                                                 \
             const long double xother = TMPL_CAST(out[n].dat[0], long double);  \
             const long double yother = TMPL_CAST(out[n].dat[0], long double);  \
             puts("FAIL");                                                      \
-            printf("    Input x = %+.40LE\n", xin);                            \
-            printf("    Input y = %+.40LE\n", yin);                            \
+            printf("    Input x   = %+.40LE\n", xin);                          \
+            printf("    Input y   = %+.40LE\n", yin);                          \
             printf("    libtmpl x = %+.40LE\n", xout);                         \
             printf("    libtmpl y = %+.40LE\n", yout);                         \
-            printf("    Other x = %+.40LE\n", xother);                         \
-            printf("    Other y = %+.40LE\n", yother);                         \
-            printf("    x Error = %+.40LE\n", TMPL_CAST(xerr, long double));   \
-            printf("    y Error = %+.40LE\n", TMPL_CAST(yerr, long double));   \
+            printf("    Other x   = %+.40LE\n", xother);                       \
+            printf("    Other y   = %+.40LE\n", yother);                       \
+            printf("    x Error   = %+.40LE\n", TMPL_CAST(xerr, long double)); \
+            printf("    y Error   = %+.40LE\n", TMPL_CAST(yerr, long double)); \
             return -1;                                                         \
         }                                                                      \
     }                                                                          \

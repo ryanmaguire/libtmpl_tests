@@ -24,8 +24,6 @@
 #include <gmp.h>
 #include <string.h>
 #include <libtmpl/include/generic/tmpl_eps.h>
-#include <libtmpl/include/generic/tmpl_is_inf.h>
-#include <libtmpl/include/generic/tmpl_is_nan.h>
 #include "tmpl_tests_mpf_get_ld.h"
 #include "tmpl_tests_mpf_set_ld.h"
 #include "tmpl_tests_dd_create.h"
