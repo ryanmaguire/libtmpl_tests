@@ -16,8 +16,8 @@
  *  You should have received a copy of the GNU General Public License         *
  *  along with libtmpl_tests.  If not, see <https://www.gnu.org/licenses/>.   *
  ******************************************************************************/
-#ifndef TMPL_TESTS_REAL_AUT_ODE2_INTERVAL_UNIT_TEST_H
-#define TMPL_TESTS_REAL_AUT_ODE2_INTERVAL_UNIT_TEST_H
+#ifndef TMPL_TESTS_REAL_AUT_ODE2_2POS_INTERVAL_UNIT_TEST_H
+#define TMPL_TESTS_REAL_AUT_ODE2_2POS_INTERVAL_UNIT_TEST_H
 #include <libtmpl/include/compat/tmpl_cast.h>
 #include <libtmpl/include/helper/tmpl_error_value.h>
 #include <libtmpl/include/helper/tmpl_max.h>
@@ -28,7 +28,7 @@
 
 /******************************************************************************
  *  Macro:                                                                    *
- *      TMPL_REAL_AUT_ODE2_INTERVAL_UNIT_TEST                                 *
+ *      TMPL_REAL_AUT_ODE_INTERVAL_UNIT_TEST                                  *
  *  Purpose:                                                                  *
  *      Test autonomous numerical ODE methods.                                *
  *  Arguments:                                                                *
@@ -47,7 +47,7 @@
  *      ord:                                                                  *
  *          The order of the error for the numerical method.                  *
  ******************************************************************************/
-#define TMPL_REAL_AUT_ODE2_INTERVAL_UNIT_TEST(type, l, r, sol, f, g, ord)      \
+#define TMPL_REAL_AUT_ODE2_2POS_INTERVAL_UNIT_TEST(type, l, r, sol, f, g, ord) \
 int main(void)                                                                 \
 {                                                                              \
     const size_t one = TMPL_CAST(1, size_t);                                   \
@@ -60,17 +60,18 @@ int main(void)                                                                 \
     const type ode_eps = TMPL_CAST(ode_eps_ld, type);                          \
     const type min_eps = TMPL_DEFAULT_TOLERANCE * TMPL_EPS(dx);                \
     const type eps = TMPL_MAX(ode_eps, min_eps);                               \
-    type z_old = g(start);                                                     \
-    type v = 0.0;                                                              \
+    type z_old0 = g(start);                                                    \
+    type z_old1 = z_old0;                                                      \
     for (n = one; n <= number_of_samples; ++n)                                 \
     {                                                                          \
         const type x = TMPL_CAST(n, type) * dx + start;                        \
-        const type y = sol(f, z_old, &v, dx);                                  \
+        const type y = sol(f, z_old0, z_old1, dx);                             \
         const type z = g(x);                                                   \
         const tmpl_Bool y_is_nan = TMPL_IS_NAN(y);                             \
         const tmpl_Bool z_is_nan = TMPL_IS_NAN(z);                             \
         const type err = TMPL_ERROR_VALUE(y, z);                               \
-        z_old = z;                                                             \
+        z_old0 = z_old1;                                                       \
+        z_old1 = z;                                                            \
         if (y_is_nan && z_is_nan)                                              \
             continue;                                                          \
         else if ((y_is_nan != z_is_nan) || (err > eps))                        \
