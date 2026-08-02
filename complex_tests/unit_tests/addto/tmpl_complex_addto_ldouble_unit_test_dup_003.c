@@ -31,6 +31,6 @@
     {{-2.0L, -2.0L}}  \
 }
 
-TMPL_C2PTR_DUP_ARRAY_EXACT_UNIT_TEST(
+TMPL_DAT2_2PTR_TO_VOID_DUP_ARRAY_EXACT_UNIT_TEST(
     tmpl_ComplexLongDouble, tmpl_CLDouble_AddTo, inarr, outarr
 )

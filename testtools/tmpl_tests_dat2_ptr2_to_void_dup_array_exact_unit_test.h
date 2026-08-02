@@ -16,10 +16,26 @@
  *  You should have received a copy of the GNU General Public License         *
  *  along with libtmpl_tests.  If not, see <https://www.gnu.org/licenses/>.   *
  ******************************************************************************/
-#ifndef TMPL_TESTS_C2PTR_DUP_ARRAY_EXACT_UNIT_TEST_H
-#define TMPL_TESTS_C2PTR_DUP_ARRAY_EXACT_UNIT_TEST_H
+#ifndef TMPL_TESTS_DAT2_2PTR_TO_VOID_DUP_ARRAY_EXACT_UNIT_TEST_H
+#define TMPL_TESTS_DAT2_2PTR_TO_VOID_DUP_ARRAY_EXACT_UNIT_TEST_H
 
-#define TMPL_C2PTR_DUP_ARRAY_EXACT_UNIT_TEST(type, func, inarr, outarr)        \
+/******************************************************************************
+ *  Macro:                                                                    *
+ *      TMPL_DAT2_2PTR_TO_VOID_DUP_ARRAY_EXACT_UNIT_TEST                      *
+ *  Purpose:                                                                  *
+ *      Unit tests for functions of the form void f(p, p) where p is a        *
+ *      pointer to a struct containing type dat[2] array.                     *
+ *  Arguments:                                                                *
+ *      type:                                                                 *
+ *          The type of the data (float, double, long double).                *
+ *      func:                                                                 *
+ *          The libtmpl function being tested.                                *
+ *      ia:                                                                   *
+ *          The first input argument.                                         *
+ *      oarr:                                                                 *
+ *          The solution array.                                               *
+ ******************************************************************************/
+#define TMPL_DAT2_2PTR_TO_VOID_DUP_ARRAY_EXACT_UNIT_TEST(type, func, ia, oa)   \
 int main(void)                                                                 \
 {                                                                              \
     const type in[] = inarr;                                                   \
