@@ -31,6 +31,6 @@
     {{-1.0F, 0.0F}}   \
 }
 
-TMPL_DAT2_2PTR_TO_VOID_DUP_ARRAY_EXACT_UNIT_TEST(
+TMPL_2DAT2_PTR_TO_VOID_DUP_ARRAY_EXACT_UNIT_TEST(
     tmpl_ComplexFloat, tmpl_CFloat_MultiplyBy, inarr, outarr
 )

@@ -16,8 +16,8 @@
  *  You should have received a copy of the GNU General Public License         *
  *  along with libtmpl_tests.  If not, see <https://www.gnu.org/licenses/>.   *
  ******************************************************************************/
-#ifndef TMPL_TESTS_DAT2_2PTR_TO_VOID_DUP_ARRAY_EXACT_UNIT_TEST_H
-#define TMPL_TESTS_DAT2_2PTR_TO_VOID_DUP_ARRAY_EXACT_UNIT_TEST_H
+#ifndef TMPL_TESTS_2DAT2_PTR_TO_VOID_DUP_ARRAY_EXACT_UNIT_TEST_H
+#define TMPL_TESTS_2DAT2_PTR_TO_VOID_DUP_ARRAY_EXACT_UNIT_TEST_H
 
 /******************************************************************************
  *  Macro:                                                                    *
@@ -35,7 +35,7 @@
  *      oarr:                                                                 *
  *          The solution array.                                               *
  ******************************************************************************/
-#define TMPL_DAT2_2PTR_TO_VOID_DUP_ARRAY_EXACT_UNIT_TEST(type, func, ia, oa)   \
+#define TMPL_2DAT2_PTR_TO_VOID_DUP_ARRAY_EXACT_UNIT_TEST(type, func, ia, oa)   \
 int main(void)                                                                 \
 {                                                                              \
     const type in[] = inarr;                                                   \

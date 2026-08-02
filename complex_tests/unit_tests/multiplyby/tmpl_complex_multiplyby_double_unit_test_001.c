@@ -38,6 +38,6 @@
     {{+1.0, 0.0}}   \
 }
 
-TMPL_DAT2_2PTR_TO_VOID_ARRAY_EXACT_UNIT_TEST(
+TMPL_2DAT2_PTR_TO_VOID_ARRAY_EXACT_UNIT_TEST(
     tmpl_ComplexDouble, tmpl_CDouble_MultiplyBy, inarr0, inarr1, outarr
 )

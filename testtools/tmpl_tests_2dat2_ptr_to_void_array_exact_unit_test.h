@@ -16,12 +16,12 @@
  *  You should have received a copy of the GNU General Public License         *
  *  along with libtmpl_tests.  If not, see <https://www.gnu.org/licenses/>.   *
  ******************************************************************************/
-#ifndef TMPL_TESTS_DAT2_2PTR_TO_VOID_ARRAY_EXACT_UNIT_TEST_H
-#define TMPL_TESTS_DAT2_2PTR_TO_VOID_ARRAY_EXACT_UNIT_TEST_H
+#ifndef TMPL_TESTS_2DAT2_PTR_TO_VOID_ARRAY_EXACT_UNIT_TEST_H
+#define TMPL_TESTS_2DAT2_PTR_TO_VOID_ARRAY_EXACT_UNIT_TEST_H
 
 /******************************************************************************
  *  Macro:                                                                    *
- *      TMPL_DAT2_2PTR_TO_VOID_ARRAY_EXACT_UNIT_TEST                          *
+ *      TMPL_2DAT2_PTR_TO_VOID_ARRAY_EXACT_UNIT_TEST                          *
  *  Purpose:                                                                  *
  *      Unit tests for functions of the form void f(p, q) where p and q are   *
  *      pointers to structs containing type dat[2] array.                     *
@@ -37,7 +37,7 @@
  *      oarr:                                                                 *
  *          The solution array.                                               *
  ******************************************************************************/
-#define TMPL_DAT2_2PTR_TO_VOID_ARRAY_EXACT_UNIT_TEST(type, func, ia0, ia1, oa) \
+#define TMPL_2DAT2_PTR_TO_VOID_ARRAY_EXACT_UNIT_TEST(type, func, ia0, ia1, oa) \
 int main(void)                                                                 \
 {                                                                              \
     const type in0[] = ia0;                                                    \
