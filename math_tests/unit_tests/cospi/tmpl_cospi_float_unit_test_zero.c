@@ -17,6 +17,10 @@
  *  along with libtmpl_tests.  If not, see <https://www.gnu.org/licenses/>.   *
  ******************************************************************************/
 #include "../../../libtmpl_tests.h"
+#ifndef TMPL_NO_C23_MATH
 #define indata {0.0F, -0.0F}
 #define outdata {1.0F, 1.0F}
 TMPL_R_TO_R_ARRAY_EXACT_UNIT_TEST(float, tmpl_Float_CosPi, indata, outdata)
+#else
+TMPL_NOT_TESTED_UNIT_TEST
+#endif

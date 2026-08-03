@@ -20,6 +20,10 @@
 #define TMPL_NSAMPS (1E7)
 #endif
 #include "../../../libtmpl_tests.h"
+#ifndef TMPL_NO_C23_MATH
 TMPL_R_TO_R_VS_FROM_INTERVAL_UNIT_TEST(
     float, -1.0E0F, 1.0E0F, tmpl_Float_CosPi, cospif
 )
+#else
+TMPL_NOT_TESTED_UNIT_TEST
+#endif

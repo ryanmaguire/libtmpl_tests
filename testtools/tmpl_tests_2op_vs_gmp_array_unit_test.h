@@ -116,11 +116,10 @@ FAIL:                                                                          \
 
 #else
 
+#include "tmpl_tests_not_tested_unit_test.h"
+
 #define TMPL_2OP_VS_GMP_ARRAY_UNIT_TEST(type, func, mpf_op, inx, iny)          \
-int main(void)                                                                 \
-{                                                                              \
-    puts("NOT TESTED");                                                        \
-}
+TMPL_NOT_TESTED_UNIT_TEST
 
 #endif
 

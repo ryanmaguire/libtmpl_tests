@@ -313,6 +313,7 @@ int main(void)                                                                 \
 #include "testtools/tmpl_tests_int_array_int_size_t_out_unit_test.h"
 #include "testtools/tmpl_tests_logdiff_plot.h"
 #include "testtools/tmpl_tests_plot_func.h"
+#include "testtools/tmpl_tests_not_tested_unit_test.h"
 #include "testtools/tmpl_tests_real_aut_ode_interval_unit_test.h"
 #include "testtools/tmpl_tests_real_aut_ode2_interval_unit_test.h"
 #include "testtools/tmpl_tests_real_aut_ode2_pos2_interval_unit_test.h"

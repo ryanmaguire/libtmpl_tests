@@ -98,11 +98,10 @@ int main(void)                                                                 \
 
 #else
 
+#include "tmpl_tests_not_tested_unit_test.h"
+
 #define TMPL_2OP_VS_GMP_INTERVAL_UNIT_TEST(dtype, func, mpf_op)                \
-int main(void)                                                                 \
-{                                                                              \
-    puts("NOT TESTED");                                                        \
-}
+TMPL_NOT_TESTED_UNIT_TEST
 
 #endif
 
