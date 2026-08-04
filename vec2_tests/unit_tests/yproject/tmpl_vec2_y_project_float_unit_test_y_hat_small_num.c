@@ -31,6 +31,6 @@
     {{0.0F, -DNUMF}}    \
 }
 
-TMPL_TWOVEC_TO_TWOVEC_ARRAY_EXACT_UNIT_TEST(
+TMPL_DAT2_PTR_TO_DAT2_ARRAY_EXACT_UNIT_TEST(
     tmpl_TwoVectorFloat, tmpl_2DFloat_Y_Project, inarr, outarr
 )

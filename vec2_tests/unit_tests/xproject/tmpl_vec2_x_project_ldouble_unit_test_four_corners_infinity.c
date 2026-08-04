@@ -31,6 +31,6 @@
     {{-TMPL_INFINITYL, 0.0L}}   \
 }
 
-TMPL_TWOVEC_TO_TWOVEC_ARRAY_EXACT_UNIT_TEST(
+TMPL_DAT2_PTR_TO_DAT2_ARRAY_EXACT_UNIT_TEST(
     tmpl_TwoVectorLongDouble, tmpl_2DLDouble_X_Project, inarr, outarr
 )
