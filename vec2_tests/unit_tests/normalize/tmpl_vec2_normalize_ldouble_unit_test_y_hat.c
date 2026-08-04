@@ -31,7 +31,7 @@
     {{0.0L, -1.0L}}   \
 }
 
-TMPL_TWOVEC_TO_TWOVEC_ARRAY_UNIT_TEST(
+TMPL_DAT2_PTR_TO_DAT2_ARRAY_UNIT_TEST(
     tmpl_TwoVectorLongDouble, long double,
     tmpl_2DLDouble_Normalize, inarr, outarr
 )

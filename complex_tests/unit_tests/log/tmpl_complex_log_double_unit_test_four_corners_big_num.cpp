@@ -24,6 +24,12 @@
     {{-BNUM, -BNUM}}    \
 }
 
-TMPL_C_TO_C_VS_FROM_ARRAY_UNIT_TEST(
-    tmpl_ComplexDouble, double, tmpl_CDouble_Log, std::log, inarray
+TMPL_DAT2_TO_DAT2_VS_ARRAY_UNIT_TEST(
+    tmpl_ComplexDouble,
+    std::complex<double>,
+    double,
+    cpp_gen_complex,
+    tmpl_CDouble_Log,
+    std::log,
+    inarray
 )

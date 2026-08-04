@@ -31,6 +31,6 @@
     {{-1.0, 0.0}}   \
 }
 
-TMPL_TWOVEC_TO_TWOVEC_ARRAY_UNIT_TEST(
+TMPL_DAT2_PTR_TO_DAT2_ARRAY_UNIT_TEST(
     tmpl_TwoVectorDouble, double, tmpl_2DDouble_Normalize, inarr, outarr
 )

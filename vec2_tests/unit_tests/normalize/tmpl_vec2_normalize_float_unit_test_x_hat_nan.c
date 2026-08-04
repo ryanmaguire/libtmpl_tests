@@ -31,6 +31,6 @@
     {{TMPL_NANF, TMPL_NANF}}  \
 }
 
-TMPL_TWOVEC_TO_TWOVEC_ARRAY_UNIT_TEST(
+TMPL_DAT2_PTR_TO_DAT2_ARRAY_UNIT_TEST(
     tmpl_TwoVectorFloat, float, tmpl_2DFloat_Normalize, inarr, outarr
 )

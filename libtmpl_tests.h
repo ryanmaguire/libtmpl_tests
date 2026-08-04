@@ -301,7 +301,10 @@ int main(void)                                                                 \
 #include "testtools/tmpl_tests_dat2_to_dat2_array_exact_unit_test.h"
 #include "testtools/tmpl_tests_dat2_to_r_array_unit_test.h"
 #include "testtools/tmpl_tests_dat2_to_r_array_exact_unit_test.h"
-#include "testtools/tmpl_tests_c_to_c_array_unit_test.h"
+#include "testtools/tmpl_tests_dat2_to_dat2_array_unit_test.h"
+#include "testtools/tmpl_tests_dat2_to_dat2_vs_array_unit_test.h"
+#include "testtools/tmpl_tests_dat2_ptr_to_dat2_array_unit_test.h"
+#include "testtools/tmpl_tests_dat2_ptr_to_dat2_array_exact_unit_test.h"
 #include "testtools/tmpl_tests_dd_vs_gmp_unit_test.h"
 #include "testtools/tmpl_tests_dd_vs_gmp_pos_unit_test.h"
 #include "testtools/tmpl_tests_diff_plot.h"
@@ -332,15 +335,13 @@ int main(void)                                                                 \
 #include "testtools/tmpl_tests_rn_to_r_single_unit_test.h"
 #include "testtools/tmpl_tests_twovec_to_r_array_unit_test.h"
 #include "testtools/tmpl_tests_twovec_to_r_array_exact_unit_test.h"
-#include "testtools/tmpl_tests_twovec_to_twovec_array_unit_test.h"
-#include "testtools/tmpl_tests_twovec_to_twovec_array_exact_unit_test.h"
 #include "testtools/tmpl_tests_threevec_to_r_vs_xyz_time_test.h"
 #include "testtools/tmpl_tests_threevec2_vs_xyz_time_test.h"
 #include "testtools/tmpl_tests_threevec2_to_r_vs_arr_time_test.h"
 #include "testtools/tmpl_tests_threevec2_to_r_vs_xyz_time_test.h"
 
 #ifdef __cplusplus
-#include "testtools/tmpl_tests_c_to_c_vs_from_array_unit_test.hpp"
+#include "testtools/tmpl_cpp_complex_gen.hpp"
 #endif
 
 #define TMPL_TEST_MIXED_FUNC_UNIT_TEST(T0, T1, gen, compare, fail, f0, f1)     \

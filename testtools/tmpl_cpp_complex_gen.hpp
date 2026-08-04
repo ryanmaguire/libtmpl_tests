@@ -16,22 +16,15 @@
  *  You should have received a copy of the GNU General Public License         *
  *  along with libtmpl_tests.  If not, see <https://www.gnu.org/licenses/>.   *
  ******************************************************************************/
-#include "../../../libtmpl_tests.h"
-#define VAL 7.071067811865475244008443621048490392848359376884740365883399E-01
-#define inarr {         \
-    {{+DNUM, +DNUM}},   \
-    {{+DNUM, -DNUM}},   \
-    {{-DNUM, +DNUM}},   \
-    {{-DNUM, -DNUM}}    \
+ #ifndef TMPL_CPP_COMPLEX_GEN_HPP
+ #define TMPL_CPP_COMPLEX_GEN_HPP
+
+#include <complex>
+
+template <typename T>
+std::complex<T> cpp_gen_complex(T x, T y)
+{
+    return std::complex<T>(x, y);
 }
 
-#define outarr {    \
-    {{+VAL, +VAL}}, \
-    {{+VAL, -VAL}}, \
-    {{-VAL, +VAL}}, \
-    {{-VAL, -VAL}}  \
-}
-
-TMPL_DAT2_PTR_TO_DAT2_ARRAY_UNIT_TEST(
-    tmpl_TwoVectorDouble, double, tmpl_2DDouble_Normalize, inarr, outarr
-)
+#endif

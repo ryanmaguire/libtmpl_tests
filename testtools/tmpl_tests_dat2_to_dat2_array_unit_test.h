@@ -16,53 +16,72 @@
  *  You should have received a copy of the GNU General Public License         *
  *  along with libtmpl_tests.  If not, see <https://www.gnu.org/licenses/>.   *
  ******************************************************************************/
-#ifndef TMPL_TESTS_TWOVEC2_TO_TWOVEC_ARRAY_UNIT_TEST_H
-#define TMPL_TESTS_TWOVEC2_TO_TWOVEC_ARRAY_UNIT_TEST_H
+#ifndef TMPL_TESTS_DAT2_TO_DAT2_ARRAY_UNIT_TEST_H
+#define TMPL_TESTS_DAT2_TO_DAT2_ARRAY_UNIT_TEST_H
+#include <libtmpl/include/compat/tmpl_cast.h>
+#include <libtmpl/include/helper/tmpl_array_size.h>
+#include <libtmpl/include/helper/tmpl_error_value.h>
+#include <libtmpl/include/generic/tmpl_eps.h>
+#include <libtmpl/include/generic/tmpl_is_nan.h>
+#include <stddef.h>
+#include <stdio.h>
 
-#define TMPL_TWOVEC2_TO_TWOVEC_ARRAY_UNIT_TEST(type, func, i0, i1, oarr)       \
+/******************************************************************************
+ *  Macro:                                                                    *
+ *      TMPL_DAT2_TO_DAT2_ARRAY_UNIT_TEST                                     *
+ *  Purpose:                                                                  *
+ *      Test functions of the form f: R -> R over a given array.              *
+ *  Arguments:                                                                *
+ *      type:                                                                 *
+ *          The data type (tmpl_ComplexDouble, etc.).                         *
+ *      ftype:                                                                *
+ *          The float type (double, etc.).                                    *
+ *      func:                                                                 *
+ *          The libtmpl function being tested.                                *
+ *      indata:                                                               *
+ *          The input array.                                                  *
+ *      outdata:                                                              *
+ *          The output array. To pass we need |func(indata) - outdata| small. *
+ ******************************************************************************/
+#define TMPL_DAT2_TO_DAT2_ARRAY_UNIT_TEST(type, ftype, func, inarr, outarr)    \
 int main(void)                                                                 \
 {                                                                              \
-    const type in0[] = i0;                                                     \
-    const type in1[] = i1;                                                     \
-    const type out[] = oarr;                                                   \
-    const ftype eps = TMPL_DEFAULT_TOLERANCE * TMPL_EPS(out[0]);               \
+    const type in[] = inarr;                                                   \
+    const type out[] = outarr;                                                 \
     const size_t zero = TMPL_CAST(0, size_t);                                  \
-    const size_t number_of_samples = TMPL_ARRAY_SIZE(in0);                     \
+    const size_t number_of_samples = TMPL_ARRAY_SIZE(in);                      \
+    const ftype eps = TMPL_DEFAULT_TOLERANCE * TMPL_EPS(out[0].dat[0]);        \
     size_t n;                                                                  \
     for (n = zero; n < number_of_samples; ++n)                                 \
     {                                                                          \
-        const type output = func(&in0[n], &in1[n]);                            \
-        const ftype x_err = TMPL_ERROR_VALUE(output.dat[0], out[n].dat[0]);    \
-        const ftype y_err = TMPL_ERROR_VALUE(output.dat[1], out[n].dat[1]);    \
+        const type output = func(in[n]);                                       \
         const tmpl_Bool xval_is_nan = TMPL_IS_NAN(output.dat[0]);              \
         const tmpl_Bool yval_is_nan = TMPL_IS_NAN(output.dat[1]);              \
         const tmpl_Bool xout_is_nan = TMPL_IS_NAN(out[n].dat[0]);              \
         const tmpl_Bool yout_is_nan = TMPL_IS_NAN(out[n].dat[1]);              \
-        const tmpl_Bool x_err_pass = (x_err < eps);                            \
-        const tmpl_Bool y_err_pass = (y_err < eps);                            \
+        const ftype x_err = TMPL_ERROR_VALUE(output.dat[0], out[n].dat[0]);    \
+        const ftype y_err = TMPL_ERROR_VALUE(output.dat[1], out[n].dat[1]);    \
+        const tmpl_Bool x_good = (x_err < eps);                                \
+        const tmpl_Bool y_good = (y_err < eps);                                \
         const tmpl_Bool xnan_pass = (xval_is_nan && xout_is_nan);              \
         const tmpl_Bool ynan_pass = (yval_is_nan && yout_is_nan);              \
         const tmpl_Bool xnan_equal = (xval_is_nan == xout_is_nan);             \
         const tmpl_Bool ynan_equal = (yval_is_nan == yout_is_nan);             \
-        const tmpl_Bool x_val_pass = (xnan_pass || (x_err_pass && xnan_equal));\
-        const tmpl_Bool y_val_pass = (ynan_pass || (y_err_pass && ynan_equal));\
+        const tmpl_Bool x_pass = (xnan_pass || (x_good && xnan_equal));        \
+        const tmpl_Bool y_pass = (ynan_pass || (y_good && ynan_equal));        \
         if ((!x_pass) || (!y_pass))                                            \
         {                                                                      \
-            const long double x0 = TMPL_CAST(in0[n].dat[0], long double);      \
-            const long double y0 = TMPL_CAST(in0[n].dat[1], long double);      \
-            const long double x1 = TMPL_CAST(in1[n].dat[0], long double);      \
-            const long double y1 = TMPL_CAST(in1[n].dat[1], long double);      \
+            const long double x = TMPL_CAST(in[n].dat[0], long double);        \
+            const long double y = TMPL_CAST(in[n].dat[1], long double);        \
             const long double xl = TMPL_CAST(output.dat[0], long double);      \
             const long double yl = TMPL_CAST(output.dat[1], long double);      \
             const long double xc = TMPL_CAST(out[n].dat[0], long double);      \
             const long double yc = TMPL_CAST(out[n].dat[1], long double);      \
-            const long double xerr = TMPL_ERROR_VALUE(xl, xc);                 \
-            const long double yerr = TMPL_ERROR_VALUE(yl, yc);                 \
+            const long double xerr = TMPL_CAST(x_err, long double);            \
+            const long double yerr = TMPL_CAST(y_err, long double);            \
             puts("FAIL");                                                      \
-            printf("    Input x0  = %+.40LE\n", x0);                           \
-            printf("    Input y0  = %+.40LE\n", y0);                           \
-            printf("    Input x1  = %+.40LE\n", x1);                           \
-            printf("    Input y1  = %+.40LE\n", y1);                           \
+            printf("    Input x   = %+.40LE\n", x);                            \
+            printf("    Input y   = %+.40LE\n", y);                            \
             printf("    libtmpl x = %+.40LE\n", xl);                           \
             printf("    libtmpl y = %+.40LE\n", yl);                           \
             printf("    Other x   = %+.40LE\n", xc);                           \
