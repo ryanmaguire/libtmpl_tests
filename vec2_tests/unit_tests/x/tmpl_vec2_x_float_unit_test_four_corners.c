@@ -24,6 +24,6 @@
     {{-1.0F, -1.0F}}    \
 }
 #define outarr {1.0F, 1.0F, -1.0F, -1.0F}
-TMPL_TWOVEC_TO_R_ARRAY_UNIT_TEST(
+TMPL_DAT2_PTR_TO_R_ARRAY_UNIT_TEST(
     tmpl_TwoVectorFloat, float, tmpl_2DFloat_X, inarr, outarr
 )

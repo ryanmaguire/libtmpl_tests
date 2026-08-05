@@ -25,6 +25,6 @@
     {{-DNUMF, -DNUMF}}  \
 }
 #define outarr {val, val, -val, -val}
-TMPL_TWOVEC_TO_R_ARRAY_UNIT_TEST(
+TMPL_DAT2_PTR_TO_R_ARRAY_UNIT_TEST(
     tmpl_TwoVectorFloat, float, tmpl_2DFloat_X, inarr, outarr
 )

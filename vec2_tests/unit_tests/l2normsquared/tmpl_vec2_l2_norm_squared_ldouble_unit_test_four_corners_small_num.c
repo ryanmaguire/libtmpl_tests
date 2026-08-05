@@ -26,7 +26,7 @@
     {{-IN_VAL, -IN_VAL}}    \
 }
 #define outarr {OUT_VAL, OUT_VAL, OUT_VAL, OUT_VAL}
-TMPL_TWOVEC_TO_R_ARRAY_UNIT_TEST(
+TMPL_DAT2_PTR_TO_R_ARRAY_UNIT_TEST(
     tmpl_TwoVectorLongDouble, long double,
     tmpl_2DLDouble_L2_Norm_Squared, inarr, outarr
 )

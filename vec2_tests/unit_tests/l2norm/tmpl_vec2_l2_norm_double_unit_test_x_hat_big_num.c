@@ -24,6 +24,6 @@
     {{-BNUM, -0.0}}     \
 }
 #define outarr {BNUM, BNUM, BNUM, BNUM}
-TMPL_TWOVEC_TO_R_ARRAY_UNIT_TEST(
+TMPL_DAT2_PTR_TO_R_ARRAY_UNIT_TEST(
     tmpl_TwoVectorDouble, double, tmpl_2DDouble_L2_Norm, inarr, outarr
 )

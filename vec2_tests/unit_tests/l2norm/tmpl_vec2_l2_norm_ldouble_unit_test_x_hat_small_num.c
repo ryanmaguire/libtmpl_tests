@@ -24,6 +24,6 @@
     {{-DNUML, -0.0L}}   \
 }
 #define outarr {DNUML, DNUML, DNUML, DNUML}
-TMPL_TWOVEC_TO_R_ARRAY_UNIT_TEST(
+TMPL_DAT2_PTR_TO_R_ARRAY_UNIT_TEST(
     tmpl_TwoVectorLongDouble, long double, tmpl_2DLDouble_L2_Norm, inarr, outarr
 )

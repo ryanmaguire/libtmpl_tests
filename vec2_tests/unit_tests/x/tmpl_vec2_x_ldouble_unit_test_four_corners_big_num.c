@@ -24,6 +24,6 @@
     {{-0.5L * BNUML, -0.5L * BNUML}}    \
 }
 #define outarr {+0.5L * BNUML, +0.5L * BNUML, -0.5L * BNUML, -0.5L * BNUML}
-TMPL_TWOVEC_TO_R_ARRAY_UNIT_TEST(
+TMPL_DAT2_PTR_TO_R_ARRAY_UNIT_TEST(
     tmpl_TwoVectorLongDouble, long double, tmpl_2DLDouble_X, inarr, outarr
 )
