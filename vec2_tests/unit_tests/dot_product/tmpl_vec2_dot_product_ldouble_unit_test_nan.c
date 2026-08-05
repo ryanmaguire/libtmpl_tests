@@ -18,25 +18,25 @@
  ******************************************************************************/
 #include "../../../libtmpl_tests.h"
 #define inarr0 {                \
-    {{+TMPL_NANF, +TMPL_NANF}},   \
-    {{+TMPL_NANF, -TMPL_NANF}},   \
-    {{-TMPL_NANF, +TMPL_NANF}},   \
-    {{-TMPL_NANF, -TMPL_NANF}}    \
+    {{+TMPL_NANL, +TMPL_NANL}},   \
+    {{+TMPL_NANL, -TMPL_NANL}},   \
+    {{-TMPL_NANL, +TMPL_NANL}},   \
+    {{-TMPL_NANL, -TMPL_NANL}}    \
 }
 
 #define inarr1 {                \
-    {{+TMPL_NANF, +TMPL_NANF}},   \
-    {{+TMPL_NANF, -TMPL_NANF}},   \
-    {{-TMPL_NANF, +TMPL_NANF}},   \
-    {{-TMPL_NANF, -TMPL_NANF}}    \
+    {{+TMPL_NANL, +TMPL_NANL}},   \
+    {{+TMPL_NANL, -TMPL_NANL}},   \
+    {{-TMPL_NANL, +TMPL_NANL}},   \
+    {{-TMPL_NANL, -TMPL_NANL}}    \
 }
 
-#define outarr {TMPL_NANF, TMPL_NANF, TMPL_NANF, TMPL_NANF}
+#define outarr {TMPL_NANL, TMPL_NANL, TMPL_NANL, TMPL_NANL}
 
 TMPL_2DAT2_PTR_TO_R_ARRAY_EXACT_UNIT_TEST(
-    tmpl_TwoVectorFloat,
-    float,
-    tmpl_2DFloat_Dot_Product,
+    tmpl_TwoVectorLongDouble,
+    long double,
+    tmpl_2DLDouble_Dot_Product,
     inarr0,
     inarr1,
     outarr

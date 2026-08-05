@@ -18,18 +18,18 @@
  ******************************************************************************/
 #include "../../../libtmpl_tests.h"
 #define inarr {     \
-    {{+1.0F, +1.0F}}, \
-    {{+1.0F, -1.0F}}, \
-    {{-1.0F, +1.0F}}, \
-    {{-1.0F, -1.0F}}  \
+    {{+1.0L, +1.0L}}, \
+    {{+1.0L, -1.0L}}, \
+    {{-1.0L, +1.0L}}, \
+    {{-1.0L, -1.0L}}  \
 }
 
-#define outarr {+2.0F, +2.0F, +2.0F, +2.0F}
+#define outarr {+2.0L, +2.0L, +2.0L, +2.0L}
 
 TMPL_2DAT2_PTR_TO_R_DUP_ARRAY_EXACT_UNIT_TEST(
-    tmpl_TwoVectorFloat,
-    float,
-    tmpl_2DFloat_Dot_Product,
+    tmpl_TwoVectorLongDouble,
+    long double,
+    tmpl_2DLDouble_Dot_Product,
     inarr,
     outarr
 )

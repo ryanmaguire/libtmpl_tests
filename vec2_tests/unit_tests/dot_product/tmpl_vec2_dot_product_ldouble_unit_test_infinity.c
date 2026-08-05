@@ -18,25 +18,25 @@
  ******************************************************************************/
 #include "../../../libtmpl_tests.h"
 #define inarr0 {                        \
-    {{+TMPL_INFINITYF, +TMPL_INFINITYF}}, \
-    {{+TMPL_INFINITYF, -TMPL_INFINITYF}}, \
-    {{-TMPL_INFINITYF, +TMPL_INFINITYF}}, \
-    {{-TMPL_INFINITYF, -TMPL_INFINITYF}}  \
+    {{+TMPL_INFINITYL, +TMPL_INFINITYL}}, \
+    {{+TMPL_INFINITYL, -TMPL_INFINITYL}}, \
+    {{-TMPL_INFINITYL, +TMPL_INFINITYL}}, \
+    {{-TMPL_INFINITYL, -TMPL_INFINITYL}}  \
 }
 
 #define inarr1 {                        \
-    {{+TMPL_INFINITYF, +TMPL_INFINITYF}}, \
-    {{+TMPL_INFINITYF, -TMPL_INFINITYF}}, \
-    {{-TMPL_INFINITYF, +TMPL_INFINITYF}}, \
-    {{-TMPL_INFINITYF, -TMPL_INFINITYF}}  \
+    {{+TMPL_INFINITYL, +TMPL_INFINITYL}}, \
+    {{+TMPL_INFINITYL, -TMPL_INFINITYL}}, \
+    {{-TMPL_INFINITYL, +TMPL_INFINITYL}}, \
+    {{-TMPL_INFINITYL, -TMPL_INFINITYL}}  \
 }
 
-#define outarr {TMPL_INFINITYF, TMPL_INFINITYF, TMPL_INFINITYF, TMPL_INFINITYF}
+#define outarr {TMPL_INFINITYL, TMPL_INFINITYL, TMPL_INFINITYL, TMPL_INFINITYL}
 
 TMPL_2DAT2_PTR_TO_R_ARRAY_EXACT_UNIT_TEST(
-    tmpl_TwoVectorFloat,
-    float,
-    tmpl_2DFloat_Dot_Product,
+    tmpl_TwoVectorLongDouble,
+    long double,
+    tmpl_2DLDouble_Dot_Product,
     inarr0,
     inarr1,
     outarr
