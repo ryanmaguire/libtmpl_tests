@@ -24,6 +24,6 @@
     {{-0.0, -1.0}}      \
 }
 #define outarr {1.0, 1.0, -1.0, -1.0}
-TMPL_TWOVEC_TO_R_ARRAY_EXACT_UNIT_TEST(
+TMPL_DAT2_PTR_TO_R_ARRAY_EXACT_UNIT_TEST(
     tmpl_TwoVectorDouble, double, tmpl_2DDouble_Y, inarr, outarr
 )

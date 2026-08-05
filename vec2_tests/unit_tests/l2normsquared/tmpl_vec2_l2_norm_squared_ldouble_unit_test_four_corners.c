@@ -24,7 +24,7 @@
     {{-1.0L, -1.0L}}      \
 }
 #define outarr {2.0L, 2.0L, 2.0L, 2.0L}
-TMPL_TWOVEC_TO_R_ARRAY_EXACT_UNIT_TEST(
+TMPL_DAT2_PTR_TO_R_ARRAY_EXACT_UNIT_TEST(
     tmpl_TwoVectorLongDouble, long double,
     tmpl_2DLDouble_L2_Norm_Squared, inarr, outarr
 )
