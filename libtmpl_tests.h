@@ -292,6 +292,7 @@ int main(void)                                                                 \
 }
 
 #include "testtools/tmpl_tests_2dat2_to_dat2_array_exact_unit_test.h"
+#include "testtools/tmpl_tests_2dat2_ptr_to_dat2_dup_array_exact_unit_test.h"
 #include "testtools/tmpl_tests_2dat2_to_dat2_array_unit_test.h"
 #include "testtools/tmpl_tests_2dat2_ptr_to_dat2_array_exact_unit_test.h"
 #include "testtools/tmpl_tests_2dat2_ptr_to_void_array_exact_unit_test.h"
