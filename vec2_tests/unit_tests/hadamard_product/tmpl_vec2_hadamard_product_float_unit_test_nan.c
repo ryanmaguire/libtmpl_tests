@@ -18,24 +18,24 @@
  ******************************************************************************/
 #include "../../../libtmpl_tests.h"
 #define inarr0 {                \
-    {{+TMPL_NANF, +TMPL_NANF}},   \
-    {{+TMPL_NANF, -TMPL_NANF}},   \
-    {{-TMPL_NANF, +TMPL_NANF}},   \
-    {{-TMPL_NANF, -TMPL_NANF}}    \
+    {{+TMPL_NANF, +TMPL_NANF}}, \
+    {{+TMPL_NANF, -TMPL_NANF}}, \
+    {{-TMPL_NANF, +TMPL_NANF}}, \
+    {{-TMPL_NANF, -TMPL_NANF}}  \
 }
 
 #define inarr1 {                \
-    {{+TMPL_NANF, +TMPL_NANF}},   \
-    {{+TMPL_NANF, -TMPL_NANF}},   \
-    {{-TMPL_NANF, +TMPL_NANF}},   \
-    {{-TMPL_NANF, -TMPL_NANF}}    \
+    {{+TMPL_NANF, +TMPL_NANF}}, \
+    {{+TMPL_NANF, -TMPL_NANF}}, \
+    {{-TMPL_NANF, +TMPL_NANF}}, \
+    {{-TMPL_NANF, -TMPL_NANF}}  \
 }
 
-#define outarr {            \
-    {{TMPL_NANF, TMPL_NANF}}, \
-    {{TMPL_NANF, TMPL_NANF}}, \
-    {{TMPL_NANF, TMPL_NANF}}, \
-    {{TMPL_NANF, TMPL_NANF}}  \
+#define outarr {                \
+    {{TMPL_NANF, TMPL_NANF}},   \
+    {{TMPL_NANF, TMPL_NANF}},   \
+    {{TMPL_NANF, TMPL_NANF}},   \
+    {{TMPL_NANF, TMPL_NANF}}    \
 }
 
 TMPL_2DAT2_PTR_TO_DAT2_ARRAY_EXACT_UNIT_TEST(
