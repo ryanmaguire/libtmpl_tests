@@ -17,25 +17,25 @@
  *  along with libtmpl_tests.  If not, see <https://www.gnu.org/licenses/>.   *
  ******************************************************************************/
 #include "../../../libtmpl_tests.h"
-#define inarr0 {                        \
-    {{+TMPL_INFINITYL, +TMPL_INFINITYL}}, \
-    {{+TMPL_INFINITYL, -TMPL_INFINITYL}}, \
-    {{-TMPL_INFINITYL, +TMPL_INFINITYL}}, \
-    {{-TMPL_INFINITYL, -TMPL_INFINITYL}}  \
+#define inarr0 {                            \
+    {{+TMPL_INFINITYL, +TMPL_INFINITYL}},   \
+    {{+TMPL_INFINITYL, -TMPL_INFINITYL}},   \
+    {{-TMPL_INFINITYL, +TMPL_INFINITYL}},   \
+    {{-TMPL_INFINITYL, -TMPL_INFINITYL}}    \
 }
 
-#define inarr1 {                        \
-    {{+TMPL_INFINITYL, +TMPL_INFINITYL}}, \
-    {{+TMPL_INFINITYL, -TMPL_INFINITYL}}, \
-    {{-TMPL_INFINITYL, +TMPL_INFINITYL}}, \
-    {{-TMPL_INFINITYL, -TMPL_INFINITYL}}  \
+#define inarr1 {                            \
+    {{+TMPL_INFINITYL, +TMPL_INFINITYL}},   \
+    {{+TMPL_INFINITYL, -TMPL_INFINITYL}},   \
+    {{-TMPL_INFINITYL, +TMPL_INFINITYL}},   \
+    {{-TMPL_INFINITYL, -TMPL_INFINITYL}}    \
 }
 
-#define outarr {                        \
-    {{+TMPL_INFINITYL, +TMPL_INFINITYL}}, \
-    {{+TMPL_INFINITYL, +TMPL_INFINITYL}}, \
-    {{+TMPL_INFINITYL, +TMPL_INFINITYL}}, \
-    {{+TMPL_INFINITYL, +TMPL_INFINITYL}}  \
+#define outarr {                            \
+    {{+TMPL_INFINITYL, +TMPL_INFINITYL}},   \
+    {{+TMPL_INFINITYL, +TMPL_INFINITYL}},   \
+    {{+TMPL_INFINITYL, +TMPL_INFINITYL}},   \
+    {{+TMPL_INFINITYL, +TMPL_INFINITYL}}    \
 }
 
 TMPL_2DAT2_PTR_TO_DAT2_ARRAY_EXACT_UNIT_TEST(

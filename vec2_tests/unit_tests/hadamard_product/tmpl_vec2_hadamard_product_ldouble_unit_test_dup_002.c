@@ -17,18 +17,18 @@
  *  along with libtmpl_tests.  If not, see <https://www.gnu.org/licenses/>.   *
  ******************************************************************************/
 #include "../../../libtmpl_tests.h"
-#define inarr {     \
-    {{+1.0L, +1.0L}}, \
-    {{+1.0L, -1.0L}}, \
-    {{-1.0L, +1.0L}}, \
-    {{-1.0L, -1.0L}}  \
+#define inarr {         \
+    {{+1.0L, +1.0L}},   \
+    {{+1.0L, -1.0L}},   \
+    {{-1.0L, +1.0L}},   \
+    {{-1.0L, -1.0L}}    \
 }
 
-#define outarr {    \
-    {{+1.0L, +1.0L}}, \
-    {{+1.0L, +1.0L}}, \
-    {{+1.0L, +1.0L}}, \
-    {{+1.0L, +1.0L}}  \
+#define outarr {        \
+    {{+1.0L, +1.0L}},   \
+    {{+1.0L, +1.0L}},   \
+    {{+1.0L, +1.0L}},   \
+    {{+1.0L, +1.0L}}    \
 }
 
 TMPL_2DAT2_PTR_TO_DAT2_DUP_ARRAY_EXACT_UNIT_TEST(
