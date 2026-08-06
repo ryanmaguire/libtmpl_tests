@@ -32,5 +32,8 @@
 }
 
 TMPL_2DAT2_PTR_TO_DAT2_DUP_ARRAY_EXACT_UNIT_TEST(
-    tmpl_TwoVectorDouble, tmpl_2DDouble_Hadamard_Product, inarr, outarr
+    tmpl_TwoVectorDouble,
+    tmpl_2DDouble_Hadamard_Product,
+    inarr,
+    outarr
 )
