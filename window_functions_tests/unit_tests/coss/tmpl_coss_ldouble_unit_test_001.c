@@ -21,7 +21,7 @@ static long double cossl(const long double x)
 {
     return tmpl_LDouble_Coss(x, 1.0L);
 }
-TMPL_TEST_REAL_FROM_CSV_UNIT_TEST(
+TMPL_R_TO_R_CSV_UNIT_TEST(
     long double,
     "csv_data/coss_values.csv",
     cossl

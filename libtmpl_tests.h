@@ -255,41 +255,7 @@ int main(void)                                                                 \
     return 0;                                                                  \
 }
 
-#define TMPL_TEST_REAL_FROM_CSV_UNIT_TEST(type, csv, f)                        \
-int main(void)                                                                 \
-{                                                                              \
-    char buffer[1024];                                                         \
-    char *line, *start, *end;                                                  \
-    FILE *fp;                                                                  \
-    const type real_zero = TMPL_CAST(0, type);                                 \
-    const type eps = TMPL_DEFAULT_TOLERANCE * TMPL_EPS(real_zero);             \
-    TMPL_OPEN_FILE(fp, csv);                                                   \
-    line = fgets(buffer, sizeof(buffer), fp);                                  \
-    (void)real_zero;                                                           \
-    while (line)                                                               \
-    {                                                                          \
-        const type x = TMPL_STRING_TO_REAL(x, line, &start);                   \
-        const type z = TMPL_STRING_TO_REAL(z, start + 1, &end);                \
-        const type y = f(x);                                                   \
-        const type err = TMPL_ERROR_VALUE(y, z);                               \
-        const tmpl_Bool y_is_nan = TMPL_IS_NAN(y);                             \
-        const tmpl_Bool z_is_nan = TMPL_IS_NAN(z);                             \
-        if ((y_is_nan != z_is_nan) || (err > eps))                             \
-        {                                                                      \
-            puts("FAIL");                                                      \
-            printf("    Input   = %+.40LE\n", TMPL_CAST(x, long double));      \
-            printf("    libtmpl = %+.40LE\n", TMPL_CAST(y, long double));      \
-            printf("    Other   = %+.40LE\n", TMPL_CAST(z, long double));      \
-            printf("    Error   = %+.40LE\n", TMPL_CAST(err, long double));    \
-            fclose(fp);                                                        \
-            return -1;                                                         \
-        }                                                                      \
-        line = fgets(buffer, sizeof(buffer), fp);                              \
-    }                                                                          \
-    puts("PASS");                                                              \
-    fclose(fp);                                                                \
-    return 0;                                                                  \
-}
+
 
 #include "testtools/tmpl_tests_2dat2_to_dat2_array_exact_unit_test.h"
 #include "testtools/tmpl_tests_2dat2_ptr_to_r_array_exact_unit_test.h"
@@ -328,6 +294,7 @@ int main(void)                                                                 \
 #include "testtools/tmpl_tests_r_to_r_array_unit_test.h"
 #include "testtools/tmpl_tests_r_to_r_array_exact_unit_test.h"
 #include "testtools/tmpl_tests_r_to_r_csv_accuracy_test.h"
+#include "testtools/tmpl_tests_r_to_r_csv_unit_test.h"
 #include "testtools/tmpl_tests_r_to_r_vs_array_unit_test.h"
 #include "testtools/tmpl_tests_r_to_r_vs_interval_unit_test.h"
 #include "testtools/tmpl_tests_r_to_r_vs_interval_exact_unit_test.h"

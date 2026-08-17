@@ -21,7 +21,7 @@ static long double kbmd20l(const long double x)
 {
     return tmpl_LDouble_KBMD20(x, 1.0L);
 }
-TMPL_TEST_REAL_FROM_CSV_UNIT_TEST(
+TMPL_R_TO_R_CSV_UNIT_TEST(
     long double,
     "csv_data/kbmd20_values.csv",
     kbmd20l

@@ -21,7 +21,7 @@ static double coss(const double x)
 {
     return tmpl_Double_Coss(x, 1.0);
 }
-TMPL_TEST_REAL_FROM_CSV_UNIT_TEST(
+TMPL_R_TO_R_CSV_UNIT_TEST(
     double,
     "csv_data/coss_values.csv",
     coss

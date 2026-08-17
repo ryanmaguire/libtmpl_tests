@@ -17,7 +17,7 @@
  *  along with libtmpl_tests.  If not, see <https://www.gnu.org/licenses/>.   *
  ******************************************************************************/
 #include "../../../libtmpl_tests.h"
-TMPL_TEST_REAL_FROM_CSV_UNIT_TEST(
+TMPL_R_TO_R_CSV_UNIT_TEST(
     double,
     "csv_data/normalized_fresnel_sin_between_pow_31_and_pow_32.csv",
     tmpl_Double_Normalized_Fresnel_Sin
