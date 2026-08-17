@@ -18,4 +18,4 @@
  ******************************************************************************/
 #include "../../../libtmpl_tests.h"
 #define indata {DNUM, -DNUM}
-TMPL_R_TO_R_VS_FROM_ARRAY_UNIT_TEST(double, tmpl_Double_Sinh, sinh, indata)
+TMPL_R_TO_R_VS_ARRAY_UNIT_TEST(double, tmpl_Double_Sinh, sinh, indata)

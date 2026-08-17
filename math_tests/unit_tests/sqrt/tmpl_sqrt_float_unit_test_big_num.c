@@ -18,4 +18,4 @@
  ******************************************************************************/
 #include "../../../libtmpl_tests.h"
 #define indata {BNUMF, -BNUMF}
-TMPL_R_TO_R_VS_FROM_ARRAY_UNIT_TEST(float, tmpl_Float_Sqrt, sqrtf, indata)
+TMPL_R_TO_R_VS_ARRAY_UNIT_TEST(float, tmpl_Float_Sqrt, sqrtf, indata)

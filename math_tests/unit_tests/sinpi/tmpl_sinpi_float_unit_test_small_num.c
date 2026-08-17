@@ -19,7 +19,7 @@
 #include "../../../libtmpl_tests.h"
 #ifndef TMPL_NO_C23_MATH
 #define indata {DNUMF, -DNUMF}
-TMPL_R_TO_R_VS_FROM_ARRAY_UNIT_TEST(float, tmpl_Float_SinPi, sinpif, indata)
+TMPL_R_TO_R_VS_ARRAY_UNIT_TEST(float, tmpl_Float_SinPi, sinpif, indata)
 #else
 TMPL_NOT_TESTED_UNIT_TEST
 #endif
