@@ -35,6 +35,6 @@ static int trailing_zeros(unsigned long int n)
     return (n == 0 ? 0 : __builtin_ctzl(n));
 }
 #endif
-TMPL_R_TO_R_VS_FROM_INTERVAL_EXACT_UNIT_TEST(
+TMPL_R_TO_R_VS_INTERVAL_EXACT_UNIT_TEST(
     unsigned long int, 0, 65535, tmpl_ULong_Trailing_Zeros, trailing_zeros
 )
