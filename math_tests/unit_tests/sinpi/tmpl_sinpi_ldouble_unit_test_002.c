@@ -21,7 +21,7 @@
 #endif
 #include "../../../libtmpl_tests.h"
 #ifndef TMPL_NO_C23_MATH
-TMPL_R_TO_R_VS_FROM_INTERVAL_UNIT_TEST(
+TMPL_R_TO_R_VS_INTERVAL_UNIT_TEST(
     long double, -1.0E1L, 1.0E1L, tmpl_LDouble_SinPi, sinpil
 )
 #else

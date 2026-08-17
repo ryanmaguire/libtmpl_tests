@@ -30,6 +30,6 @@ static float cossf(const float x)
 {
     return tmpl_Float_Coss(x, 1.0);
 }
-TMPL_R_TO_R_VS_FROM_INTERVAL_UNIT_TEST(
+TMPL_R_TO_R_VS_INTERVAL_UNIT_TEST(
     float, -0.5F, 0.5F, coss, cossf
 )

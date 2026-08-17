@@ -26,6 +26,6 @@ static float fsin(const float x)
     const double f_sin_x = tmpl_Double_Normalized_Fresnel_Sin(x_double);
     return TMPL_CAST(f_sin_x, float);
 }
-TMPL_R_TO_R_VS_FROM_INTERVAL_UNIT_TEST(
+TMPL_R_TO_R_VS_INTERVAL_UNIT_TEST(
     float, 0.0F, 1.0E+02F, tmpl_Float_Normalized_Fresnel_Sin, fsin
 )
