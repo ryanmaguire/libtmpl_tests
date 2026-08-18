@@ -16,8 +16,8 @@
  *  You should have received a copy of the GNU General Public License         *
  *  along with libtmpl_tests.  If not, see <https://www.gnu.org/licenses/>.   *
  ******************************************************************************/
-#ifndef TMPL_TESTS_R2_TO_R_VS_FROM_ARRAY_UNIT_TEST_H
-#define TMPL_TESTS_R2_TO_R_VS_FROM_ARRAY_UNIT_TEST_H
+#ifndef TMPL_TESTS_R2_TO_R_VS_ARRAY_UNIT_TEST_H
+#define TMPL_TESTS_R2_TO_R_VS_ARRAY_UNIT_TEST_H
 #include <libtmpl/include/compat/tmpl_cast.h>
 #include <libtmpl/include/helper/tmpl_array_size.h>
 #include <libtmpl/include/helper/tmpl_error_value.h>
@@ -28,7 +28,7 @@
 
 /******************************************************************************
  *  Macro:                                                                    *
- *      TMPL_R2_TO_R_VS_FROM_ARRAY_UNIT_TEST                                  *
+ *      TMPL_R2_TO_R_VS_ARRAY_UNIT_TEST                                       *
  *  Purpose:                                                                  *
  *      Test functions of the form f: R^2 -> R from an input array.           *
  *  Arguments:                                                                *
@@ -41,7 +41,7 @@
  *      indata:                                                               *
  *          The input array.                                                  *
  ******************************************************************************/
-#define TMPL_R2_TO_R_VS_FROM_ARRAY_UNIT_TEST(type, func0, func1, indata)       \
+#define TMPL_R2_TO_R_VS_ARRAY_UNIT_TEST(type, func0, func1, indata)            \
 int main(void)                                                                 \
 {                                                                              \
     struct real2 {type x, y;} in[] = indata;                                   \

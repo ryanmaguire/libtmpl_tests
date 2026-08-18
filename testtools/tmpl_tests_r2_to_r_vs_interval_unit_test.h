@@ -16,8 +16,8 @@
  *  You should have received a copy of the GNU General Public License         *
  *  along with libtmpl_tests.  If not, see <https://www.gnu.org/licenses/>.   *
  ******************************************************************************/
-#ifndef TMPL_TESTS_R2_TO_R_VS_FROM_INTERVAL_UNIT_TEST_H
-#define TMPL_TESTS_R2_TO_R_VS_FROM_INTERVAL_UNIT_TEST_H
+#ifndef TMPL_TESTS_R2_TO_R_VS_INTERVAL_UNIT_TEST_H
+#define TMPL_TESTS_R2_TO_R_VS_INTERVAL_UNIT_TEST_H
 #include <libtmpl/include/compat/tmpl_cast.h>
 #include <libtmpl/include/helper/tmpl_error_value.h>
 #include <libtmpl/include/generic/tmpl_eps.h>
@@ -28,7 +28,7 @@
 
 /******************************************************************************
  *  Macro:                                                                    *
- *      TMPL_R2_TO_R_VS_FROM_INTERVAL_UNIT_TEST                               *
+ *      TMPL_R2_TO_R_VS_INTERVAL_UNIT_TEST                                    *
  *  Purpose:                                                                  *
  *      Test functions of the form f: R^2 -> R on the square [a, b]^2.        *
  *  Arguments:                                                                *
@@ -43,7 +43,7 @@
  *      f1:                                                                   *
  *          The external function being compared with.                        *
  ******************************************************************************/
-#define TMPL_R2_TO_R_VS_FROM_INTERVAL_UNIT_TEST(type, left, right, f0, f1)     \
+#define TMPL_R2_TO_R_VS_INTERVAL_UNIT_TEST(type, left, right, f0, f1)          \
 int main(void)                                                                 \
 {                                                                              \
     const size_t zero = TMPL_CAST(0, size_t);                                  \
