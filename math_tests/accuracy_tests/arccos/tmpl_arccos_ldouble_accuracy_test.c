@@ -16,5 +16,7 @@
  *  You should have received a copy of the GNU General Public License         *
  *  along with libtmpl.  If not, see <https://www.gnu.org/licenses/>.         *
  ******************************************************************************/
-#include "tmpl_math_accuracy_tests.h"
-RUN_TEST(double, 1.0E-7, 1.0E7, 1E8, tmpl_Double_Log, log)
+#include "../../../libtmpl_tests.h"
+TMPL_R_TO_R_VS_INTERVAL_ACCURACY_TEST(
+    long double, -1.0L, 1.0L, 1E8, tmpl_LDouble_Arccos, acosl
+)
