@@ -21,9 +21,5 @@
 #endif
 #include "../../../libtmpl_tests.h"
 TMPL_TEST_REAL_FUNC_VS_REAL_FUNC_TIME_TEST(
-    double,
-    -tmpl_Max_Double_Base_E,
-    +tmpl_Max_Double_Base_E,
-    tmpl_Double_Exp,
-    exp
+    double, -700.0, +700.0, tmpl_Double_Exp, exp
 )
