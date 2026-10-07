@@ -21,5 +21,5 @@
 #endif
 #include "../../../libtmpl_tests.h"
 TMPL_TEST_REAL_FUNC_VS_REAL_FUNC_TIME_TEST(
-    long double, -0.125L, 0.125L, tmpl_LDouble_Arccos, acosl
+    long double, -0.5L, 0.5L, tmpl_LDouble_Arccos, acosl
 )
