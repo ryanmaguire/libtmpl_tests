@@ -103,7 +103,7 @@
 #define TMPL_OPENMP_BOOL_PRAGMA
 #endif
 
-#define TMPL_DEFAULT_TOLERANCE (4)
+#define TMPL_DEFAULT_TOLERANCE (2)
 
 #define TMPL_TEST_REAL_FUNC_VS_REAL_FUNC_TIME_TEST(type, begin, finish, f0, f1)\
 int main(void)                                                                 \
