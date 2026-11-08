@@ -19,7 +19,7 @@
 #ifndef TMPL_TESTS_2OP_VS_GMP_INTERVAL_UNIT_TEST_H
 #define TMPL_TESTS_2OP_VS_GMP_INTERVAL_UNIT_TEST_H
 
-#ifndef NO_GMP
+#ifndef TMPL_NO_GMP
 
 #include <gmp.h>
 #include <string.h>

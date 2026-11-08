@@ -19,7 +19,7 @@
 #ifndef TMPL_TESTS_MPF_SET_LD_H
 #define TMPL_TESTS_MPF_SET_LD_H
 
-#ifndef NO_GMP
+#ifndef TMPL_NO_GMP
 
 #include <string.h>
 #include <gmp.h>

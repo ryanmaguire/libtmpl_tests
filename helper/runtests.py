@@ -97,7 +97,7 @@ def runtests():
             linker_flags = [flag for flag in linker_flags if flag != "-lgsl"]
         elif arg == "-nogmp":
             linker_flags = [flag for flag in linker_flags if flag != "-lgmp"]
-            linker_flags.append("-DNO_GMP")
+            linker_flags.append("-DTMPL_NO_GMP")
         elif arg == "-nocerf":
             linker_flags = [flag for flag in linker_flags if flag != "-lcerf"]
         else:
