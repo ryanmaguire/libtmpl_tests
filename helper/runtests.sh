@@ -107,7 +107,7 @@ runtests() {
 
         # Some tests use C23 tools and may need to be disabled.
         elif [ "$arg" = "-noc23math" ]; then
-            LinkerFlags="$LinkerFlags -TMPL_NO_C23_MATH"
+            LinkerFlags="$LinkerFlags -DTMPL_NO_C23_MATH"
 
         # Some compilers (Solaris C compiler, NVIDIA's nvcc) do not support
         # the link-time optimization flag. Remove this if requested.
