@@ -24,20 +24,23 @@
 #undef TMPL_DEFAULT_TOLERANCE
 #define TMPL_DEFAULT_TOLERANCE (1)
 
+static mpfr_t mx, result;
+static int initialized = 0;
+
 static double
 asin_precise(const double x)
 {
-    mpfr_t mx, result;
     double y;
+    if (!initialized)
+    {
+        mpfr_init2(mx, 64);
+        mpfr_init2(result, 64);
+        initialized = 1;
+    }
 
-    mpfr_init2(mx, 64);
-    mpfr_init2(result, 64);
     mpfr_set_d(mx, x, MPFR_RNDN);
     mpfr_asin(result, mx, MPFR_RNDN);
     y = mpfr_get_d(result, MPFR_RNDN);
-    mpfr_clear(mx);
-    mpfr_clear(result);
-
     return y;
 }
 
