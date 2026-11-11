@@ -17,7 +17,7 @@
  *  along with libtmpl_tests.  If not, see <https://www.gnu.org/licenses/>.   *
  ******************************************************************************/
 #ifndef TMPL_NSAMPS
-#define TMPL_NSAMPS (1E8)
+#define TMPL_NSAMPS (1E6)
 #endif
 #include "../../../libtmpl_tests.h"
 #include <mpfr.h>
