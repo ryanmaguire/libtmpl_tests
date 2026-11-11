@@ -17,27 +17,30 @@
  *  along with libtmpl_tests.  If not, see <https://www.gnu.org/licenses/>.   *
  ******************************************************************************/
 #ifndef TMPL_NSAMPS
-#define TMPL_NSAMPS (1E6)
+#define TMPL_NSAMPS (1E8)
 #endif
 #include "../../../libtmpl_tests.h"
 #include <mpfr.h>
 #undef TMPL_DEFAULT_TOLERANCE
 #define TMPL_DEFAULT_TOLERANCE (1)
 
+static mpfr_t mx, result;
+static int initialized = 0;
+
 static double
 acos_precise(const double x)
 {
-    mpfr_t mx, result;
     double y;
+    if (!initialized)
+    {
+        mpfr_init2(mx, 64);
+        mpfr_init2(result, 64);
+        initialized = 1;
+    }
 
-    mpfr_init2(mx, 64);
-    mpfr_init2(result, 64);
     mpfr_set_d(mx, x, MPFR_RNDN);
     mpfr_acos(result, mx, MPFR_RNDN);
     y = mpfr_get_d(result, MPFR_RNDN);
-    mpfr_clear(mx);
-    mpfr_clear(result);
-
     return y;
 }
 

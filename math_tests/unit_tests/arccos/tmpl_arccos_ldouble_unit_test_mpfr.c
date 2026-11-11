@@ -32,7 +32,7 @@ acos_precise(const long double x)
 {
     long double y;
     if (!initialized)
-    {puts("Initializing!");
+    {
         mpfr_init2(mx, 128);
         mpfr_init2(result, 128);
         initialized = 1;
